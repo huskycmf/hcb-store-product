@@ -21,6 +21,7 @@ class Module
 
         $options = new ModuleOptions(isset($config['hcb-product']) ?
                                            $config['hcb-product'] : array());
+
         $di->instanceManager()->addSharedInstance($options, 'HcbProduct\Options\ModuleOptions');
     }
 

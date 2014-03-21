@@ -3,7 +3,7 @@ define([
     "dojo/_base/array",
     "dojo/_base/lang",
     "dojo/on",
-    'hc-backend/public/js/src/hc-backend/layout/main/content/_ContentMixin',
+    'hc-backend/layout/main/content/_ContentMixin',
     "dijit/_TemplatedMixin",
     "dojo/text!./templates/Container.html",
     "dojo/i18n!../nls/List",
