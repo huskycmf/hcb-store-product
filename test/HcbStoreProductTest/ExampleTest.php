@@ -1,5 +1,5 @@
 <?php
-namespace HcbProductTest;
+namespace HcbStoreProductTest;
 
 class ExampleTest extends \PHPUnit_Framework_TestCase
 {

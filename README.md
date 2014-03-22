@@ -1,4 +1,4 @@
-husky-client
+HuskyCMS module for backend area to manage Store Products
 ==================
 
-Plugin
+Module

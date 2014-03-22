@@ -5,7 +5,7 @@ define([
     'xstyle/css!./css/product.css'
 ], function(declare, _Package, translation) {
 
-    return declare("ProductPackage", [ _Package ], {
+    return declare("StoreProductPackage", [ _Package ], {
         title: translation['packageTitle']
     });
 });

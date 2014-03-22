@@ -1,7 +1,7 @@
 <?php
-namespace HcbProduct\CategoryProduct;
+namespace HcbStoreProduct\CategoryProduct;
 
-use HcbProduct\Entity\CategoryProduct;
+use HcbStoreProduct\Entity\CategoryProduct;
 use HcCore\Entity\EntityInterface;
 use HcBackend\Entity\PageBindInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -35,7 +35,7 @@ class Locale implements EntityInterface, ImageBindInterface, PageBindInterface
     /**
      * @var CategoryProduct
      *
-     * @ORM\ManyToOne(targetEntity="HcbProduct\Entity\CategoryProduct")
+     * @ORM\ManyToOne(targetEntity="HcbStoreProduct\Entity\CategoryProduct")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="category_product_id", referencedColumnName="id")
      * })

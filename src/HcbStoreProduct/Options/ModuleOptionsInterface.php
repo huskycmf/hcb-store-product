@@ -1,5 +1,5 @@
 <?php
-namespace HcbProduct\Options;
+namespace HcbStoreProduct\Options;
 
 interface ModuleOptionsInterface
 {

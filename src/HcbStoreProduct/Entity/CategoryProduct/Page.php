@@ -1,5 +1,5 @@
 <?php
-namespace HcbProduct\Entity\CategoryProduct;
+namespace HcbStoreProduct\Entity\CategoryProduct;
 
 use Doctrine\ORM\Mapping as ORM;
 use HcBackend\Entity\MappedPage;
