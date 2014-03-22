@@ -6,11 +6,11 @@ return array(
     'doctrine' => array(
         'driver' => array(
             'app_driver' => array(
-                'paths' => array(__DIR__ . '/../src/HcbProduct/Entity')
+                'paths' => array(__DIR__ . '/../src/HcbStoreProduct/Entity')
             ),
             'orm_default' => array(
                 'drivers' => array(
-                    'HcbProduct\Entity' => 'app_driver'
+                    'HcbStoreProduct\Entity' => 'app_driver'
                 )
             )
         )
@@ -19,17 +19,17 @@ return array(
     'asset_manager' => array(
         'resolver_configs' => array(
             'paths' => array(
-                'HcbProduct' => __DIR__ . '/../public',
+                'HcbStoreProduct' => __DIR__ . '/../public',
             )
         )
     ),
 
     'hc-backend'=> array(
         'packages' => array(
-            'hcb-product' => array(
+            'hcb-store-product' => array(
                 'js'=>array(
                     'type'=>'content',
-                    'http_path'=>'/js/src/hcb-product'
+                    'http_path'=>'/js/src/hcb-store-product'
                 )
             )
         )

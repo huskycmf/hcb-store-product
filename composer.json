@@ -1,5 +1,5 @@
 {
-    "name": "huskycms/hcb-product",
+    "name": "huskycms/hcb-store-product",
     "type": "huskycms-backend-plugin",
     "description": "Managing products plugin for backend area of the HuskyCMS",
     "authors": [
@@ -12,7 +12,7 @@
         "huskycms", "plugin", "module"
     ],
     "license": "MIT",
-    "homepage": "http://huskycms.com/hcb-product",
+    "homepage": "http://huskycms.com/hcb-store-product",
     "repositories": [
         {
             "type": "composer",
@@ -35,7 +35,7 @@
     },
     "autoload": {
         "psr-0": {
-            "HcbProduct": "src/"
+            "HcbStoreProduct": "src/"
         },
 
         "classmap": [

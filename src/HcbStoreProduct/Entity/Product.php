@@ -1,5 +1,5 @@
 <?php
-namespace HcbProduct\Entity;
+namespace HcbStoreProduct\Entity;
 
 use HcBackend\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;

@@ -1,5 +1,5 @@
 var miniExcludes = {
-		"hcb-product/README.md": 1
+		"hcb-store-product/README.md": 1
 	},
 	amdExcludes = {
 	},

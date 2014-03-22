@@ -1,5 +1,5 @@
 <?php
-namespace HcbProduct;
+namespace HcbStoreProduct;
 
 use HcbClient\Options\ModuleOptions;
 use Zend\Mvc\MvcEvent;
@@ -19,10 +19,10 @@ class Module
 
         $config = $sm->get('config');
 
-        $options = new ModuleOptions(isset($config['hcb-product']) ?
-                                           $config['hcb-product'] : array());
+        $options = new ModuleOptions(isset($config['hcb-store-product']) ?
+                                           $config['hcb-store-product'] : array());
 
-        $di->instanceManager()->addSharedInstance($options, 'HcbProduct\Options\ModuleOptions');
+        $di->instanceManager()->addSharedInstance($options, 'HcbStoreProduct\Options\ModuleOptions');
     }
 
     public function getConfig()
