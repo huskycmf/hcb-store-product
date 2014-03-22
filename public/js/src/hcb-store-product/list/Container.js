@@ -9,16 +9,16 @@ define([
     "dojo/i18n!../nls/List",
     "dojo/request",
     "hc-backend/router",
-    "hc-backend/dgrid/form/RefreshSelectedButton"
+    "hcb-store-product/list/widget/Grid"
 ], function(declare, array, lang, on, _ContentMixin, _TemplatedMixin,
-            template, translation, request, router, Grid, RefreshSelectedButton) {
-    return declare([ _ContentMixin, _TemplatedMixin ], {
+            template, translation, request, router, Grid) {
+    return declare('hcb-store-product.list.Container', [ _ContentMixin, _TemplatedMixin ], {
         //  summary:
         //      List container. Contains widgets who responsible for
         //      displaying list of clients.
         templateString: template,
 
-        baseClass: 'productList',
+        baseClass: 'storeProductList',
         
         postCreate: function () {
             try {
