@@ -22,7 +22,7 @@ define([
         
         postCreate: function () {
             try {
-//                this._gridWidget = new Grid({'class': this.baseClass+'Grid'});
+                this._gridWidget = new Grid({'class': this.baseClass+'Grid'});
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
@@ -31,8 +31,7 @@ define([
 
         startup: function () {
             try {
-//                this.addChild(this._blockWidget);
-//                this.addChild(this._gridWidget);
+                this.addChild(this._gridWidget);
                 this.inherited(arguments);
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
@@ -42,7 +41,7 @@ define([
 
         refresh: function () {
             try {
-//                this._gridWidget.refresh({keepScrollPosition: true});
+                this._gridWidget.refresh({keepScrollPosition: true});
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
