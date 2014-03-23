@@ -44,6 +44,7 @@ class FetchQbBuilderService implements DataServiceInterface
         $qb->where('p.enabled = 1');
 
         if (is_null($params)) return $qb;
+
         return $this->sortingService->apply($params, $qb, 'p');
     }
 }

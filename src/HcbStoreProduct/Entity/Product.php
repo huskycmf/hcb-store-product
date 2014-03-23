@@ -22,24 +22,62 @@ class Product implements EntityInterface
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="enabled", type="integer", nullable=false)
+     */
+    private $enabled = 0;
+
+    /**
      * @var Product\Localized
      *
      * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized", mappedBy="product")
      * @ORM\OrderBy({"updatedTimestamp" = "DESC"})
      */
-    private $locale = null;
+    private $localized = null;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
+     */
+    private $createdTimestamp;
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->locale = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set createdTimestamp
+     *
+     * @param \DateTime $createdTimestamp
+     * @return Product
+     */
+    public function setCreatedTimestamp($createdTimestamp)
+    {
+        $this->createdTimestamp = $createdTimestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get createdTimestamp
+     *
+     * @return \DateTime
+     */
+    public function getCreatedTimestamp()
+    {
+        return $this->createdTimestamp;
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -47,35 +85,58 @@ class Product implements EntityInterface
     }
 
     /**
-     * Add locale
+     * Set enabled
      *
-     * @param \HcbStoreProduct\Entity\Product\Localized $locale
+     * @param int $enabled
      * @return Product
      */
-    public function addLocale(\HcbStoreProduct\Entity\Product\Localized $locale)
+    public function setEnabled($enabled)
     {
-        $this->locale[] = $locale;
+        $this->enabled = $enabled;
 
         return $this;
     }
 
     /**
-     * Remove locale
+     * Get enabled
      *
-     * @param \HcbStoreProduct\Entity\Product\Localized $locale
+     * @return int
      */
-    public function removeLocale(\HcbStoreProduct\Entity\Product\Localized $locale)
+    public function getEnabled()
     {
-        $this->locale->removeElement($locale);
+        return $this->enabled;
     }
 
     /**
-     * Get locale
+     * Add localized
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param \HcbStoreProduct\Entity\Product\Localized $localized
+     * @return Product
      */
-    public function getLocale()
+    public function addLocalized(\HcbStoreProduct\Entity\Product\Localized $localized)
     {
-        return $this->locale;
+        $this->localized[] = $localized;
+
+        return $this;
+    }
+
+    /**
+     * Remove localized
+     *
+     * @param \HcbStoreProduct\Entity\Product\Localized $localized
+     */
+    public function removeLocalized(\HcbStoreProduct\Entity\Product\Localized $localized)
+    {
+        $this->localized->removeElement($localized);
+    }
+
+    /**
+     * Get localized
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLocalized()
+    {
+        return $this->localized;
     }
 }

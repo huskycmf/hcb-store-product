@@ -1,11 +1,11 @@
 <?php
-namespace HcbStoreProduct\Service\Locale;
+namespace HcbStoreProduct\Service\Localized;
 
 use HcBackend\Service\PageBinderServiceInterface;
 use HcBackend\Service\ImageBinderServiceInterface;
-use HcbStoreProduct\Data\LocaleInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use HcbStoreProduct\Entity\StaticPage;
+use HcbStoreProduct\Data\LocalizedInterface;
+use HcbStoreProduct\Entity\Product\Localized;
 use Zf2Libs\Stdlib\Service\Response\Messages\ResponseInterface;
 
 class UpdateService
@@ -26,44 +26,32 @@ class UpdateService
     protected $pageBinderService;
 
     /**
-     * @var ImageBinderServiceInterface
-     */
-    protected $imageBinderService;
-
-    /**
      * @param EntityManagerInterface $entityManager
      * @param PageBinderServiceInterface $pageBinderService
-     * @param \HcBackend\Service\ImageBinderServiceInterface $imageBinderService
      * @param ResponseInterface $saveResponse
      */
     public function __construct(EntityManagerInterface $entityManager,
                                 PageBinderServiceInterface $pageBinderService,
-                                ImageBinderServiceInterface $imageBinderService,
                                 ResponseInterface $saveResponse)
     {
         $this->pageBinderService = $pageBinderService;
-        $this->imageBinderService = $imageBinderService;
         $this->entityManager = $entityManager;
         $this->saveResponse = $saveResponse;
     }
 
     /**
-     * @param \HcbStoreProduct\Entity\StaticPage\Locale $localeEntity
-     * @param LocaleInterface $localeData
-     * @internal param \HcbStoreProduct\Entity\StaticPage $postEntity
-     * @return ResponseMessagesInterface
+     * @param \HcbStoreProduct\Entity\Product\Localized $productLocalizedEntity
+     * @param LocalizedInterface $localizedData
+     * @return ResponseInterface
      */
-    public function update(StaticPage\Locale $localeEntity, LocaleInterface $localeData)
+    public function update(Localized $productLocalizedEntity, LocalizedInterface $localizedData)
     {
         try {
             $this->entityManager->beginTransaction();
 
-            $this->imageBinderService->bind($localeData, $localeEntity);
-            $this->pageBinderService->bind($localeData, $localeEntity);
+            $this->pageBinderService->bind($localizedData, $productLocalizedEntity);
 
-            $this->entityManager->persist($localeEntity);
-
-            $localeEntity->setContent($localeData->getContent());
+            $this->entityManager->persist($productLocalizedEntity);
 
             $this->entityManager->flush();
             $this->entityManager->commit();

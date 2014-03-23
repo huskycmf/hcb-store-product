@@ -5,7 +5,7 @@ use HcBackend\Data\ImageInterface;
 use HcBackend\Data\PageInterface;
 use HcBackend\Data\LangInterface;
 
-interface LocalizedInterface extends PageInterface, LangInterface, ImageInterface
+interface LocalizedInterface extends PageInterface, LangInterface
 {
     /**
      * @return string

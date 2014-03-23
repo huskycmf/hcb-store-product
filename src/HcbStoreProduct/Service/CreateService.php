@@ -2,8 +2,8 @@
 namespace HcbStoreProduct\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use HcbStoreProduct\Entity\Product;
 use HcCore\Service\CommandInterface;
-use HcbStoreProduct\Entity\StaticPage;
 use HcbStoreProduct\Stdlib\Service\Response\CreateResponse;
 
 class CreateService implements CommandInterface
@@ -37,14 +37,14 @@ class CreateService implements CommandInterface
         try {
             $this->entityManager->beginTransaction();
 
-            $staticPage = new StaticPage();
-            $staticPage->setCreatedTimestamp(new \DateTime());
+            $product = new Product();
+            $product->setCreatedTimestamp(new \DateTime());
 
-            $this->entityManager->persist($staticPage);
+            $this->entityManager->persist($product);
 
             $this->entityManager->flush();
 
-            $this->createResponse->setResource($staticPage->getId());
+            $this->createResponse->setResource($product->getId());
             
             $this->entityManager->commit();
         } catch (\Exception $e) {

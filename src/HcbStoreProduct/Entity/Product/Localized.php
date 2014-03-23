@@ -6,6 +6,7 @@ use HcBackend\Entity\PageInterface;
 use HcbStoreProduct\Entity\Product;
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
+use HcCore\Entity\LocaleBindInterface;
 
 /**
  * Localized
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="store_product_localized")
  * @ORM\Entity
  */
-class Localized implements EntityInterface, PageBindInterface
+class Localized implements EntityInterface, PageBindInterface, LocaleBindInterface
 {
     /**
      * @var integer
@@ -27,7 +28,7 @@ class Localized implements EntityInterface, PageBindInterface
     /**
      * @var Product
      *
-     * @ORM\ManyToOne(targetEntity="HcbStoreProduct\Entity\Product", inversedBy="locale")
+     * @ORM\ManyToOne(targetEntity="HcbStoreProduct\Entity\Product", inversedBy="localized")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
      * })

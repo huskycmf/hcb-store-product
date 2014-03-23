@@ -1,38 +1,37 @@
 <?php
-namespace HcbStoreProduct\Service\Locale;
+namespace HcbStoreProduct\Service\Localized;
 
 use HcCore\Entity\EntityInterface;
 use HcCore\Service\ResourceCommandInterface;
-use HcbStoreProduct\Data\LocaleInterface;
-use HcbStoreProduct\Entity\StaticPage;
+use HcbStoreProduct\Data\LocalizedInterface;
 use Zf2Libs\Stdlib\Service\Response\Messages\ResponseInterface;
 
 class UpdateCommand implements ResourceCommandInterface
 {
     /**
-     * @var LocaleInterface
+     * @var LocalizedInterface
      */
-    protected $localeData;
+    protected $localizedData;
 
     /**
      * @var UpdateService
      */
     protected $service;
 
-    public function __construct(LocaleInterface $localeData,
+    public function __construct(LocalizedInterface $localizedData,
                                 UpdateService $service)
     {
-        $this->localeData = $localeData;
+        $this->localizedData = $localizedData;
         $this->service = $service;
     }
 
     /**
-     * @param \HcCore\Entity\EntityInterface|\HcbStoreProduct\Entity\StaticPage\Locale $postDataEntity
+     * @param \HcCore\Entity\EntityInterface|\HcbStoreProduct\Entity\Product\Localized $productLocalizedEntity
      *
      * @return ResponseInterface
      */
-    public function execute(EntityInterface $postDataEntity)
+    public function execute(EntityInterface $productLocalizedEntity)
     {
-        return $this->service->update($postDataEntity, $this->localeData);
+        return $this->service->update($productLocalizedEntity, $this->localizedData);
     }
 }

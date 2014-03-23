@@ -1,11 +1,11 @@
 <?php
-namespace HcbStoreProduct\Service\Locale;
+namespace HcbStoreProduct\Service\Localized;
 
+use HcCore\Service\LocaleBinderServiceInterface;
 use HcBackend\Service\PageBinderServiceInterface;
-use HcBackend\Service\ImageBinderServiceInterface;
-use HcbStoreProduct\Data\LocaleInterface;
-use HcbStoreProduct\Entity\StaticPage;
 use Doctrine\ORM\EntityManagerInterface;
+use HcbStoreProduct\Data\LocalizedInterface;
+use HcbStoreProduct\Entity\Product;
 use HcbStoreProduct\Stdlib\Service\Response\CreateResponse;
 
 class CreateService
@@ -26,54 +26,55 @@ class CreateService
     protected $pageBinderService;
 
     /**
-     * @var ImageBinderServiceInterface
+     * @var LocaleBinderServiceInterface
      */
-    protected $imageBinderService;
+    protected $localeBinderService;
 
     /**
      * @param EntityManagerInterface $entityManager
      * @param PageBinderServiceInterface $pageBinderService
-     * @param ImageBinderServiceInterface $imageBinderService
+     * @param LocaleBinderServiceInterface $localeService
      * @param CreateResponse $saveResponse
      */
     public function __construct(EntityManagerInterface $entityManager,
                                 PageBinderServiceInterface $pageBinderService,
-                                ImageBinderServiceInterface $imageBinderService,
+                                LocaleBinderServiceInterface $localeBinderService,
                                 CreateResponse $saveResponse)
     {
         $this->pageBinderService = $pageBinderService;
-        $this->imageBinderService = $imageBinderService;
+        $this->localeBinderService = $localeBinderService;
         $this->entityManager = $entityManager;
         $this->createResponse = $saveResponse;
     }
 
     /**
-     * @param StaticPage $staticPageEntity
-     * @param LocaleInterface $localeData
+     * @param Product $productEntity
+     * @param LocalizedInterface $localizedData
      * @return CreateResponse
      */
-    public function save(StaticPage $staticPageEntity, LocaleInterface $localeData)
+    public function save(Product $productEntity, LocalizedInterface $localizedData)
     {
         try {
             $this->entityManager->beginTransaction();
 
-            $localeEntity = new StaticPage\Locale();
-            $staticPageEntity->setEnabled(1);
+            $localizedEntity = new Product\Localized();
+            $productEntity->setEnabled(1);
 
-            $localeEntity->setStaticPage($staticPageEntity);
-            $localeEntity->setLang($localeData->getLang());
+            $localizedEntity->setProduct($productEntity);
 
-            $this->imageBinderService->bind($localeData, $localeEntity);
-            $this->pageBinderService->bind($localeData, $localeEntity);
+            $response = $this->localeBinderService
+                             ->bind($localizedData, $localizedEntity);
 
-            $this->entityManager->persist($localeEntity);
+            if ($response->isFailed()) {
+                return $response;
+            }
 
-            $localeEntity->setContent($localeData->getContent());
+            $this->pageBinderService->bind($localizedData, $localizedEntity);
+            $this->entityManager->persist($localizedEntity);
 
             $this->entityManager->flush();
 
-            $this->createResponse->setResource($localeEntity->getId());
-
+            $this->createResponse->setResource($localizedEntity->getId());
             $this->entityManager->commit();
         } catch (\Exception $e) {
             $this->entityManager->rollback();

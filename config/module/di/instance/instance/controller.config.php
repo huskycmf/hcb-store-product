@@ -3,7 +3,7 @@ return array(
     'HcbStoreProduct-Controller-Collection-List' => array(
         'parameters' => array(
             'paginatorDataFetchService' => 'HcbStoreProduct-Service-Collection-FetchQbBuilder',
-            'viewModel' => 'HcbStoreProduct-Paginator-ViewModel-JsonModel-Page'
+            'viewModel' => 'HcbStoreProduct-Paginator-ViewModel-JsonModel-Product'
         )
     ),
 
@@ -34,7 +34,7 @@ return array(
     'HcbStoreProduct-Controller-Localized-Create' => array(
         'parameters' => array(
             'inputData' => 'HcbStoreProduct-Data-Localized',
-            'fetchService' => 'HcbStoreProduct-Service-FetchService-Page',
+            'fetchService' => 'HcbStoreProduct-Service-FetchService-Product',
             'serviceCommand' => 'HcbStoreProduct-Service-Localized-CreateCommand',
             'jsonResponseModelFactory' => 'HcbStoreProduct-Json-View-StatusMessageDataModelFactory'
         )

@@ -19,6 +19,10 @@ class CreateCommand implements ResourceCommandInterface
      */
     protected $service;
 
+    /**
+     * @param LocalizedInterface $localizedData
+     * @param CreateService $service
+     */
     public function __construct(LocalizedInterface $localizedData,
                                 CreateService $service)
     {

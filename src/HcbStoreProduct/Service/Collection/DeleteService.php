@@ -1,9 +1,9 @@
 <?php
 namespace HcbStoreProduct\Service\Collection;
 
+use HcbStoreProduct\Entity\Product as ProductEntity;
 use HcCore\Data\Collection\Entities\ByIdsInterface;
 use HcCore\Service\CommandInterface;
-use HcbStoreProduct\Entity\StaticPage as StaticPageEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use Zf2Libs\Stdlib\Service\Response\Messages\Response;
 
@@ -55,11 +55,11 @@ class DeleteService implements CommandInterface
     {
         try {
             $this->entityManager->beginTransaction();
-            $staticPageEntities = $postsToDelete->getEntities();
+            $productEntities = $postsToDelete->getEntities();
 
-            /* @var $staticPageEntities StaticPageEntity[] */
-            foreach ($staticPageEntities as $staticPageEntity) {
-                $this->entityManager->remove($staticPageEntity);
+            /* @var $productEntities ProductEntity[] */
+            foreach ($productEntities as $productEntity) {
+                $this->entityManager->remove($productEntity);
             }
 
             $this->entityManager->flush();

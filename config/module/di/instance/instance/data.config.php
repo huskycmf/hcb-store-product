@@ -2,8 +2,9 @@
 return array(
     'HcbStoreProduct-Data-Localized' => array(
         'parameters' => array(
-            'resourceInputContentLoader' =>
-                'HcbStoreProduct-Uploader-Input-Image-LoadResource-FromText-Content'
+//            'resourceInputContentLoader' =>
+//                'HcbStoreProduct-Uploader-Input-Image-LoadResource-FromText-Content'
+            'entityManager' => 'Doctrine\ORM\EntityManager'
         )
     ),
 

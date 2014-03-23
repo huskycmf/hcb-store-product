@@ -25,6 +25,6 @@ class FetchService implements FetchServiceInterface
      */
     public function fetch($id)
     {
-        return $this->entityManager->find('HcbStoreProduct\Entity\StaticPage', $id);
+        return $this->entityManager->find('HcbStoreProduct\Entity\Product', $id);
     }
 }

@@ -1,11 +1,11 @@
 <?php
-namespace HcbStoreProduct\Service\Locale\Collection;
+namespace HcbStoreProduct\Service\Localized\Collection;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use HcbStoreProduct\Entity\Product as ProductEntity;
 use HcCore\Service\Fetch\Paginator\ArrayCollection\ResourceDataServiceInterface;
 use Doctrine\ORM\QueryBuilder;
 use HcCore\Service\Filtration\Collection\FiltrationServiceInterface;
-use HcbStoreProduct\Entity\StaticPage;
 use HcbStoreProduct\Service\Exception\InvalidResourceException;
 use Zend\Stdlib\Parameters;
 
@@ -25,18 +25,18 @@ class FetchQbBuilderService implements ResourceDataServiceInterface
     }
 
     /**
-     * @param StaticPage $staticPageEntity
+     * @param ProductEntity $productEntity
      * @param Parameters $params
      * @return ArrayCollection
      * @throws InvalidResourceException
      */
-    public function fetch($staticPageEntity, Parameters $params = null)
+    public function fetch($productEntity, Parameters $params = null)
     {
-        if (!$staticPageEntity instanceof StaticPage) {
-            throw new InvalidResourceException('staticPageEntity must be compatible with type HcbStoreProduct\Entity\StaticPage');
+        if (!$productEntity instanceof ProductEntity) {
+            throw new InvalidResourceException('productEntity must be compatible with type HcbStoreProduct\Entity\Product');
         }
 
-        $collection = $staticPageEntity->getLocales();
+        $collection = $productEntity->getLocalized();
         $arrayCollection = new ArrayCollection($collection->toArray());
         if (is_null($params)) {
             return $arrayCollection;

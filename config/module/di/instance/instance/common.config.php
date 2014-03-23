@@ -1,6 +1,6 @@
 <?php
 return array(
-    'HcbStoreProduct-Paginator-ViewModel-JsonModel-Page' => array(
+    'HcbStoreProduct-Paginator-ViewModel-JsonModel-Product' => array(
         'parameters' => array(
             'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Collection'
         )
