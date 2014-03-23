@@ -1,6 +1,6 @@
 define([], function() {
     return {
-        "route": "/products",
+        "route": "/store/product",
         "prio": 1,
         "modules": [{
             "route": "",

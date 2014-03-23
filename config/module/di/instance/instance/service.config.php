@@ -6,9 +6,9 @@ return array(
         )
     ),
 
-    'HcbStoreProduct-Service-FetchService-Locale' => array(
+    'HcbStoreProduct-Service-FetchService-Localized' => array(
         'parameters' => array(
-            'entityName' => 'HcbStoreProduct-Entity-Product-Locale'
+            'entityName' => 'HcbStoreProduct-Entity-Product-Localized'
         )
     ),
 
@@ -30,15 +30,15 @@ return array(
         'parameters' => array( 'name' => 'content' )
     ),
 
-    'HcbStoreProduct-Uploader-Input-Image-CreateResource-Locale' => array(
+    'HcbStoreProduct-Uploader-Input-Image-CreateResource-Localized' => array(
         'parameters' => array(
             'name' => 'upload'
         )
     ),
 
-    'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource-Locale' => array(
+    'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource-Localized' => array(
         'parameters' => array(
-            'resourceInput' => 'HcbStoreProduct-Uploader-Input-Image-CreateResource-Locale'
+            'resourceInput' => 'HcbStoreProduct-Uploader-Input-Image-CreateResource-Localized'
         )
     )
 );

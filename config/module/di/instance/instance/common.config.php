@@ -2,13 +2,13 @@
 return array(
     'HcbStoreProduct-Paginator-ViewModel-JsonModel-Page' => array(
         'parameters' => array(
-            'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Page'
+            'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Collection'
         )
     ),
 
-    'HcbStoreProduct-Paginator-ViewModel-JsonModel-Locale' => array(
+    'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized' => array(
         'parameters' => array(
-            'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Locale'
+            'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Localized-Resource'
         )
     )
 );

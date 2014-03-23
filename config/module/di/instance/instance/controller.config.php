@@ -22,37 +22,37 @@ return array(
         )
     ),
 
-    'HcbStoreProduct-Controller-Locale-Update' => array(
+    'HcbStoreProduct-Controller-Localized-Update' => array(
         'parameters' => array(
-            'inputData' => 'HcbStoreProduct-Data-Locale',
-            'fetchService' => 'HcbStoreProduct-Service-FetchService-Locale',
-            'serviceCommand' => 'HcbStoreProduct-Service-Locale-UpdateCommand',
+            'inputData' => 'HcbStoreProduct-Data-Localized',
+            'fetchService' => 'HcbStoreProduct-Service-FetchService-Localized',
+            'serviceCommand' => 'HcbStoreProduct-Service-Localized-UpdateCommand',
             'jsonResponseModelFactory' => 'HcbStoreProduct-Json-View-StatusMessageDataModelFactory'
         )
     ),
 
-    'HcbStoreProduct-Controller-Locale-Create' => array(
+    'HcbStoreProduct-Controller-Localized-Create' => array(
         'parameters' => array(
-            'inputData' => 'HcbStoreProduct-Data-Locale',
+            'inputData' => 'HcbStoreProduct-Data-Localized',
             'fetchService' => 'HcbStoreProduct-Service-FetchService-Page',
-            'serviceCommand' => 'HcbStoreProduct-Service-Locale-CreateCommand',
+            'serviceCommand' => 'HcbStoreProduct-Service-Localized-CreateCommand',
             'jsonResponseModelFactory' => 'HcbStoreProduct-Json-View-StatusMessageDataModelFactory'
         )
     ),
 
-    'HcbStoreProduct-Controller-Locale-Collection-List' => array(
+    'HcbStoreProduct-Controller-Localized-Collection-List' => array(
         'parameters' => array(
             'fetchService' => 'HcbStoreProduct-Service-FetchService-Page',
-            'paginatorDataFetchService' => 'HcbStoreProduct-Service-Locale-Collection-FetchQbBuilder',
-            'viewModel' => 'HcbStoreProduct-Paginator-ViewModel-JsonModel-Locale'
+            'paginatorDataFetchService' => 'HcbStoreProduct-Service-Localized-Collection-FetchQbBuilder',
+            'viewModel' => 'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized'
         )
     ),
 
-    'HcbStoreProduct-Controller-Locale-Image-Create' => array(
+    'HcbStoreProduct-Controller-Localized-Image-Create' => array(
         'parameters' => array(
             'saveService' => 'HcBackend-Images-Default-SaveService',
-            'uploaderModel' => 'HcbStoreProduct-Uploader-View-Model-UploaderModel-Locale-Image',
-            'createResourceData' => 'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource-Locale'
+            'uploaderModel' => 'HcbStoreProduct-Uploader-View-Model-UploaderModel-Localized-Image',
+            'createResourceData' => 'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource-Localized'
         )
     ),
 );

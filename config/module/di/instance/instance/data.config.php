@@ -1,6 +1,6 @@
 <?php
 return array(
-    'HcbStoreProduct-Data-Locale' => array(
+    'HcbStoreProduct-Data-Localized' => array(
         'parameters' => array(
             'resourceInputContentLoader' =>
                 'HcbStoreProduct-Uploader-Input-Image-LoadResource-FromText-Content'

@@ -1,7 +1,7 @@
 define([
     "dojo/_base/declare",
     "dojo/_base/lang",
-    "hcb-store-product/store/Products",
+    "hcb-store-product/store/ProductStore",
     "dgrid/OnDemandGrid",
     "dgrid/extensions/ColumnHider",
     "dgrid/extensions/ColumnResizer",

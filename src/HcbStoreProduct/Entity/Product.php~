@@ -25,7 +25,7 @@ class Product implements EntityInterface
      * @var Product\Localized
      *
      * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized", mappedBy="product")
-     * @ORM\OrderBy({"updatedTimestamp" = "DESC"})
+     * @ORM\OrderBy({"createdTimestamp" = "DESC"})
      */
     private $locale = null;
     /**

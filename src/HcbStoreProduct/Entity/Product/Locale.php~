@@ -1,0 +1,161 @@
+<?php
+namespace HcbStoreProduct\Entity\Product;
+
+use HcbStoreProduct\Entity\Product;
+use HcCore\Entity\EntityInterface;
+use Doctrine\ORM\Mapping as ORM;
+use HcbStoreProduct\Entity\StaticPage;
+
+/**
+ * Locale
+ *
+ * @ORM\Table(name="store_product_locale")
+ * @ORM\Entity
+ */
+class Locale implements EntityInterface
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned"=true})
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var Product
+     *
+     * @ORM\ManyToOne(targetEntity="HcbStoreProduct\Entity\Product", inversedBy="locale")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     * })
+     */
+    private $product;
+
+    /**
+     * @var Locale
+     *
+     * @ORM\OneToOne(targetEntity="HcCore\Entity\Locale")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="locale_id", referencedColumnName="id")
+     * })
+     */
+    private $locale;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_timestamp", type="datetime", nullable=false)
+     */
+    private $updatedTimestamp;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
+     */
+    private $createdTimestamp;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set updatedTimestamp
+     *
+     * @param \DateTime $updatedTimestamp
+     * @return Locale
+     */
+    public function setUpdatedTimestamp($updatedTimestamp)
+    {
+        $this->updatedTimestamp = $updatedTimestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedTimestamp
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedTimestamp()
+    {
+        return $this->updatedTimestamp;
+    }
+
+    /**
+     * Set createdTimestamp
+     *
+     * @param \DateTime $createdTimestamp
+     * @return Locale
+     */
+    public function setCreatedTimestamp($createdTimestamp)
+    {
+        $this->createdTimestamp = $createdTimestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get createdTimestamp
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedTimestamp()
+    {
+        return $this->createdTimestamp;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \HcbStoreProduct\Entity\Product $product
+     * @return Locale
+     */
+    public function setProduct(\HcbStoreProduct\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \HcbStoreProduct\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Set locale
+     *
+     * @param \HcCore\Entity\Locale $locale
+     * @return Locale
+     */
+    public function setLocale(\HcCore\Entity\Locale $locale = null)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return \HcCore\Entity\Locale 
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+}

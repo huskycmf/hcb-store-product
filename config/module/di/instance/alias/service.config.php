@@ -8,21 +8,21 @@ return array(
     'HcbStoreProduct-Service-Collection-Delete' =>
         'HcbStoreProduct\Service\Collection\DeleteService',
 
-    'HcbStoreProduct-Service-Locale-CreateCommand' =>
-        'HcbStoreProduct\Service\Locale\CreateCommand',
+    'HcbStoreProduct-Service-Localized-CreateCommand' =>
+        'HcbStoreProduct\Service\Localized\CreateCommand',
 
-    'HcbStoreProduct-Service-Locale-UpdateCommand' =>
-        'HcbStoreProduct\Service\Locale\UpdateCommand',
+    'HcbStoreProduct-Service-Localized-UpdateCommand' =>
+        'HcbStoreProduct\Service\Localized\UpdateCommand',
 
-    'HcbStoreProduct-Service-Locale-Collection-FetchQbBuilder' =>
-        'HcbStoreProduct\Service\Locale\Collection\FetchQbBuilderService',
+    'HcbStoreProduct-Service-Localized-Collection-FetchQbBuilder' =>
+        'HcbStoreProduct\Service\Localized\Collection\FetchQbBuilderService',
 
-    'HcbStoreProduct-Uploader-View-Model-UploaderModel-Locale-Image' =>
+    'HcbStoreProduct-Uploader-View-Model-UploaderModel-Localized-Image' =>
         'Zf2FileUploader\View\Model\UploaderModel',
 
-    'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource-Locale' =>
+    'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource-Localized' =>
         'Zf2FileUploader\InputFilter\Image\CreateResource',
 
-    'HcbStoreProduct-Uploader-Input-Image-CreateResource-Locale' =>
+    'HcbStoreProduct-Uploader-Input-Image-CreateResource-Localized' =>
         'Zf2FileUploader\Input\Image\CreateResource'
 );

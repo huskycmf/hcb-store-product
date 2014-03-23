@@ -9,6 +9,6 @@ return array(
     'HcbStoreProduct-Controller-Create' =>
         'HcCore\Controller\Common\Rest\Collection\DataController',
 
-    'HcbStoreProduct-Controller-Locale-Update' =>
+    'HcbStoreProduct-Controller-Localized-Update' =>
         'HcCore\Controller\Common\Rest\Collection\ResourceDataController',
 );

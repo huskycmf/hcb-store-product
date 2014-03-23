@@ -1,23 +1,17 @@
 <?php
 namespace HcbStoreProduct\Entity\Product;
 
-//use HcBackend\Entity\PageInterface;
 use HcbStoreProduct\Entity\Product;
 use HcCore\Entity\EntityInterface;
-//use HcBackend\Entity\PageBindInterface;
-//use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use HcbStaticPage\Entity\StaticPage;
-//use HcBackend\Entity\ImageBindInterface;
-//use Zf2FileUploader\Entity\ImageInterface;
 
 /**
- * Locale
+ * Localized
  *
- * @ORM\Table(name="store_product_locale")
+ * @ORM\Table(name="store_product_localized")
  * @ORM\Entity
  */
-class Locale implements EntityInterface/*, ImageBindInterface, PageBindInterface*/
+class Localized implements EntityInterface
 {
     /**
      * @var integer
@@ -31,12 +25,19 @@ class Locale implements EntityInterface/*, ImageBindInterface, PageBindInterface
     /**
      * @var Product
      *
-     * @ORM\ManyToOne(targetEntity="HcbStoreProduct\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="HcbStoreProduct\Entity\Product", inversedBy="locale")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
      * })
      */
     private $product;
+
+    /**
+     * @var Page
+     *
+     * @ORM\OneToOne(targetEntity="HcbStoreProduct\Entity\Product\Localized\Page", mappedBy="localized")
+     */
+    private $page;
 
     /**
      * @var Locale

@@ -7,7 +7,7 @@ define([
     'hc-backend/config'
 ], function (declare, JsonRest, Cache, Memory, Observable, config) {
     return Observable(Cache(JsonRest({
-        target: config.get('primaryRoute')+"/products",
+        target: config.get('primaryRoute')+"/store/product",
         idProperty: 'id'
     }), Memory()));
 });
