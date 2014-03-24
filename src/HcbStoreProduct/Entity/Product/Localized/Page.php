@@ -9,7 +9,7 @@ use HcCore\Entity\EntityInterface;
 /**
  * Page
  *
- * @ORM\Table(name="store_product_locale_page")
+ * @ORM\Table(name="store_product_localized_page")
  * @ORM\Entity
  */
 class Page extends MappedPage implements EntityInterface
