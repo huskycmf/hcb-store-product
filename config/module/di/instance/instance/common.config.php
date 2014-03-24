@@ -2,7 +2,7 @@
 return array(
     'HcbStoreProduct-Paginator-ViewModel-JsonModel-Product' => array(
         'parameters' => array(
-            'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Collection'
+            'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Collection-Product'
         )
     ),
 

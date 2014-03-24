@@ -45,12 +45,12 @@ class LocalizedDataTest extends \PHPUnit_Framework_TestCase
 
         $this->dataExtractor->expects($this->once())
              ->method('extract')->will($this->returnValue(
-                                         array('lang' => 'ru')
+                                         array('locale' => 'ru')
                                       ));
 
         $data = new Localized($this->request, $this->dataExtractor, $di);
 
         $this->assertTrue($data->isValid());
-        $this->assertEquals('ru', $data->getLang());
+        $this->assertEquals('ru', $data->getLocale());
     }
 }

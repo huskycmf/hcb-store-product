@@ -14,4 +14,10 @@ class CommonTest extends AbstractTest
         $this->assertInstanceOf('Zf2Libs\Paginator\ViewModel\JsonModel',
                                 $this->di->get('HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized'));
     }
+
+    public function testStdlibExtractorCollectionProduct()
+    {
+        $this->assertInstanceOf('HcbStoreProduct\Stdlib\Extractor\Collection\Product',
+                                $this->di->get('HcbStoreProduct-Stdlib-Extractor-Collection-Product'));
+    }
 }

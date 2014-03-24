@@ -1,11 +1,10 @@
 <?php
 namespace HcbStoreProduct\Data;
 
-use HcBackend\Data\ImageInterface;
 use HcBackend\Data\PageInterface;
-use HcBackend\Data\LangInterface;
+use HcCore\Data\LocaleInterface;
 
-interface LocalizedInterface extends PageInterface, LangInterface
+interface LocalizedInterface extends PageInterface, LocaleInterface
 {
     /**
      * @return string

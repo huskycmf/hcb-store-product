@@ -1,5 +1,5 @@
 <?php
-namespace HcbStoreProduct\Stdlib\Extractor;
+namespace HcbStoreProduct\Stdlib\Extractor\Collection;
 
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
@@ -7,7 +7,7 @@ use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
 use HcbStoreProduct\Entity\Product as ProductEntity;
 use HcbStoreProduct\Entity\Product\Localized as ProductLocalizedEntity;
 
-class Collection implements ExtractorInterface
+class Product implements ExtractorInterface
 {
     /**
      * Extract values from an object
@@ -22,17 +22,19 @@ class Collection implements ExtractorInterface
             throw new InvalidArgumentException("Expected HcbStoreProduct\\Entity\\Product object, invalid object given");
         }
 
-        /* @var $localeEntity ProductLocalizedEntity */
-        $localeEntity = $product->getLocale()->current();
-        $updatedTimestamp = $localeEntity->getUpdatedTimestamp();
+        /* @var $localizedEntity ProductLocalizedEntity */
+        $localizedEntity = $product->getLocalized()->current();
+        $updatedTimestamp = $localizedEntity->getUpdatedTimestamp();
         if (is_null($updatedTimestamp)) {
-            $updatedTimestamp = $localeEntity->getCreatedTimestamp()->format('Y-m-d H:i:s');
+            $updatedTimestamp = $localizedEntity->getCreatedTimestamp()->format('Y-m-d H:i:s');
         } else {
             $updatedTimestamp = $updatedTimestamp->format('Y-m-d H:i:s');
         }
 
-        return array('id'=>$localeEntity->getId(),
-                     'url'=>$localeEntity->getPage()->getUrl(),
+        $page = $localizedEntity->getPage();
+
+        return array('id'=>$localizedEntity->getId(),
+                     'url'=>(is_null($page) ? '' : $page->getUrl()),
                      'timestamp'=>$updatedTimestamp);
     }
 }
