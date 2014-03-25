@@ -35,7 +35,7 @@ return array(
                 'locale' => array(
                     'type' => 'literal',
                     'options' => array(
-                        'route' => '/locale'
+                        'route' => '/localized'
                     ),
                     'may_terminate' => false,
                     'child_routes' => array(
@@ -44,7 +44,7 @@ return array(
                             'options' => array(
                                 'verb' => 'get',
                                 'defaults' => array(
-                                    'controller' => 'HcbStoreProduct-Controller-Locale-Collection-List'
+                                    'controller' => 'HcbStoreProduct-Controller-Localized-Collection-List'
                                 )
                             )
                         ),
@@ -53,7 +53,7 @@ return array(
                             'options' => array(
                                 'verb' => 'post',
                                 'defaults' => array(
-                                    'controller' => 'HcbStoreProduct-Controller-Locale-Create'
+                                    'controller' => 'HcbStoreProduct-Controller-Localized-Create'
                                 )
                             )
                         ),
@@ -70,7 +70,7 @@ return array(
                                     'options' => array(
                                         'verb' => 'put',
                                         'defaults' => array(
-                                            'controller' => 'HcbStoreProduct-Controller-Locale-Update'
+                                            'controller' => 'HcbStoreProduct-Controller-Localized-Update'
                                         )
                                     )
                                 )

@@ -3,6 +3,9 @@ return array(
     'HcbStoreProduct-Controller-Collection-List' =>
         'HcCore\Controller\Common\Rest\Collection\ListController',
 
+    'HcbStoreProduct-Controller-Localized-Collection-List' =>
+        'HcCore\Controller\Common\Rest\Collection\ResourceListController',
+
     'HcbStoreProduct-Controller-Collection-Delete' =>
         'HcCore\Controller\Common\Rest\Collection\DataController',
 

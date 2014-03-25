@@ -9,6 +9,12 @@ class ControllerTest extends AbstractTest
                                     $this->di->get('HcbStoreProduct-Controller-Collection-List'));
     }
 
+    public function testListLocalizedController()
+    {
+        $this->assertInstanceOf('HcCore\Controller\Common\Rest\Collection\ResourceListController',
+                                    $this->di->get('HcbStoreProduct-Controller-Localized-Collection-List'));
+    }
+
     public function testCreateController()
     {
         $this->assertInstanceOf('HcCore\Controller\Common\Rest\Collection\DataController',

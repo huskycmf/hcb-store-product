@@ -17,6 +17,12 @@ return array(
     'HcbStoreProduct-Service-Localized-Collection-FetchQbBuilder' =>
         'HcbStoreProduct\Service\Localized\Collection\FetchQbBuilderService',
 
+    'HcbStaticPage-Service-FetchService-Page' =>
+        'HcCore\Service\FetchService',
+
+    'HcbStaticPage-Service-FetchService-Locale' =>
+        'HcCore\Service\FetchService',
+
     'HcbStoreProduct-Uploader-View-Model-UploaderModel-Localized-Image' =>
         'Zf2FileUploader\View\Model\UploaderModel',
 
