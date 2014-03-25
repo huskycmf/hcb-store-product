@@ -21,9 +21,27 @@ class ControllerTest extends AbstractTest
                                     $this->di->get('HcbStoreProduct-Controller-Create'));
     }
 
+    public function testLocalizedCreateController()
+    {
+        $this->assertInstanceOf('HcCore\Controller\Common\Rest\Collection\ResourceDataController',
+                                $this->di->get('HcbStoreProduct-Controller-Localized-Create'));
+    }
+
     public function testLocalizedUpdateController()
     {
         $this->assertInstanceOf('HcCore\Controller\Common\Rest\Collection\ResourceDataController',
                                 $this->di->get('HcbStoreProduct-Controller-Localized-Update'));
+    }
+
+    public function testDeleteCollectionController()
+    {
+        $this->assertInstanceOf('HcCore\Controller\Common\Rest\Collection\DataController',
+                                $this->di->get('HcbStoreProduct-Controller-Collection-Delete'));
+    }
+
+    public function testLocalizedImageCreateController()
+    {
+        $this->assertInstanceOf('HcCore\Controller\Common\Rest\Collection\ResourceDataController',
+                                $this->di->get('HcbStoreProduct-Controller-Localized-Create'));
     }
 }

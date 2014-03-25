@@ -1,5 +1,8 @@
 <?php
 return array(
+
+    // Product
+
     'HcbStoreProduct-Controller-Collection-List' => array(
         'parameters' => array(
             'paginatorDataFetchService' => 'HcbStoreProduct-Service-Collection-FetchQbBuilder',
@@ -16,9 +19,19 @@ return array(
 
     'HcbStoreProduct-Controller-Collection-Delete' => array(
         'parameters' => array(
-            'inputData' => 'HcbStoreProduct-Data-Collection-Entities-ByIds-Page',
+            'inputData' => 'HcbStoreProduct-Data-Collection-Entities-ByIds-Product',
             'serviceCommand' => 'HcbStoreProduct-Service-Collection-Delete',
             'jsonResponseModelFactory' => 'HcbStoreProduct-Json-View-StatusMessageDataModelFactory'
+        )
+    ),
+
+    // Localized
+
+    'HcbStoreProduct-Controller-Localized-Collection-List' => array(
+        'parameters' => array(
+            'fetchService' => 'HcbStoreProduct-Service-FetchService-Product',
+            'paginatorDataFetchService' => 'HcbStoreProduct-Service-Localized-Collection-FetchQbBuilder',
+            'viewModel' => 'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized'
         )
     ),
 
@@ -40,13 +53,7 @@ return array(
         )
     ),
 
-    'HcbStoreProduct-Controller-Localized-Collection-List' => array(
-        'parameters' => array(
-            'fetchService' => 'HcbStoreProduct-Service-FetchService-Product',
-            'paginatorDataFetchService' => 'HcbStoreProduct-Service-Localized-Collection-FetchQbBuilder',
-            'viewModel' => 'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized'
-        )
-    ),
+    // Localized Image
 
     'HcbStoreProduct-Controller-Localized-Image-Create' => array(
         'parameters' => array(

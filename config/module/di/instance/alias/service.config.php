@@ -11,6 +11,9 @@ return array(
     'HcbStoreProduct-Service-Localized-CreateCommand' =>
         'HcbStoreProduct\Service\Localized\CreateCommand',
 
+    'HcbStoreProduct-Service-Collection-IdsService-Product' =>
+        'HcCore\Service\Collection\IdsService',
+
     'HcbStoreProduct-Service-Localized-UpdateCommand' =>
         'HcbStoreProduct\Service\Localized\UpdateCommand',
 
