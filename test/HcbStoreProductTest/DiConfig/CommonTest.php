@@ -15,9 +15,15 @@ class CommonTest extends AbstractTest
                                 $this->di->get('HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized'));
     }
 
-    public function testStdlibExtractorCollectionProduct()
+    public function testStdlibExtractorResource()
     {
-        $this->assertInstanceOf('HcbStoreProduct\Stdlib\Extractor\Collection\Product',
-                                $this->di->get('HcbStoreProduct-Stdlib-Extractor-Collection-Product'));
+        $this->assertInstanceOf('HcbStoreProduct\Stdlib\Extractor\Resource',
+                                $this->di->get('HcbStoreProduct-Stdlib-Extractor-Resource'));
+    }
+
+    public function testStdlibExtractorLocalizedResource()
+    {
+        $this->assertInstanceOf('HcbStoreProduct\Stdlib\Extractor\Localized\Resource',
+                                $this->di->get('HcbStoreProduct-Stdlib-Extractor-Localized-Resource'));
     }
 }

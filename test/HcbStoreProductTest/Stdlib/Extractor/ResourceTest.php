@@ -1,15 +1,15 @@
 <?php
-namespace HcbStoreProductTest\Stdlib\Extractor\Collection;
+namespace HcbStoreProductTest\Stdlib\Extractor;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
-use HcbStoreProduct\Stdlib\Extractor\Collection\Product as ProductExtractor;
+use HcbStoreProduct\Stdlib\Extractor\Resource as ResourceExtractor;
 use Zend\Di\Di;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class ResourceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ProductExtractor
+     * @var ResourceExtractor
      */
     protected $extractor;
 
@@ -25,7 +25,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->extractor = new ProductExtractor();
+        $this->extractor = new ResourceExtractor();
         $this->productMock = $this->getMock('HcbStoreProduct\Entity\Product');
         $this->localizedMock = $this->getMock('HcbStoreProduct\Entity\Product\Localized');
 

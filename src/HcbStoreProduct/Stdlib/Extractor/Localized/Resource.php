@@ -11,7 +11,7 @@ class Resource implements ExtractorInterface
     /**
      * @var PageExtractor
      */
-    protected $pageExtractor;
+    protected  $pageExtractor;
 
     /**
      * @param PageExtractor $pageExtractor
@@ -47,14 +47,13 @@ class Resource implements ExtractorInterface
 
         $localData = array('id'=>$productLocalized->getId(),
                            'lang'=>$productLocalized->getLocale()->getLang(),
-//                           'content'=>$productLocalized->getContent(),
                            'createdTimestamp'=>$createdTimestamp,
                            'updatedTimestamp'=>$updatedTimestamp);
 
-        if (!is_null($productLocalized->getPage())) {
-            return array_merge($localData, $this->pageExtractor->extract($productLocalized->getPage()));
-        } else {
-            return $localData;
+        if (($pageEntity = $productLocalized->getPage())) {
+            $localData = array_merge($localData, $this->pageExtractor->extract($pageEntity));
         }
+
+        return $localData;
     }
 }

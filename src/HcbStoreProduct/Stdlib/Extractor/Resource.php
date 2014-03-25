@@ -1,5 +1,5 @@
 <?php
-namespace HcbStoreProduct\Stdlib\Extractor\Collection;
+namespace HcbStoreProduct\Stdlib\Extractor;
 
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
@@ -7,7 +7,7 @@ use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
 use HcbStoreProduct\Entity\Product as ProductEntity;
 use HcbStoreProduct\Entity\Product\Localized as ProductLocalizedEntity;
 
-class Product implements ExtractorInterface
+class Resource implements ExtractorInterface
 {
     /**
      * Extract values from an object
