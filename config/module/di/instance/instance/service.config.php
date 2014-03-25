@@ -2,19 +2,19 @@
 return array(
     'HcbStoreProduct-Service-FetchService-Product' => array(
         'parameters' => array(
-            'entityName' => 'HcbStoreProduct-Entity-Product'
+            'entityName' => 'HcbStoreProduct\Entity\Product'
         )
     ),
 
     'HcbStoreProduct-Service-FetchService-Localized' => array(
         'parameters' => array(
-            'entityName' => 'HcbStoreProduct-Entity-Product-Localized'
+            'entityName' => 'HcbStoreProduct\Entity\Product\Localized'
         )
     ),
 
     'HcbStoreProduct-Service-Collection-IdsService-Product' => array(
         'parameters' => array(
-            'entityName' => 'HcbStoreProduct-Entity-Product'
+            'entityName' => 'HcbStoreProduct\Entity\Product'
         )
     ),
 

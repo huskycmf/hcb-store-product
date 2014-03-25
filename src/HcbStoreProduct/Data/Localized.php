@@ -23,7 +23,9 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
     {
         /* @var $input \HcBackend\InputFilter\Input\Locale */
         $input = $di->get('HcBackend\InputFilter\Input\Locale',
-                          array('name' => 'locale'))->setRequired(true);
+                          array('name' => 'locale'))
+                    ->setRequired(true);
+
         $this->add($input);
 
         $this->add(array('type'=>'HcBackend\InputFilter\Page'), 'page');

@@ -2,10 +2,11 @@
 namespace HcbStoreProduct\Service\Localized\Collection;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManagerInterface;
 use HcbStoreProduct\Entity\Product as ProductEntity;
 use HcCore\Service\Fetch\Paginator\ArrayCollection\ResourceDataServiceInterface;
 use Doctrine\ORM\QueryBuilder;
-use HcCore\Service\Filtration\Collection\FiltrationServiceInterface;
+use HcCore\Service\Filtration\Query\FiltrationServiceInterface;
 use HcbStoreProduct\Service\Exception\InvalidResourceException;
 use Zend\Stdlib\Parameters;
 
@@ -17,10 +18,18 @@ class FetchQbBuilderService implements ResourceDataServiceInterface
     protected $filtrationService;
 
     /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
+
+    /**
+     * @param EntityManagerInterface $entityManager
      * @param FiltrationServiceInterface $filtrationService
      */
-    public function __construct(FiltrationServiceInterface $filtrationService)
+    public function __construct(EntityManagerInterface $entityManager,
+                                FiltrationServiceInterface $filtrationService)
     {
+        $this->entityManager = $entityManager;
         $this->filtrationService = $filtrationService;
     }
 
@@ -36,12 +45,25 @@ class FetchQbBuilderService implements ResourceDataServiceInterface
             throw new InvalidResourceException('productEntity must be compatible with type HcbStoreProduct\Entity\Product');
         }
 
-        $collection = $productEntity->getLocalized();
-        $arrayCollection = new ArrayCollection($collection->toArray());
+        /* @var $localizedRepository \Doctrine\ORM\EntityRepository */
+        $localizedRepository = $this->entityManager->getRepository('HcbStoreProduct\Entity\Product\Localized');
+        $qb = $localizedRepository->createQueryBuilder('l');
+
+        $qb->join('l.locale', 'locale')
+           ->where('l.product = :product');
+
+        $qb->setParameter('product', $productEntity);
+
+
         if (is_null($params)) {
-            return $arrayCollection;
+            return $qb->getQuery()
+                      ->getArrayResult();
         }
 
-        return $this->filtrationService->apply($params, $arrayCollection);
+
+
+        \Zf2Libs\Debug\Utility::dump($this->filtrationService
+                                          ->apply($params, $qb, 'l')
+                                          ->getQuery()->getSQL());
     }
 }
