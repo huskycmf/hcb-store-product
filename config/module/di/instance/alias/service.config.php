@@ -17,8 +17,8 @@ return array(
     'HcbStoreProduct-Service-Localized-UpdateCommand' =>
         'HcbStoreProduct\Service\Localized\UpdateCommand',
 
-    'HcbStoreProduct-Service-Localized-Collection-FetchQbBuilder' =>
-        'HcbStoreProduct\Service\Localized\Collection\FetchQbBuilderService',
+    'HcbStoreProduct-Service-Localized-Collection-FetchArrayCollection' =>
+        'HcbStoreProduct\Service\Localized\Collection\FetchArrayCollectionService',
 
     'HcbStaticPage-Service-FetchService-Page' =>
         'HcCore\Service\FetchService',

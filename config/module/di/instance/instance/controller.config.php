@@ -30,7 +30,7 @@ return array(
     'HcbStoreProduct-Controller-Localized-Collection-List' => array(
         'parameters' => array(
             'fetchService' => 'HcbStoreProduct-Service-FetchService-Product',
-            'paginatorDataFetchService' => 'HcbStoreProduct-Service-Localized-Collection-FetchQbBuilder',
+            'paginatorDataFetchService' => 'HcbStoreProduct-Service-Localized-Collection-FetchArrayCollection',
             'viewModel' => 'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized'
         )
     ),

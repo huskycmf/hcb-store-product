@@ -10,7 +10,7 @@ use HcCore\Service\Filtration\Query\FiltrationServiceInterface;
 use HcbStoreProduct\Service\Exception\InvalidResourceException;
 use Zend\Stdlib\Parameters;
 
-class FetchQbBuilderService implements ResourceDataServiceInterface
+class FetchArrayCollectionService implements ResourceDataServiceInterface
 {
     /**
      * @var FiltrationServiceInterface
