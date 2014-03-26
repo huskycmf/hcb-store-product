@@ -54,16 +54,12 @@ class FetchQbBuilderService implements ResourceDataServiceInterface
 
         $qb->setParameter('product', $productEntity);
 
-
         if (is_null($params)) {
             return $qb->getQuery()
                       ->getArrayResult();
         }
 
-
-
-        \Zf2Libs\Debug\Utility::dump($this->filtrationService
-                                          ->apply($params, $qb, 'l')
-                                          ->getQuery()->getSQL());
+        return new ArrayCollection($this->filtrationService->apply($params, $qb, 'l', array('lang'=>'locale.locale'))
+                                        ->getQuery()->getResult());
     }
 }
