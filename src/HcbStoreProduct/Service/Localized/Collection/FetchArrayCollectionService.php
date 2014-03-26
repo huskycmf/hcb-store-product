@@ -55,11 +55,12 @@ class FetchArrayCollectionService implements ResourceDataServiceInterface
         $qb->setParameter('product', $productEntity);
 
         if (is_null($params)) {
-            return $qb->getQuery()
-                      ->getArrayResult();
+            $result = $qb->getQuery()->getResult();
+        } else {
+            $result = $this->filtrationService->apply($params, $qb, 'l', array('lang'=>'locale.locale'))
+                           ->getQuery()->getResult();
         }
 
-        return new ArrayCollection($this->filtrationService->apply($params, $qb, 'l', array('lang'=>'locale.locale'))
-                                        ->getQuery()->getResult());
+        return new ArrayCollection($result);
     }
 }

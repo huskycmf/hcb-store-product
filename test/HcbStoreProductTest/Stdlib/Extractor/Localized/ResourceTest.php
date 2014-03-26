@@ -46,7 +46,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
 
         $localeMock = $this->getMock('HcCore\Entity\Locale');
         $localeMock->expects($this->once())
-            ->method('getLang')
+            ->method('getLocale')
             ->will($this->returnValue('ru'));
 
         $this->localizedMock
@@ -72,7 +72,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
              ->method('getCreatedTimestamp')
              ->will($this->returnValue(new \DateTime('2012-09-10 10:10:10')));
 
-        $this->assertEquals(array('id'=>1, 'lang'=>'ru',
+        $this->assertEquals(array('id'=>1, 'locale'=>'ru',
                                   'keywords'=>'test keywords',
                                   'createdTimestamp'=>'2012-09-10 10:10:10',
                                   'updatedTimestamp'=>'2012-10-10 10:10:10'),
@@ -91,7 +91,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
             ->method('getCreatedTimestamp')
             ->will($this->returnValue(new \DateTime('2012-09-10 10:10:10')));
 
-        $this->assertEquals(array('id'=>1, 'lang'=>'ru',
+        $this->assertEquals(array('id'=>1, 'locale'=>'ru',
                                   'createdTimestamp'=>'2012-09-10 10:10:10',
                                   'updatedTimestamp'=>'2012-10-10 10:10:10'),
                             $this->extractor->extract($this->localizedMock));

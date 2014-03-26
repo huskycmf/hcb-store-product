@@ -46,7 +46,7 @@ class Resource implements ExtractorInterface
         }
 
         $localData = array('id'=>$productLocalized->getId(),
-                           'lang'=>$productLocalized->getLocale()->getLocale(),
+                           'locale'=>$productLocalized->getLocale()->getLocale(),
                            'createdTimestamp'=>$createdTimestamp,
                            'updatedTimestamp'=>$updatedTimestamp);
 
