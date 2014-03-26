@@ -31,7 +31,7 @@ define([
             {label: translation['labelId'], hidden: true, field: 'id', sortable: true, resizable: false},
             editor({label: translation['labelUrl'], field: 'url', hidden: false,
                     sortable: true, resizable: true, route: '/update/:id'}),
-            timestamp({label: translation['labelCreatedTimestamp'], field: 'createdTimestamp', sortable: true})
+            timestamp({label: translation['labelTimestamp'], field: 'timestamp', sortable: true})
         ],
 
         loadingMessage: translation['loadingMessage'],
