@@ -27,10 +27,10 @@ class Page extends MappedPage implements EntityInterface
     /**
      * Set localized
      *
-     * @param \HcbStoreProduct\Entity\Product\Localized $localized
+     * @param Localized $localized
      * @return Page
      */
-    public function setLocalized(\HcbStoreProduct\Entity\Product\Localized $localized = null)
+    public function setLocalized(Localized $localized = null)
     {
         $this->localized = $localized;
 

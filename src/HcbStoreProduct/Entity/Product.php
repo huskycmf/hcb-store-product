@@ -29,6 +29,13 @@ class Product implements EntityInterface
     private $enabled = 0;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
+     */
+    private $createdTimestamp;
+
+    /**
      * @var Product\Localized
      *
      * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized", mappedBy="product")
@@ -37,18 +44,44 @@ class Product implements EntityInterface
     private $localized = null;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
-     */
-    private $createdTimestamp;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
         $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add localized
+     *
+     * @param \HcbStoreProduct\Entity\Product\Localized $localized
+     * @return Product
+     */
+    public function addLocalized(\HcbStoreProduct\Entity\Product\Localized $localized)
+    {
+        $this->localized[] = $localized;
+
+        return $this;
+    }
+
+    /**
+     * Remove localized
+     *
+     * @param \HcbStoreProduct\Entity\Product\Localized $localized
+     */
+    public function removeLocalized(\HcbStoreProduct\Entity\Product\Localized $localized)
+    {
+        $this->localized->removeElement($localized);
+    }
+
+    /**
+     * Get localized
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLocalized()
+    {
+        return $this->localized;
     }
 
     /**
@@ -105,38 +138,5 @@ class Product implements EntityInterface
     public function getEnabled()
     {
         return $this->enabled;
-    }
-
-    /**
-     * Add localized
-     *
-     * @param \HcbStoreProduct\Entity\Product\Localized $localized
-     * @return Product
-     */
-    public function addLocalized(\HcbStoreProduct\Entity\Product\Localized $localized)
-    {
-        $this->localized[] = $localized;
-
-        return $this;
-    }
-
-    /**
-     * Remove localized
-     *
-     * @param \HcbStoreProduct\Entity\Product\Localized $localized
-     */
-    public function removeLocalized(\HcbStoreProduct\Entity\Product\Localized $localized)
-    {
-        $this->localized->removeElement($localized);
-    }
-
-    /**
-     * Get localized
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLocalized()
-    {
-        return $this->localized;
     }
 }
