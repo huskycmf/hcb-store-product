@@ -1,7 +1,7 @@
 <?php
 namespace HcbStoreProduct;
 
-use HcbClient\Options\ModuleOptions;
+use HcbStoreProduct\Options\ModuleOptions;
 use Zend\Mvc\MvcEvent;
 
 class Module
