@@ -26,6 +26,13 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=500, nullable=false)
+     */
+    protected $title;
+
+    /**
      * @var Product
      *
      * @ORM\ManyToOne(targetEntity="HcbStoreProduct\Entity\Product", inversedBy="localized")
@@ -74,6 +81,29 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Localized
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
