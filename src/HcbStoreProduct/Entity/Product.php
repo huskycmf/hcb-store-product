@@ -3,6 +3,7 @@ namespace HcbStoreProduct\Entity;
 
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Zf2FileUploader\Entity\Image;
 
 /**
  * Product
@@ -29,6 +30,30 @@ class Product implements EntityInterface
     private $enabled = 0;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float", nullable=false)
+     */
+    private $price;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="price_deal", type="float", nullable=false)
+     */
+    private $priceDeal;
+
+    /**
+     * @var Image
+     *
+     * @ORM\OneToOne(targetEntity="Zf2FileUploader\Entity\Image")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="image_3d_id", referencedColumnName="id")
+     * })
+     */
+    private $image3d;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
@@ -42,13 +67,137 @@ class Product implements EntityInterface
      * @ORM\OrderBy({"updatedTimestamp" = "DESC"})
      */
     private $localized = null;
-
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set enabled
+     *
+     * @param integer $enabled
+     * @return Product
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return integer 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     * @return Product
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set priceDeal
+     *
+     * @param float $priceDeal
+     * @return Product
+     */
+    public function setPriceDeal($priceDeal)
+    {
+        $this->priceDeal = $priceDeal;
+
+        return $this;
+    }
+
+    /**
+     * Get priceDeal
+     *
+     * @return float 
+     */
+    public function getPriceDeal()
+    {
+        return $this->priceDeal;
+    }
+
+    /**
+     * Set createdTimestamp
+     *
+     * @param \DateTime $createdTimestamp
+     * @return Product
+     */
+    public function setCreatedTimestamp($createdTimestamp)
+    {
+        $this->createdTimestamp = $createdTimestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get createdTimestamp
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedTimestamp()
+    {
+        return $this->createdTimestamp;
+    }
+
+    /**
+     * Set image3d
+     *
+     * @param \Zf2FileUploader\Entity\Image $image3d
+     * @return Product
+     */
+    public function setImage3d(\Zf2FileUploader\Entity\Image $image3d = null)
+    {
+        $this->image3d = $image3d;
+
+        return $this;
+    }
+
+    /**
+     * Get image3d
+     *
+     * @return \Zf2FileUploader\Entity\Image 
+     */
+    public function getImage3d()
+    {
+        return $this->image3d;
     }
 
     /**
@@ -77,66 +226,10 @@ class Product implements EntityInterface
     /**
      * Get localized
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getLocalized()
     {
         return $this->localized;
-    }
-
-    /**
-     * Set createdTimestamp
-     *
-     * @param \DateTime $createdTimestamp
-     * @return Product
-     */
-    public function setCreatedTimestamp($createdTimestamp)
-    {
-        $this->createdTimestamp = $createdTimestamp;
-
-        return $this;
-    }
-
-    /**
-     * Get createdTimestamp
-     *
-     * @return \DateTime
-     */
-    public function getCreatedTimestamp()
-    {
-        return $this->createdTimestamp;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set enabled
-     *
-     * @param int $enabled
-     * @return Product
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-
-        return $this;
-    }
-
-    /**
-     * Get enabled
-     *
-     * @return int
-     */
-    public function getEnabled()
-    {
-        return $this->enabled;
     }
 }
