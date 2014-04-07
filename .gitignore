@@ -6,4 +6,4 @@
 composer.lock
 composer.phar
 test/report
-~*
+*~

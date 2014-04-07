@@ -23,11 +23,11 @@ class Product implements EntityInterface
     private $id;
 
     /**
-     * @var integer
+     * @var boolean
      *
-     * @ORM\Column(name="enabled", type="integer", nullable=false)
+     * @ORM\Column(name="enabled", type="boolean", nullable=false)
      */
-    private $enabled = 0;
+    private $enabled = false;
 
     /**
      * @var float
@@ -61,17 +61,27 @@ class Product implements EntityInterface
     private $createdTimestamp;
 
     /**
+     * @var \HcbStoreProduct\Entity\Product\Image
+     *
+     * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Image", mappedBy="product")
+     * @ORM\OrderBy({"priority" = "ASC"})
+     */
+    private $image = null;
+
+    /**
      * @var Product\Localized
      *
      * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized", mappedBy="product")
      * @ORM\OrderBy({"updatedTimestamp" = "DESC"})
      */
     private $localized = null;
+
     /**
      * Constructor
      */
     public function __construct()
     {
+        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
         $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -88,7 +98,7 @@ class Product implements EntityInterface
     /**
      * Set enabled
      *
-     * @param integer $enabled
+     * @param boolean $enabled
      * @return Product
      */
     public function setEnabled($enabled)
@@ -101,7 +111,7 @@ class Product implements EntityInterface
     /**
      * Get enabled
      *
-     * @return integer 
+     * @return boolean 
      */
     public function getEnabled()
     {
@@ -198,6 +208,39 @@ class Product implements EntityInterface
     public function getImage3d()
     {
         return $this->image3d;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \HcbStoreProduct\Entity\Product\Image $image
+     * @return Product
+     */
+    public function addImage(\HcbStoreProduct\Entity\Product\Image $image)
+    {
+        $this->image[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \HcbStoreProduct\Entity\Product\Image $image
+     */
+    public function removeImage(\HcbStoreProduct\Entity\Product\Image $image)
+    {
+        $this->image->removeElement($image);
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 
     /**
