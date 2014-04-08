@@ -14,8 +14,4 @@ return array(
 
     'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized' =>
         'Zf2Libs\Paginator\ViewModel\JsonModel',
-
-    'HcbStoreProduct-Service-FetchService-Product' => 'HcCore\Service\FetchService',
-
-    'HcbStoreProduct-Service-FetchService-Localized' => 'HcCore\Service\FetchService',
 );

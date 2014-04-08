@@ -20,10 +20,10 @@ return array(
     'HcbStoreProduct-Service-Localized-Collection-FetchArrayCollection' =>
         'HcbStoreProduct\Service\Localized\Collection\FetchArrayCollectionService',
 
-    'HcbStaticPage-Service-FetchService-Page' =>
+    'HcbStoreProduct-Service-FetchService-Product' =>
         'HcCore\Service\FetchService',
 
-    'HcbStaticPage-Service-FetchService-Locale' =>
+    'HcbStoreProduct-Service-FetchService-Localized' =>
         'HcCore\Service\FetchService',
 
     'HcbStoreProduct-Uploader-View-Model-UploaderModel-Localized-Image' =>
