@@ -30,6 +30,13 @@ class Product implements EntityInterface
     private $enabled = false;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer", nullable=false)
+     */
+    private $status;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="price", type="float", nullable=false)
@@ -54,6 +61,16 @@ class Product implements EntityInterface
     private $image3d;
 
     /**
+     * @var Product
+     *
+     * @ORM\OneToOne(targetEntity="HcbStoreProduct\Entity\Product")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     * })
+     */
+    private $product;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
@@ -66,7 +83,37 @@ class Product implements EntityInterface
      * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Image", mappedBy="product")
      * @ORM\OrderBy({"priority" = "ASC"})
      */
-    private $image = null;
+    private $image;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Attribute", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_has_attribute",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="store_product_attribute_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $attribute;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Modifier", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_has_modifier",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="store_product_modifier_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $modifier;
 
     /**
      * @var Product\Localized
@@ -74,7 +121,7 @@ class Product implements EntityInterface
      * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized", mappedBy="product")
      * @ORM\OrderBy({"updatedTimestamp" = "DESC"})
      */
-    private $localized = null;
+    private $localized;
 
     /**
      * Constructor
@@ -82,6 +129,8 @@ class Product implements EntityInterface
     public function __construct()
     {
         $this->image = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->modifier = new \Doctrine\Common\Collections\ArrayCollection();
         $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -244,6 +293,72 @@ class Product implements EntityInterface
     }
 
     /**
+     * Add attribute
+     *
+     * @param \HcbStoreProduct\Entity\Product\Attribute $attribute
+     * @return Product
+     */
+    public function addAttribute(\HcbStoreProduct\Entity\Product\Attribute $attribute)
+    {
+        $this->attribute[] = $attribute;
+
+        return $this;
+    }
+
+    /**
+     * Remove attribute
+     *
+     * @param \HcbStoreProduct\Entity\Product\Attribute $attribute
+     */
+    public function removeAttribute(\HcbStoreProduct\Entity\Product\Attribute $attribute)
+    {
+        $this->attribute->removeElement($attribute);
+    }
+
+    /**
+     * Get attribute
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
+    }
+
+    /**
+     * Add modifier
+     *
+     * @param \HcbStoreProduct\Entity\Product\Modifier $modifier
+     * @return Product
+     */
+    public function addModifier(\HcbStoreProduct\Entity\Product\Modifier $modifier)
+    {
+        $this->modifier[] = $modifier;
+
+        return $this;
+    }
+
+    /**
+     * Remove modifier
+     *
+     * @param \HcbStoreProduct\Entity\Product\Modifier $modifier
+     */
+    public function removeModifier(\HcbStoreProduct\Entity\Product\Modifier $modifier)
+    {
+        $this->modifier->removeElement($modifier);
+    }
+
+    /**
+     * Get modifier
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModifier()
+    {
+        return $this->modifier;
+    }
+
+    /**
      * Add localized
      *
      * @param \HcbStoreProduct\Entity\Product\Localized $localized
@@ -274,5 +389,51 @@ class Product implements EntityInterface
     public function getLocalized()
     {
         return $this->localized;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return Product
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \HcbStoreProduct\Entity\Product $product
+     * @return Product
+     */
+    public function setProduct(\HcbStoreProduct\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \HcbStoreProduct\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }

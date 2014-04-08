@@ -39,7 +39,7 @@ class Image implements EntityInterface
      *
      * @ORM\Column(name="priority", type="integer", nullable=false)
      */
-    protected $priority;
+    private $priority;
 
     /**
      * @var boolean

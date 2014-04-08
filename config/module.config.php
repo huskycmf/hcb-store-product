@@ -16,6 +16,15 @@ return array(
         )
     ),
 
+    'hcb-store-product' => array(
+//        'statuses' => array(
+//            '1' => 'product_status_1',
+//            '2' => 'product_status_2',
+//            '3' => 'product_status_3',
+//            '4' => 'product_status_4'
+//        )
+    ),
+
     'asset_manager' => array(
         'resolver_configs' => array(
             'paths' => array(
