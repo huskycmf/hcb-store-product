@@ -35,6 +35,13 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     /**
      * @var string
      *
+     * @ORM\Column(name="short_description", type="string", nullable=false)
+     */
+    private $shortDescription;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="string", nullable=false)
      */
     private $description;
@@ -249,5 +256,28 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set shortDescription
+     *
+     * @param string $shortDescription
+     * @return Localized
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get shortDescription
+     *
+     * @return string 
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
     }
 }
