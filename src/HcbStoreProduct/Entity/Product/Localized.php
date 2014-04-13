@@ -74,6 +74,36 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     private $locale;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized\Attribute", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_has_attribute",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="store_product_localized_attribute_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $attribute;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized\Modifier", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_has_modifier",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="store_product_localized_modifier_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $modifier;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated_timestamp", type="datetime", nullable=false)
@@ -86,6 +116,14 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
      * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
      */
     private $createdTimestamp;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->modifier = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -113,11 +151,57 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     /**
      * Get title
      *
-     * @return string
+     * @return string 
      */
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set shortDescription
+     *
+     * @param string $shortDescription
+     * @return Localized
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get shortDescription
+     *
+     * @return string 
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Localized
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
@@ -205,7 +289,7 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     /**
      * Get page
      *
-     * @return \HcbStoreProduct\Entity\Product\Localized\Page 
+     * @return PageInterface
      */
     public function getPage()
     {
@@ -236,48 +320,68 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     }
 
     /**
-     * Set description
+     * Add attribute
      *
-     * @param string $description
+     * @param \HcbStoreProduct\Entity\Product\Localized\Attribute $attribute
      * @return Localized
      */
-    public function setDescription($description)
+    public function addAttribute(\HcbStoreProduct\Entity\Product\Localized\Attribute $attribute)
     {
-        $this->description = $description;
+        $this->attribute[] = $attribute;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Remove attribute
      *
-     * @return string 
+     * @param \HcbStoreProduct\Entity\Product\Localized\Attribute $attribute
      */
-    public function getDescription()
+    public function removeAttribute(\HcbStoreProduct\Entity\Product\Localized\Attribute $attribute)
     {
-        return $this->description;
+        $this->attribute->removeElement($attribute);
     }
 
     /**
-     * Set shortDescription
+     * Get attribute
      *
-     * @param string $shortDescription
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
+    }
+
+    /**
+     * Add modifier
+     *
+     * @param \HcbStoreProduct\Entity\Product\Localized\Modifier $modifier
      * @return Localized
      */
-    public function setShortDescription($shortDescription)
+    public function addModifier(\HcbStoreProduct\Entity\Product\Localized\Modifier $modifier)
     {
-        $this->shortDescription = $shortDescription;
+        $this->modifier[] = $modifier;
 
         return $this;
     }
 
     /**
-     * Get shortDescription
+     * Remove modifier
      *
-     * @return string 
+     * @param \HcbStoreProduct\Entity\Product\Localized\Modifier $modifier
      */
-    public function getShortDescription()
+    public function removeModifier(\HcbStoreProduct\Entity\Product\Localized\Modifier $modifier)
     {
-        return $this->shortDescription;
+        $this->modifier->removeElement($modifier);
+    }
+
+    /**
+     * Get modifier
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModifier()
+    {
+        return $this->modifier;
     }
 }

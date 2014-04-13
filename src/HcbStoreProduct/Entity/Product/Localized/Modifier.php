@@ -1,5 +1,5 @@
 <?php
-namespace HcbStoreProduct\Entity\Product;
+namespace HcbStoreProduct\Entity\Product\Localized;
 
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Modifier
  *
- * @ORM\Table(name="store_product_modifier")
+ * @ORM\Table(name="store_product_localized_modifier")
  * @ORM\Entity
  */
 class Modifier implements EntityInterface
@@ -31,24 +31,23 @@ class Modifier implements EntityInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product", cascade={"persist"})
-     * @ORM\JoinTable(name="store_product_has_modifier",
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_localized_has_modifier",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="store_product_modifier_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_localized_modifier_id", referencedColumnName="id")
      *   }
      * )
      */
-    private $product;
-
+    private $localized;
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->product = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -85,35 +84,35 @@ class Modifier implements EntityInterface
     }
 
     /**
-     * Add product
+     * Add localized
      *
-     * @param \HcbStoreProduct\Entity\Product $product
+     * @param \HcbStoreProduct\Entity\Product\Localized $localized
      * @return Modifier
      */
-    public function addProduct(\HcbStoreProduct\Entity\Product $product)
+    public function addLocalized(\HcbStoreProduct\Entity\Product\Localized $localized)
     {
-        $this->product[] = $product;
+        $this->localized[] = $localized;
 
         return $this;
     }
 
     /**
-     * Remove product
+     * Remove localized
      *
-     * @param \HcbStoreProduct\Entity\Product $product
+     * @param \HcbStoreProduct\Entity\Product\Localized $localized
      */
-    public function removeProduct(\HcbStoreProduct\Entity\Product $product)
+    public function removeLocalized(\HcbStoreProduct\Entity\Product\Localized $localized)
     {
-        $this->product->removeElement($product);
+        $this->localized->removeElement($localized);
     }
 
     /**
-     * Get product
+     * Get localized
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getProduct()
+    public function getLocalized()
     {
-        return $this->product;
+        return $this->localized;
     }
 }
