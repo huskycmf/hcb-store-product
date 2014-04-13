@@ -103,6 +103,21 @@ class Product implements EntityInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Label", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_has_label",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="store_product_label_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $label;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Modifier", cascade={"persist"})
      * @ORM\JoinTable(name="store_product_has_modifier",
      *   joinColumns={
@@ -122,7 +137,6 @@ class Product implements EntityInterface
      * @ORM\OrderBy({"updatedTimestamp" = "DESC"})
      */
     private $localized;
-
     /**
      * Constructor
      */
@@ -130,6 +144,7 @@ class Product implements EntityInterface
     {
         $this->image = new \Doctrine\Common\Collections\ArrayCollection();
         $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->label = new \Doctrine\Common\Collections\ArrayCollection();
         $this->modifier = new \Doctrine\Common\Collections\ArrayCollection();
         $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -165,6 +180,29 @@ class Product implements EntityInterface
     public function getEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return Product
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
@@ -260,6 +298,29 @@ class Product implements EntityInterface
     }
 
     /**
+     * Set product
+     *
+     * @param \HcbStoreProduct\Entity\Product $product
+     * @return Product
+     */
+    public function setProduct(\HcbStoreProduct\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \HcbStoreProduct\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
      * Add image
      *
      * @param \HcbStoreProduct\Entity\Product\Image $image
@@ -326,6 +387,39 @@ class Product implements EntityInterface
     }
 
     /**
+     * Add label
+     *
+     * @param \HcbStoreProduct\Entity\Product\Label $label
+     * @return Product
+     */
+    public function addLabel(\HcbStoreProduct\Entity\Product\Label $label)
+    {
+        $this->label[] = $label;
+
+        return $this;
+    }
+
+    /**
+     * Remove label
+     *
+     * @param \HcbStoreProduct\Entity\Product\Label $label
+     */
+    public function removeLabel(\HcbStoreProduct\Entity\Product\Label $label)
+    {
+        $this->label->removeElement($label);
+    }
+
+    /**
+     * Get label
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
      * Add modifier
      *
      * @param \HcbStoreProduct\Entity\Product\Modifier $modifier
@@ -389,51 +483,5 @@ class Product implements EntityInterface
     public function getLocalized()
     {
         return $this->localized;
-    }
-
-    /**
-     * Set status
-     *
-     * @param integer $status
-     * @return Product
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set product
-     *
-     * @param \HcbStoreProduct\Entity\Product $product
-     * @return Product
-     */
-    public function setProduct(\HcbStoreProduct\Entity\Product $product = null)
-    {
-        $this->product = $product;
-
-        return $this;
-    }
-
-    /**
-     * Get product
-     *
-     * @return \HcbStoreProduct\Entity\Product 
-     */
-    public function getProduct()
-    {
-        return $this->product;
     }
 }
