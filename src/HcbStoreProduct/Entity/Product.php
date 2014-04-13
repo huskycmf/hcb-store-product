@@ -88,6 +88,21 @@ class Product implements EntityInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Attribute", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_has_attribute",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="store_product_attribute_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $attribute;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Label", cascade={"persist"})
      * @ORM\JoinTable(name="store_product_has_label",
      *   joinColumns={
@@ -107,14 +122,13 @@ class Product implements EntityInterface
      * @ORM\OrderBy({"updatedTimestamp" = "DESC"})
      */
     private $localized;
-
-
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->image = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
         $this->label = new \Doctrine\Common\Collections\ArrayCollection();
         $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -321,6 +335,39 @@ class Product implements EntityInterface
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add attribute
+     *
+     * @param \HcbStoreProduct\Entity\Product\Attribute $attribute
+     * @return Product
+     */
+    public function addAttribute(\HcbStoreProduct\Entity\Product\Attribute $attribute)
+    {
+        $this->attribute[] = $attribute;
+
+        return $this;
+    }
+
+    /**
+     * Remove attribute
+     *
+     * @param \HcbStoreProduct\Entity\Product\Attribute $attribute
+     */
+    public function removeAttribute(\HcbStoreProduct\Entity\Product\Attribute $attribute)
+    {
+        $this->attribute->removeElement($attribute);
+    }
+
+    /**
+     * Get attribute
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
     }
 
     /**

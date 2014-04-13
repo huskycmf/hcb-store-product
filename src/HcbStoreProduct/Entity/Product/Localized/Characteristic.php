@@ -5,12 +5,12 @@ use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Attribute
+ * Characteristic
  *
- * @ORM\Table(name="store_product_localized_attribute")
+ * @ORM\Table(name="store_product_localized_characteristic")
  * @ORM\Entity
  */
-class Attribute implements EntityInterface
+class Characteristic implements EntityInterface
 {
     /**
      * @var integer
@@ -25,12 +25,12 @@ class Attribute implements EntityInterface
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized", cascade={"persist"})
-     * @ORM\JoinTable(name="store_product_localized_has_attribute",
+     * @ORM\JoinTable(name="store_product_has_characteristic",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="store_product_localized_attribute_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_characteristic_id", referencedColumnName="id")
      *   }
      * )
      */
@@ -39,9 +39,16 @@ class Attribute implements EntityInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=false)
+     * @ORM\Column(name="name", type="string", length=500, nullable=false)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="value", type="string", length=500, nullable=false)
+     */
+    private $value;
     /**
      * Constructor
      */
@@ -64,7 +71,7 @@ class Attribute implements EntityInterface
      * Set name
      *
      * @param string $name
-     * @return Attribute
+     * @return Characteristic
      */
     public function setName($name)
     {
@@ -84,10 +91,33 @@ class Attribute implements EntityInterface
     }
 
     /**
+     * Set value
+     *
+     * @param string $value
+     * @return Characteristic
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value
+     *
+     * @return string 
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
      * Add localized
      *
      * @param \HcbStoreProduct\Entity\Product\Localized $localized
-     * @return Attribute
+     * @return Characteristic
      */
     public function addLocalized(\HcbStoreProduct\Entity\Product\Localized $localized)
     {

@@ -47,6 +47,13 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="extra_description", type="string", nullable=false)
+     */
+    private $extraDescription;
+
+    /**
      * @var Product
      *
      * @ORM\ManyToOne(targetEntity="HcbStoreProduct\Entity\Product", inversedBy="localized")
@@ -76,32 +83,17 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized\Attribute", cascade={"persist"})
-     * @ORM\JoinTable(name="store_product_has_attribute",
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized\Characteristic", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_localized_has_characteristic",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="store_product_localized_attribute_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_localized_characteristic_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")
      *   }
      * )
      */
-    private $attribute;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized\Modifier", cascade={"persist"})
-     * @ORM\JoinTable(name="store_product_has_modifier",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="store_product_localized_modifier_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")
-     *   }
-     * )
-     */
-    private $modifier;
+    private $characteristic;
 
     /**
      * @var \DateTime
@@ -116,13 +108,13 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
      * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
      */
     private $createdTimestamp;
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->modifier = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->characteristic = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -320,68 +312,58 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     }
 
     /**
-     * Add attribute
+     * Add characteristic
      *
-     * @param \HcbStoreProduct\Entity\Product\Localized\Attribute $attribute
+     * @param \HcbStoreProduct\Entity\Product\Localized\Characteristic $characteristic
      * @return Localized
      */
-    public function addAttribute(\HcbStoreProduct\Entity\Product\Localized\Attribute $attribute)
+    public function addCharacteristic(\HcbStoreProduct\Entity\Product\Localized\Characteristic $characteristic)
     {
-        $this->attribute[] = $attribute;
+        $this->characteristic[] = $characteristic;
 
         return $this;
     }
 
     /**
-     * Remove attribute
+     * Remove characteristic
      *
-     * @param \HcbStoreProduct\Entity\Product\Localized\Attribute $attribute
+     * @param \HcbStoreProduct\Entity\Product\Localized\Characteristic $characteristic
      */
-    public function removeAttribute(\HcbStoreProduct\Entity\Product\Localized\Attribute $attribute)
+    public function removeCharacteristic(\HcbStoreProduct\Entity\Product\Localized\Characteristic $characteristic)
     {
-        $this->attribute->removeElement($attribute);
+        $this->characteristic->removeElement($characteristic);
     }
 
     /**
-     * Get attribute
+     * Get characteristic
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getAttribute()
+    public function getCharacteristic()
     {
-        return $this->attribute;
+        return $this->characteristic;
     }
 
     /**
-     * Add modifier
+     * Set extraDescription
      *
-     * @param \HcbStoreProduct\Entity\Product\Localized\Modifier $modifier
+     * @param string $extraDescription
      * @return Localized
      */
-    public function addModifier(\HcbStoreProduct\Entity\Product\Localized\Modifier $modifier)
+    public function setExtraDescription($extraDescription)
     {
-        $this->modifier[] = $modifier;
+        $this->extraDescription = $extraDescription;
 
         return $this;
     }
 
     /**
-     * Remove modifier
+     * Get extraDescription
      *
-     * @param \HcbStoreProduct\Entity\Product\Localized\Modifier $modifier
+     * @return string 
      */
-    public function removeModifier(\HcbStoreProduct\Entity\Product\Localized\Modifier $modifier)
+    public function getExtraDescription()
     {
-        $this->modifier->removeElement($modifier);
-    }
-
-    /**
-     * Get modifier
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getModifier()
-    {
-        return $this->modifier;
+        return $this->extraDescription;
     }
 }
