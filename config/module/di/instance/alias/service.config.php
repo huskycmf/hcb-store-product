@@ -33,5 +33,7 @@ return array(
         'Zf2FileUploader\InputFilter\Image\CreateResource',
 
     'HcbStoreProduct-Uploader-Input-Image-CreateResource-Localized' =>
-        'Zf2FileUploader\Input\Image\CreateResource'
+        'Zf2FileUploader\Input\Image\CreateResource',
+
+    'HcbStoreProduct-Service-FetchByAlias' => 'HcbStoreProduct\Service\FetchByAliasService'
 );

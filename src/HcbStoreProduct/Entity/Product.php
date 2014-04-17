@@ -1,6 +1,8 @@
 <?php
 namespace HcbStoreProduct\Entity;
 
+use HcBackend\Entity\AliasWiredAwareInterface;
+use HcBackend\Entity\LocalizedInterface;
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Zf2FileUploader\Entity\Image;
@@ -11,7 +13,7 @@ use Zf2FileUploader\Entity\Image;
  * @ORM\Table(name="store_product")
  * @ORM\Entity
  */
-class Product implements EntityInterface
+class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInterface
 {
     /**
      * @var integer
@@ -78,12 +80,26 @@ class Product implements EntityInterface
     private $createdTimestamp;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_timestamp", type="datetime", nullable=false)
+     */
+    private $updatedTimestamp;
+
+    /**
      * @var \HcbStoreProduct\Entity\Product\Image
      *
      * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Image", mappedBy="product")
      * @ORM\OrderBy({"priority" = "ASC"})
      */
     private $image;
+
+    /**
+     * @var \HcbStoreProduct\Entity\Product\Alias
+     *
+     * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Alias", mappedBy="product")
+     */
+    private $alias;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -119,9 +135,9 @@ class Product implements EntityInterface
      * @var Product\Localized
      *
      * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized", mappedBy="product")
-     * @ORM\OrderBy({"updatedTimestamp" = "DESC"})
      */
     private $localized;
+
     /**
      * Constructor
      */
@@ -434,5 +450,61 @@ class Product implements EntityInterface
     public function getLocalized()
     {
         return $this->localized;
+    }
+
+    /**
+     * Set updatedTimestamp
+     *
+     * @param \DateTime $updatedTimestamp
+     * @return Product
+     */
+    public function setUpdatedTimestamp($updatedTimestamp)
+    {
+        $this->updatedTimestamp = $updatedTimestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedTimestamp
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedTimestamp()
+    {
+        return $this->updatedTimestamp;
+    }
+
+    /**
+     * Add alias
+     *
+     * @param \HcbStoreProduct\Entity\Product\Alias $alias
+     * @return Product
+     */
+    public function addAlias(\HcbStoreProduct\Entity\Product\Alias $alias)
+    {
+        $this->alias[] = $alias;
+
+        return $this;
+    }
+
+    /**
+     * Remove alias
+     *
+     * @param \HcbStoreProduct\Entity\Product\Alias $alias
+     */
+    public function removeAlias(\HcbStoreProduct\Entity\Product\Alias $alias)
+    {
+        $this->alias->removeElement($alias);
+    }
+
+    /**
+     * Get alias
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAlias()
+    {
+        return $this->alias;
     }
 }

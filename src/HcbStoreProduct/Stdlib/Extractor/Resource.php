@@ -24,9 +24,9 @@ class Resource implements ExtractorInterface
 
         /* @var $localizedEntity ProductLocalizedEntity */
         $localizedEntity = $product->getLocalized()->current();
-        $updatedTimestamp = $localizedEntity->getUpdatedTimestamp();
+        $updatedTimestamp = $product->getUpdatedTimestamp();
         if (is_null($updatedTimestamp)) {
-            $updatedTimestamp = $localizedEntity->getCreatedTimestamp()->format('Y-m-d H:i:s');
+            $updatedTimestamp = $product->getCreatedTimestamp()->format('Y-m-d H:i:s');
         } else {
             $updatedTimestamp = $updatedTimestamp->format('Y-m-d H:i:s');
         }
