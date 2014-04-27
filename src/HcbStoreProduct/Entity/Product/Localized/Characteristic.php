@@ -27,10 +27,10 @@ class Characteristic implements EntityInterface
      * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized", cascade={"persist"})
      * @ORM\JoinTable(name="store_product_has_characteristic",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_characteristic_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="store_product_characteristic_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")
      *   }
      * )
      */
@@ -49,6 +49,7 @@ class Characteristic implements EntityInterface
      * @ORM\Column(name="value", type="string", length=500, nullable=false)
      */
     private $value;
+
     /**
      * Constructor
      */

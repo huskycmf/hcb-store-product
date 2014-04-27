@@ -86,10 +86,10 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
      * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized\Characteristic", cascade={"persist"})
      * @ORM\JoinTable(name="store_product_localized_has_characteristic",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="store_product_localized_characteristic_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_localized_characteristic_id", referencedColumnName="id")
      *   }
      * )
      */
