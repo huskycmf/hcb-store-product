@@ -54,7 +54,7 @@ class Attribute implements EntityInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=500, nullable=false)
+     * @ORM\Column(name="value", type="string", length=500, nullable=false)
      */
     private $value;
     
