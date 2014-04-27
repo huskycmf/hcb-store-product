@@ -27,10 +27,10 @@ class Attribute implements EntityInterface
      * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product", cascade={"persist"})
      * @ORM\JoinTable(name="store_product_has_attribute",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_attribute_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="store_product_attribute_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
      *   }
      * )
      */
@@ -47,16 +47,9 @@ class Attribute implements EntityInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=500, nullable=false)
+     * @ORM\Column(name="name", type="string", length=200, nullable=false)
      */
     private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="value", type="string", length=500, nullable=false)
-     */
-    private $value;
     
     /**
      * Constructor
@@ -97,29 +90,6 @@ class Attribute implements EntityInterface
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set value
-     *
-     * @param string $value
-     * @return Attribute
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Get value
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 
     /**

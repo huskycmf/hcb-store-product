@@ -107,10 +107,10 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
      * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Attribute", cascade={"persist"})
      * @ORM\JoinTable(name="store_product_has_attribute",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="store_product_attribute_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_attribute_id", referencedColumnName="id")
      *   }
      * )
      */
