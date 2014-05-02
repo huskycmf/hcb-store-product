@@ -139,6 +139,13 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     private $localized;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="file_instruction", type="string", nullable=false)
+     */
+    private $fileInstruction;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -506,5 +513,28 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     public function getAlias()
     {
         return $this->alias;
+    }
+
+    /**
+     * Set fileInstruction
+     *
+     * @param string $fileInstruction
+     * @return Product
+     */
+    public function setFileInstruction($fileInstruction)
+    {
+        $this->fileInstruction = $fileInstruction;
+
+        return $this;
+    }
+
+    /**
+     * Get fileInstruction
+     *
+     * @return string 
+     */
+    public function getFileInstruction()
+    {
+        return $this->fileInstruction;
     }
 }
