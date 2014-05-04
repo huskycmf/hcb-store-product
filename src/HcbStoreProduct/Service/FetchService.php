@@ -1,6 +1,7 @@
 <?php
 namespace HcbStoreProduct\Service;
 
+use HcCore\Entity\EntityInterface;
 use HcCore\Service\FetchServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -21,7 +22,7 @@ class FetchService implements FetchServiceInterface
 
     /**
      * @param mixed $id
-     * @return object
+     * @return EntityInterface | null
      */
     public function fetch($id)
     {
