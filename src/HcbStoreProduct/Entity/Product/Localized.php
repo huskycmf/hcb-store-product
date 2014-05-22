@@ -84,6 +84,7 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized\Characteristic", cascade={"persist"})
+     * @ORM\OrderBy({"priority" = "ASC"})
      * @ORM\JoinTable(name="store_product_localized_has_characteristic",
      *   joinColumns={
      *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")

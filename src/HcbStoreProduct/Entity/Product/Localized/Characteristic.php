@@ -51,6 +51,13 @@ class Characteristic implements EntityInterface
     private $value;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="priority", type="integer", nullable=false, options={"unsigned"=true})
+     */
+    private $priority;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -66,6 +73,27 @@ class Characteristic implements EntityInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * Set priority
+     *
+     * @return Characteristic
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+        return $this;
     }
 
     /**
