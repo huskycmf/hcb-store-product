@@ -48,9 +48,9 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * @var boolean
      *
-     * @ORM\Column(name="new_product", type="boolean", nullable=true)
+     * @ORM\Column(name="is_new", type="boolean", nullable=true)
      */
-    private $newProduct;
+    private $isNew;
 
     /**
      * @var float
@@ -243,26 +243,26 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     }
 
     /**
-     * Set newProduct
+     * Set isNew
      *
-     * @param boolean $newProduct
+     * @param boolean $isNew
      * @return Product
      */
-    public function setNewProduct($newProduct)
+    public function setIsNew($isNew)
     {
-        $this->newProduct = $newProduct;
+        $this->isNew = $isNew;
 
         return $this;
     }
 
     /**
-     * Get newProduct
+     * Get isNew
      *
      * @return boolean
      */
-    public function getNewProduct()
+    public function getIsNew()
     {
-        return $this->newProduct;
+        return $this->isNew;
     }
 
     /**
