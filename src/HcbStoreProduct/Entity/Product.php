@@ -46,6 +46,13 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     private $price;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="new_product", type="boolean", nullable=true)
+     */
+    private $newProduct;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="price_deal", type="float", nullable=false)
@@ -233,6 +240,29 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Set newProduct
+     *
+     * @param boolean $newProduct
+     * @return Product
+     */
+    public function setNewProduct($newProduct)
+    {
+        $this->newProduct = $newProduct;
+
+        return $this;
+    }
+
+    /**
+     * Get newProduct
+     *
+     * @return boolean
+     */
+    public function getNewProduct()
+    {
+        return $this->newProduct;
     }
 
     /**
