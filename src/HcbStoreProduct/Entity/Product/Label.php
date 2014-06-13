@@ -44,6 +44,13 @@ class Label implements EntityInterface
     private $name;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="priority", type="integer", nullable=false)
+     */
+    private $priority;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -59,6 +66,29 @@ class Label implements EntityInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param integer $priority
+     * @return Label
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 
     /**
