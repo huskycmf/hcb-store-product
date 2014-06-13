@@ -28,7 +28,7 @@ class Alias implements EntityInterface, AliasWiredInterface
      * @var \HcbStoreProduct\Entity\Product
      *
      * @ORM\Id
-     * @ORM\OneToOne(targetEntity="\HcbStoreProduct\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="\HcbStoreProduct\Entity\Product", inversedBy="alias")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
      * })

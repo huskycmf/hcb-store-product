@@ -5,7 +5,7 @@ use HcBackend\Entity\AliasWiredAwareInterface;
 use HcBackend\Entity\LocalizedInterface;
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Zf2FileUploader\Entity\Image;
+use HcBackend\Entity\Image;
 
 /**
  * Product
@@ -46,13 +46,6 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     private $price;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_new", type="boolean", nullable=true)
-     */
-    private $isNew;
-
-    /**
      * @var float
      *
      * @ORM\Column(name="price_deal", type="float", nullable=false)
@@ -62,7 +55,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * @var Image
      *
-     * @ORM\OneToOne(targetEntity="Zf2FileUploader\Entity\Image")
+     * @ORM\OneToOne(targetEntity="HcBackend\Entity\Image")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="image_3d_id", referencedColumnName="id")
      * })
@@ -135,6 +128,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
      *     @ORM\JoinColumn(name="store_product_label_id", referencedColumnName="id")
      *   }
      * )
+     * @ORM\OrderBy({"priority" = "ASC"})
      */
     private $label;
 
@@ -243,29 +237,6 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     }
 
     /**
-     * Set isNew
-     *
-     * @param boolean $isNew
-     * @return Product
-     */
-    public function setIsNew($isNew)
-    {
-        $this->isNew = $isNew;
-
-        return $this;
-    }
-
-    /**
-     * Get isNew
-     *
-     * @return boolean
-     */
-    public function getIsNew()
-    {
-        return $this->isNew;
-    }
-
-    /**
      * Set priceDeal
      *
      * @param float $priceDeal
@@ -314,10 +285,10 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Set image3d
      *
-     * @param \Zf2FileUploader\Entity\Image $image3d
+     * @param \HcBackend\Entity\Image $image3d
      * @return Product
      */
-    public function setImage3d(\Zf2FileUploader\Entity\Image $image3d = null)
+    public function setImage3d(\HcBackend\Entity\Image $image3d = null)
     {
         $this->image3d = $image3d;
 
@@ -327,7 +298,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get image3d
      *
-     * @return \Zf2FileUploader\Entity\Image 
+     * @return \HcBackend\Entity\Image
      */
     public function getImage3d()
     {
