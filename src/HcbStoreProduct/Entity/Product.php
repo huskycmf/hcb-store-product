@@ -133,6 +133,21 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     private $label;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Set", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_set_has_product",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="store_product_set_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $set;
+
+    /**
      * @var Product\Localized
      *
      * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Localized", mappedBy="product")
@@ -145,17 +160,6 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
      * @ORM\Column(name="file_instruction", type="string", nullable=false)
      */
     private $fileInstruction;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->label = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -538,4 +542,50 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     {
         return $this->fileInstruction;
     }
+
+    /**
+     * Add set
+     *
+     * @param \HcbStoreProduct\Entity\Product\Set $set
+     * @return Product
+     */
+    public function addSet(\HcbStoreProduct\Entity\Product\Set $set)
+    {
+        $this->set[] = $set;
+
+        return $this;
+    }
+
+    /**
+     * Remove set
+     *
+     * @param \HcbStoreProduct\Entity\Product\Set $set
+     */
+    public function removeSet(\HcbStoreProduct\Entity\Product\Set $set)
+    {
+        $this->set->removeElement($set);
+    }
+
+    /**
+     * Get set
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSet()
+    {
+        return $this->set;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->alias = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->label = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->set = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }
