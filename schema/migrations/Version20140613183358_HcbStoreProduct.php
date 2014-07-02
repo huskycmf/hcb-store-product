@@ -7,7 +7,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration,
 /**
  * Auto-generated Migration: Please modify to your need!
  */
-class Version20140613183357_HcbStoreProduct extends AbstractMigration
+class Version20140613183358_HcbStoreProduct extends AbstractMigration
 {
     public function up(Schema $schema)
     {
