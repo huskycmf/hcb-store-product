@@ -5,12 +5,12 @@ use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Set
+ * Kit
  *
- * @ORM\Table(name="store_product_set")
+ * @ORM\Table(name="store_product_kit")
  * @ORM\Entity
  */
-class Set implements EntityInterface
+class Kit implements EntityInterface
 {
     /**
      * @var integer
@@ -25,9 +25,9 @@ class Set implements EntityInterface
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product", cascade={"persist"})
-     * @ORM\JoinTable(name="store_product_set_has_product",
+     * @ORM\JoinTable(name="store_product_kit_has_product",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="store_product_set_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_kit_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
@@ -35,6 +35,21 @@ class Set implements EntityInterface
      * )
      */
     private $product;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="HcBackend\Entity\Image", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_kit_has_image",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="store_product_kit_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $image;
 
     /**
      * @var string
@@ -48,6 +63,7 @@ class Set implements EntityInterface
     public function __construct()
     {
         $this->product = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -64,7 +80,7 @@ class Set implements EntityInterface
      * Set price
      *
      * @param float $price
-     * @return Set
+     * @return Kit
      */
     public function setPrice($price)
     {
@@ -87,7 +103,7 @@ class Set implements EntityInterface
      * Add product
      *
      * @param \HcbStoreProduct\Entity\Product $product
-     * @return Set
+     * @return Kit
      */
     public function addProduct(\HcbStoreProduct\Entity\Product $product)
     {
@@ -114,5 +130,38 @@ class Set implements EntityInterface
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \HcBackend\Entity\Image $image
+     * @return Kit
+     */
+    public function addImage(\HcBackend\Entity\Image $image)
+    {
+        $this->image[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \HcBackend\Entity\Image $image
+     */
+    public function removeImage(\HcBackend\Entity\Image $image)
+    {
+        $this->image->removeElement($image);
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

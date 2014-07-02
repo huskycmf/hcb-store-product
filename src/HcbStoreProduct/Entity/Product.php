@@ -135,17 +135,17 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Set", cascade={"persist"})
-     * @ORM\JoinTable(name="store_product_set_has_product",
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Kit", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_kit_has_product",
      *   joinColumns={
      *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="store_product_set_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_kit_id", referencedColumnName="id")
      *   }
      * )
      */
-    private $set;
+    private $kit;
 
     /**
      * @var Product\Localized
@@ -164,7 +164,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -187,7 +187,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get enabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEnabled()
     {
@@ -210,7 +210,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
@@ -233,7 +233,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get price
      *
-     * @return float 
+     * @return float
      */
     public function getPrice()
     {
@@ -256,7 +256,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get priceDeal
      *
-     * @return float 
+     * @return float
      */
     public function getPriceDeal()
     {
@@ -279,7 +279,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get createdTimestamp
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedTimestamp()
     {
@@ -325,7 +325,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get product
      *
-     * @return \HcbStoreProduct\Entity\Product 
+     * @return \HcbStoreProduct\Entity\Product
      */
     public function getProduct()
     {
@@ -358,7 +358,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get image
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getImage()
     {
@@ -391,7 +391,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get attribute
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAttribute()
     {
@@ -424,7 +424,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get label
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLabel()
     {
@@ -457,7 +457,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get localized
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLocalized()
     {
@@ -480,7 +480,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get updatedTimestamp
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedTimestamp()
     {
@@ -513,7 +513,7 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get alias
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAlias()
     {
@@ -536,44 +536,11 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * Get fileInstruction
      *
-     * @return string 
+     * @return string
      */
     public function getFileInstruction()
     {
         return $this->fileInstruction;
-    }
-
-    /**
-     * Add set
-     *
-     * @param \HcbStoreProduct\Entity\Product\Set $set
-     * @return Product
-     */
-    public function addSet(\HcbStoreProduct\Entity\Product\Set $set)
-    {
-        $this->set[] = $set;
-
-        return $this;
-    }
-
-    /**
-     * Remove set
-     *
-     * @param \HcbStoreProduct\Entity\Product\Set $set
-     */
-    public function removeSet(\HcbStoreProduct\Entity\Product\Set $set)
-    {
-        $this->set->removeElement($set);
-    }
-
-    /**
-     * Get set
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSet()
-    {
-        return $this->set;
     }
     /**
      * Constructor
@@ -584,8 +551,40 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
         $this->alias = new \Doctrine\Common\Collections\ArrayCollection();
         $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
         $this->label = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->set = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->kit = new \Doctrine\Common\Collections\ArrayCollection();
         $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    /**
+     * Add kit
+     *
+     * @param \HcbStoreProduct\Entity\Product\Kit $kit
+     * @return Product
+     */
+    public function addKit(\HcbStoreProduct\Entity\Product\Kit $kit)
+    {
+        $this->kit[] = $kit;
+
+        return $this;
+    }
+
+    /**
+     * Remove kit
+     *
+     * @param \HcbStoreProduct\Entity\Product\Kit $kit
+     */
+    public function removeKit(\HcbStoreProduct\Entity\Product\Kit $kit)
+    {
+        $this->kit->removeElement($kit);
+    }
+
+    /**
+     * Get kit
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getKit()
+    {
+        return $this->kit;
+    }
 }
