@@ -11,6 +11,10 @@ class Version20140613183357_HcbStoreProduct extends AbstractMigration
 {
     public function up(Schema $schema)
     {
+
+        $this->addSql("DROP TABLE IS EXISTS `store_product_set_has_product`");
+        $this->addSql("DROP TABLE IS EXISTS `store_product_set`");
+
         $this->addSql("CREATE TABLE IF NOT EXISTS `store_product_set` (
                           `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
                           `price` SMALLINT UNSIGNED NOT NULL,
@@ -21,20 +25,20 @@ class Version20140613183357_HcbStoreProduct extends AbstractMigration
                           `store_product_set_id` INT UNSIGNED NOT NULL,
                           `store_product_id` INT UNSIGNED NOT NULL,
                           PRIMARY KEY (`store_product_set_id`, `store_product_id`),
-                          INDEX `fk_store_product_set_has_store_product_store_product1_idx`
-                                (`store_product_id` ASC),
-                          INDEX `fk_store_product_set_has_store_product_store_product_set1_idx`
-                                (`store_product_set_id` ASC),
+                                  INDEX `fk_store_product_set_has_store_product_store_product1_idx`
+                                    (`store_product_id` ASC),
+                                  INDEX `fk_store_product_set_has_store_product_store_product_set1_idx`
+                                    (`store_product_set_id` ASC),
                           CONSTRAINT `fk_store_product_set_has_store_product_store_product_set1`
                             FOREIGN KEY (`store_product_set_id`)
                             REFERENCES `store_product_set` (`id`)
-                            ON DELETE NO ACTION
-                            ON UPDATE NO ACTION,
+                            ON DELETE CASCADE
+                            ON UPDATE CASCADE,
                           CONSTRAINT `fk_store_product_set_has_store_product_store_product1`
                             FOREIGN KEY (`store_product_id`)
                             REFERENCES `store_product` (`id`)
-                            ON DELETE NO ACTION
-                            ON UPDATE NO ACTION)
+                            ON DELETE CASCADE
+                            ON UPDATE CASCADE)
                         ENGINE = InnoDB");
     }
 
