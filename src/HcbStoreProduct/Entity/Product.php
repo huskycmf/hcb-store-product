@@ -135,17 +135,17 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Kit", cascade={"persist"})
-     * @ORM\JoinTable(name="store_product_kit_has_product",
+     * @ORM\ManyToMany(targetEntity="HcbStoreProduct\Entity\Product\Selection", cascade={"persist"})
+     * @ORM\JoinTable(name="store_product_selection_has_product",
      *   joinColumns={
      *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="store_product_kit_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="store_product_selection_id", referencedColumnName="id")
      *   }
      * )
      */
-    private $kit;
+    private $selection;
 
     /**
      * @var Product\Localized
@@ -551,40 +551,40 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
         $this->alias = new \Doctrine\Common\Collections\ArrayCollection();
         $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
         $this->label = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->kit = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->selection = new \Doctrine\Common\Collections\ArrayCollection();
         $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Add kit
+     * Add selection
      *
-     * @param \HcbStoreProduct\Entity\Product\Kit $kit
+     * @param \HcbStoreProduct\Entity\Product\Selection $selection
      * @return Product
      */
-    public function addKit(\HcbStoreProduct\Entity\Product\Kit $kit)
+    public function addSelection(\HcbStoreProduct\Entity\Product\Selection $selection)
     {
-        $this->kit[] = $kit;
+        $this->selection[] = $selection;
 
         return $this;
     }
 
     /**
-     * Remove kit
+     * Remove selection
      *
-     * @param \HcbStoreProduct\Entity\Product\Kit $kit
+     * @param \HcbStoreProduct\Entity\Product\Selection $selection
      */
-    public function removeKit(\HcbStoreProduct\Entity\Product\Kit $kit)
+    public function removeSelection(\HcbStoreProduct\Entity\Product\Selection $selection)
     {
-        $this->kit->removeElement($kit);
+        $this->selection->removeElement($selection);
     }
 
     /**
-     * Get kit
+     * Get selection
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getKit()
+    public function getSelection()
     {
-        return $this->kit;
+        return $this->selection;
     }
 }
