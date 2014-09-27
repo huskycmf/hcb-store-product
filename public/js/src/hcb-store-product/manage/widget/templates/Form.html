@@ -1,12 +1,4 @@
 <form data-dojo-attach-point="containerNode" class="dijitHidden">
-    <!--<div class="row">-->
-        <!--<label>${!_t.aliasLabel}</label>-->
-        <!--<input class="${baseClass}Alias"-->
-               <!--data-dojo-type="dijit/form/TextBox"-->
-               <!--data-dojo-props='name:"alias"' />-->
-        <!--<div class="field-description">${!_t.aliasHelp}</div>-->
-    <!--</div>-->
-
     <div class="row">
         <label>${!_t.titleLabel}</label>
         <input class="${baseClass}Alias" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"title"' />
@@ -35,6 +27,33 @@
                data-dojo-type="dijit/form/Textarea"
                data-dojo-props='name:"pageKeywords", maxLength: 300' />
         <div class="field-description">${!_t.metaKeywordsHelp}</div>
+    </div>
+
+    <div class="row">
+        ${!_t.statusLabel}
+        <input class="${baseClass}Status"
+               data-dojo-type="dijit/form/NumberTextBox"
+               data-dojo-attach-point="statusWidget"
+               data-dojo-props='name: "status", constraints: {min: 1, max: 4}' />
+        <div class="field-description">${!_t.statusHelp}</div>
+    </div>
+
+    <div class="row">
+        ${!_t.priceLabel}
+        <input class="${baseClass}Price"
+               data-dojo-type="dijit/form/NumberTextBox"
+               data-dojo-attach-point="priceWidget"
+               data-dojo-props='name: "price", constraints: {min: 1}' />
+        <div class="field-description">${!_t.priceHelp}</div>
+    </div>
+
+    <div class="row">
+        ${!_t.priceDealLabel}
+        <input class="${baseClass}PriceDeal"
+               data-dojo-type="dijit/form/NumberTextBox"
+               data-dojo-attach-point="priceDealWidget"
+               data-dojo-props='name: "priceDeal", constraints: {min: 0}' />
+        <div class="field-description">${!_t.priceDealHelp}</div>
     </div>
 
     <div class="row">
@@ -67,15 +86,6 @@
                               settings: {filebrowserUploadUrl: "${filebrowserUploadUrl}",
                                          allowedContent: true}'></div>
         <div class="field-description">${!_t.extraDescriptionHelp}</div>
-    </div>
-
-    <div class="row">
-        ${!_t.statusLabel}
-        <input class="${baseClass}Status"
-               data-dojo-type="dijit/form/NumberTextBox"
-               data-dojo-attach-point="statusWidget"
-               data-dojo-props='name: "status", constraints: {min: 1, max: 4}' />
-        <div class="field-description">${!_t.statusHelp}</div>
     </div>
 
     <input class="${baseClass}AddButton"

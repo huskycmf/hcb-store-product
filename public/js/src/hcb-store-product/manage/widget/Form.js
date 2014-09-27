@@ -1,6 +1,7 @@
 define([
     "dojo/_base/declare",
     "hc-backend/widget/ContentLocalization/widget/Form",
+    "hc-backend/form/_HasPageFieldsMixin",
     "dijit/_WidgetsInTemplateMixin",
     "hc-backend/config",
     "dojo/text!./templates/Form.html",
@@ -10,9 +11,9 @@ define([
     "dijit/form/NumberTextBox",
     "dojo-common/form/BusyButton",
     "dijit/form/ValidationTextBox"
-], function(declare, Form, _WidgetsInTemplateMixin, config,
+], function(declare, Form, _HasPageFieldsMixin, _WidgetsInTemplateMixin, config,
             template, i18nAdd) {
-    return declare([ Form, _WidgetsInTemplateMixin ], {
+    return declare([ Form, _HasPageFieldsMixin, _WidgetsInTemplateMixin ], {
         //  summary:
         //      Form widget for adding page to the CMS database
 

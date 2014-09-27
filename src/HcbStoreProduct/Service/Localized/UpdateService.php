@@ -51,6 +51,16 @@ class UpdateService
 
             $this->pageBinderService->bind($localizedData, $productLocalizedEntity);
 
+            $productLocalizedEntity->setTitle($localizedData->getTitle());
+            $productLocalizedEntity->setDescription($localizedData->getDescription());
+
+            $productLocalizedEntity->getProduct()->setPrice($localizedData->getPrice());
+            $productLocalizedEntity->getProduct()->setPriceDeal($localizedData->getPriceDeal());
+
+            $productLocalizedEntity->setShortDescription($localizedData->getShortDescription());
+            $productLocalizedEntity->setExtraDescription($localizedData->getExtraDescription());
+            $productLocalizedEntity->getProduct()->setStatus($localizedData->getStatus());
+
             $this->entityManager->persist($productLocalizedEntity);
 
             $this->entityManager->flush();

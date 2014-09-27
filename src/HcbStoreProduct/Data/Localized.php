@@ -2,13 +2,10 @@
 namespace HcbStoreProduct\Data;
 
 use HcCore\Data\DataMessagesInterface;
-use Zend\InputFilter\CollectionInputFilter;
 use HcCore\Stdlib\Extractor\Request\Payload\Extractor;
 use Zend\Di\Di;
 use Zend\Http\PhpEnvironment\Request;
-use Zend\I18n\Translator\Translator;
 use HcCore\InputFilter\InputFilter;
-use Zend\Validator\Callback;
 
 class Localized extends InputFilter implements LocalizedInterface, DataMessagesInterface
 {
@@ -23,20 +20,37 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
     {
         /* @var $input \HcBackend\InputFilter\Input\Locale */
         $input = $di->get('HcBackend\InputFilter\Input\Locale',
-                          array('name' => 'locale'))
+                          array('name' => 'lang'))
                     ->setRequired(true);
-
         $this->add($input);
 
         $this->add(array('type'=>'HcBackend\InputFilter\Page'), 'page');
 
-        /* @var $input \Zend\InputFilter\Input */
-        $input = $di->get('Zend\InputFilter\Input', array('name'=>'content'))
-                    ->setRequired(false)
-                    ->setAllowEmpty(true);
+        $this->add(array( 'name' => 'description', 'required' => false, 'allowEmpty' => true,
+                          'filters' => array(array('name' => 'StringTrim'))));
 
-        $input->getFilterChain()->attach($di->get('Zend\Filter\StringTrim'));
-        $this->add($input);
+        $this->add(array( 'name' => 'title', 'required' => true, 'allowEmpty' => false,
+                         'validators' => array(array( 'name' => 'string_length',
+                                                      'options' => array(
+                                                        'min' => 1,
+                                                        'max' => 300
+                                                      ))),
+                          'filters' => array(array('name' => 'StringTrim'))));
+
+        $this->add(array( 'name' => 'shortDescription', 'required' => false, 'allowEmpty' => true,
+                          'filters' => array(array('name' => 'StringTrim'))));
+
+        $this->add(array( 'name' => 'extraDescription', 'required' => false, 'allowEmpty' => true,
+                          'filters' => array(array('name' => 'StringTrim'))));
+
+        $this->add(array( 'name' => 'status', 'required' => true,
+                          'validators' => array(array( 'name' => 'digits'))));
+
+        $this->add(array( 'name' => 'price', 'required' => true,
+                          'validators' => array(array( 'name' => 'digits'))));
+
+        $this->add(array( 'name' => 'priceDeal', 'required' => false, 'allowEmpty' => true,
+                          'validators' => array(array( 'name' => 'digits'))));
 
         $this->setData($dataExtractor->extract($request));
     }
@@ -44,17 +58,66 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
     /**
      * @return string
      */
-    public function getContent()
+    public function getDescription()
     {
-        return $this->getValue('content');
+        return $this->getValue('description');
     }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->getValue('title');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrice()
+    {
+        return $this->getValue('price');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPriceDeal()
+    {
+        return $this->getValue('priceDeal');
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortDescription()
+    {
+        return $this->getValue('shortDescription');
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtraDescription()
+    {
+        return $this->getValue('extraDescription');
+    }
+
+    /**
+     * @return number
+     */
+    public function getStatus()
+    {
+        return $this->getValue('status');
+    }
+
 
     /**
      * @return string
      */
     public function getLocale()
     {
-        return $this->getValue('locale');
+        return $this->getValue('lang');
     }
 
     /**
