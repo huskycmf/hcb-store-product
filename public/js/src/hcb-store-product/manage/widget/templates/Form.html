@@ -1,26 +1,16 @@
 <form data-dojo-attach-point="containerNode" class="dijitHidden">
-    <div data-dojo-type="dijit/layout/TabContainer"
-         data-dojo-props='style:"width: 500px; height: 200px;",  tabPosition:"bottom"'>
-        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props='title:"My first tab", selected:true'>
-            Bottom tabs
-        </div>
-        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props='title:"My second tab", closable:true'>
-            <div class="row">
-                <input class="${baseClass}HerUrl"
-                       data-dojo-type="dijit/form/TextBox"
-                       data-dojo-props='name:"herUrl"' />
-            </div>
-        </div>
-        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props='title:"My last tab"'>
-            Lorem ipsum and all around - last...
-        </div>
-    </div>
+    <!--<div class="row">-->
+        <!--<label>${!_t.aliasLabel}</label>-->
+        <!--<input class="${baseClass}Alias"-->
+               <!--data-dojo-type="dijit/form/TextBox"-->
+               <!--data-dojo-props='name:"alias"' />-->
+        <!--<div class="field-description">${!_t.aliasHelp}</div>-->
+    <!--</div>-->
+
     <div class="row">
-        <label>${!_t.urlLabel}</label>
-        <input class="${baseClass}Url"
-               data-dojo-type="dijit/form/TextBox"
-               data-dojo-props='name:"pageUrl"' />
-        <div class="field-description">${!_t.urlHelp}</div>
+        <label>${!_t.titleLabel}</label>
+        <input class="${baseClass}Alias" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"title"' />
+        <div class="field-description">${!_t.titleHelp}</div>
     </div>
 
     <div class="row">
@@ -48,15 +38,44 @@
     </div>
 
     <div class="row">
-        ${!_t.contentLabel}
-        <div class="${baseClass}Editor"
+        ${!_t.shortDescriptionLabel}
+        <div class="${baseClass}ShortDescriptionEditor"
              data-dojo-type="dojo-ckeditor/Editor"
-             data-dojo-attach-point="contentEditorWidget"
-             data-dojo-props='name:"content",
-                              settings: {
-                              filebrowserUploadUrl: "${filebrowserUploadUrl}",
-                              allowedContent: true}'></div>
-        <div class="field-description">${!_t.contentHelp}</div>
+             data-dojo-attach-point="shortDescriptionEditorWidget"
+             data-dojo-props='name:"shortDescription",
+                              settings: {allowedContent: true}'></div>
+        <div class="field-description">${!_t.shortDescriptionHelp}</div>
+    </div>
+
+    <div class="row">
+        ${!_t.descriptionLabel}
+        <div class="${baseClass}DescriptionEditor"
+             data-dojo-type="dojo-ckeditor/Editor"
+             data-dojo-attach-point="descriptionEditorWidget"
+             data-dojo-props='name:"description",
+                              settings: {filebrowserUploadUrl: "${filebrowserUploadUrl}",
+                                         allowedContent: true}'></div>
+        <div class="field-description">${!_t.descriptionHelp}</div>
+    </div>
+
+    <div class="row">
+        ${!_t.extraDescriptionLabel}
+        <div class="${baseClass}ExtraDescriptionEditor"
+             data-dojo-type="dojo-ckeditor/Editor"
+             data-dojo-attach-point="extraDescriptionEditorWidget"
+             data-dojo-props='name: "extraDescription",
+                              settings: {filebrowserUploadUrl: "${filebrowserUploadUrl}",
+                                         allowedContent: true}'></div>
+        <div class="field-description">${!_t.extraDescriptionHelp}</div>
+    </div>
+
+    <div class="row">
+        ${!_t.statusLabel}
+        <input class="${baseClass}Status"
+               data-dojo-type="dijit/form/NumberTextBox"
+               data-dojo-attach-point="statusWidget"
+               data-dojo-props='name: "status", constraints: {min: 1, max: 4}' />
+        <div class="field-description">${!_t.statusHelp}</div>
     </div>
 
     <input class="${baseClass}AddButton"

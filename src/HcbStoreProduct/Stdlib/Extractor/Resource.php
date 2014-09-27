@@ -1,6 +1,7 @@
 <?php
 namespace HcbStoreProduct\Stdlib\Extractor;
 
+use HcBackend\Service\Alias\DetectAlias;
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
 
@@ -9,6 +10,19 @@ use HcbStoreProduct\Entity\Product\Localized as ProductLocalizedEntity;
 
 class Resource implements ExtractorInterface
 {
+    /**
+     * @var DetectAlias
+     */
+    protected $detectAlias;
+
+    /**
+     * @param DetectAlias $detectAlias
+     */
+    public function __construct(DetectAlias $detectAlias)
+    {
+        $this->detectAlias = $detectAlias;
+    }
+
     /**
      * Extract values from an object
      *
@@ -31,10 +45,9 @@ class Resource implements ExtractorInterface
             $updatedTimestamp = $updatedTimestamp->format('Y-m-d H:i:s');
         }
 
-        $page = $localizedEntity->getPage();
-
+        $aliasEntity = $this->detectAlias->detect($localizedEntity->getProduct());
         return array('id'=>$localizedEntity->getId(),
-                     'url'=>(is_null($page) ? '' : $page->getUrl()),
+                     'alias'=>(is_null($aliasEntity) ? '' : $aliasEntity->getAlias()->getName()),
                      'timestamp'=>$updatedTimestamp);
     }
 }

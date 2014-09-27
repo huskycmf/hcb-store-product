@@ -49,6 +49,7 @@ class Selection implements EntityInterface
      * @ORM\Column(name="price", type="float", nullable=false)
      */
     private $price;
+
     /**
      * Constructor
      */

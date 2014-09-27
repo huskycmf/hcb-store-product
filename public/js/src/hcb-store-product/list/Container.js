@@ -1,17 +1,10 @@
 define([
     "dojo/_base/declare",
-    "dojo/_base/array",
-    "dojo/_base/lang",
-    "dojo/on",
     'hc-backend/layout/main/content/_ContentMixin',
     "dijit/_TemplatedMixin",
     "dojo/text!./templates/Container.html",
-    "dojo/i18n!../nls/List",
-    "dojo/request",
-    "hc-backend/router",
     "hcb-store-product/list/widget/Grid"
-], function(declare, array, lang, on, _ContentMixin, _TemplatedMixin,
-            template, translation, request, router, Grid) {
+], function(declare, _ContentMixin, _TemplatedMixin, template, Grid) {
     return declare('hcb-store-product.list.Container', [ _ContentMixin, _TemplatedMixin ], {
         //  summary:
         //      List container. Contains widgets who responsible for

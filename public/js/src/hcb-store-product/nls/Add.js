@@ -7,8 +7,11 @@ define({ root:
         titleLabel: "Title",
         titleHelp: "Text which will be displayed as title",
 
-        urlLabel: "Path/URI",
-        urlHelp: "Url displayed in browser address bar, if not defined will automatically generated from title",
+        aliasLabel: "Alias",
+        aliasHelp: "Alias displayed in browser address bar, if not defined identifier will be used",
+
+        statusLabel: "Status",
+        statusHelp: "Product statuses, 1 = onstock, 2 = ontheway, 3 = preorder, 4 = discontinued",
 
         metaTitleLabel: "Page Title",
         metaTitleHelp: "Text which will be displayed as page title",
@@ -19,8 +22,14 @@ define({ root:
         metaKeywordsLabel: "Page Keywords",
         metaKeywordsHelp: "Page keywords will be displayed in meta tags",
 
-        contentLabel: "Page content",
-        contentHelp: "Content contains text which will be displayed in the main site block",
+        descriptionLabel: "Description",
+        descriptionHelp: "Product description displayed in product view",
+
+        extraDescriptionLabel: "Extra Description",
+        extraDescriptionHelp: "Extra Product description displayed in product view",
+
+        shortDescriptionLabel: "Short Description",
+        shortDescriptionHelp: "Short product description displayed in catalog view",
 
         previewLabel: "Preview content",
         previewHelp: "Text will be displayed as preview of current entry"

@@ -1,6 +1,7 @@
 <?php
 namespace HcbStoreProduct\Stdlib\Extractor\Localized;
 
+use HcBackend\Service\Alias\DetectAlias;
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
 use HcbStoreProduct\Entity\Product\Localized as ProductLocalizedEntity;
@@ -14,11 +15,18 @@ class Resource implements ExtractorInterface
     protected  $pageExtractor;
 
     /**
+     * @var DetectAlias
+     */
+    protected $detectAlias;
+
+    /**
      * @param PageExtractor $pageExtractor
      */
-    public function __construct(PageExtractor $pageExtractor)
+    public function __construct(PageExtractor $pageExtractor,
+                                DetectAlias $detectAlias)
     {
         $this->pageExtractor = $pageExtractor;
+        $this->detectAlias = $detectAlias;
     }
 
     /**
@@ -35,18 +43,27 @@ class Resource implements ExtractorInterface
                                                 object, invalid object given");
         }
 
-        $createdTimestamp = $productLocalized->getCreatedTimestamp();
+        $createdTimestamp = $productLocalized->getProduct()->getCreatedTimestamp();
         if ($createdTimestamp) {
             $createdTimestamp = $createdTimestamp->format('Y-m-d H:i:s');
         }
 
-        $updatedTimestamp = $productLocalized->getUpdatedTimestamp();
+        $updatedTimestamp = $productLocalized->getProduct()->getUpdatedTimestamp();
         if ($updatedTimestamp) {
             $updatedTimestamp = $updatedTimestamp->format('Y-m-d H:i:s');
         }
 
+        $aliasWireEntity = $this->detectAlias->detect($productLocalized->getProduct());
+
         $localData = array('id'=>$productLocalized->getId(),
                            'locale'=>$productLocalized->getLocale()->getLocale(),
+                           'alias'=>(is_null($aliasWireEntity) ? '' :
+                                     $aliasWireEntity->getAlias()->getName()),
+                           'title'=>$productLocalized->getTitle(),
+                           'description'=>$productLocalized->getDescription(),
+                           'shortDescription'=>$productLocalized->getShortDescription(),
+                           'extraDescription'=>$productLocalized->getExtraDescription(),
+                           'status' => $productLocalized->getProduct()->getStatus(),
                            'createdTimestamp'=>$createdTimestamp,
                            'updatedTimestamp'=>$updatedTimestamp);
 

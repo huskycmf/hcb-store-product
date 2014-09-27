@@ -4,7 +4,7 @@ define({ root:
         noDataMessage: 'No data, try again later.',
         labelTimestamp: 'Updated',
         labelId: 'Identity',
-        labelUrl: 'Url',
+        labelAlias: 'Alias',
         loadingMessage: 'Loading ...'
     })
 //end v1.x content
