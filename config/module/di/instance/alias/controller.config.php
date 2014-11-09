@@ -22,5 +22,8 @@ return array(
 
     // Localized Image
     'HcbStoreProduct-Controller-Localized-Image-Create' =>
-        'Zf2FileUploader\Controller\Images\CreateController'
+        'Zf2FileUploader\Controller\Images\CreateController',
+
+    'HcbStoreProduct-Controller-Localized-Image-List' =>
+        'HcbStoreProduct\Controller\Images\ListController'
 );

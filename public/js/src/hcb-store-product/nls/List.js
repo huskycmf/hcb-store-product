@@ -4,7 +4,11 @@ define({ root:
         noDataMessage: 'No data, try again later.',
         labelTimestamp: 'Updated',
         labelId: 'Identity',
-        labelAlias: 'Alias',
+        labelCategory: 'Category',
+        labelTitle: 'Title',
+        labelWatched: 'Watched',
+        addButton: 'Add Product',
+        saveButton: 'Save Products',
         loadingMessage: 'Loading ...'
     })
 //end v1.x content

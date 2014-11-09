@@ -68,6 +68,13 @@
 
     <div class="row">
         ${!_t.descriptionLabel}
+        <div data-dojo-type="dojo-common/form/FileInputList"
+             name="images[]"
+             data-dojo-props="service: '${filebrowserUploadUrl}'"></div>
+    </div>
+
+    <div class="row">
+        ${!_t.descriptionLabel}
         <div class="${baseClass}DescriptionEditor"
              data-dojo-type="dojo-ckeditor/Editor"
              data-dojo-attach-point="descriptionEditorWidget"

@@ -6,24 +6,6 @@ return array(
     ),
     'may_terminate' => false,
     'child_routes' => array(
-        'image' => array(
-            'type' => 'literal',
-            'options' => array(
-                'route' => '/image'
-            ),
-            'may_terminate' => false,
-            'child_routes' => array (
-                'create' => array(
-                    'type' => 'method',
-                    'options' => array(
-                        'verb' => 'post',
-                        'defaults' => array(
-                            'controller' => 'HcbStoreProduct-Controller-Locale-Image-Create'
-                        )
-                    )
-                )
-            )
-        ),
         'resource' => array(
             'type' => 'segment',
             'options' => array(
@@ -32,6 +14,33 @@ return array(
             ),
             'may_terminate' => false,
             'child_routes' => array(
+                'image' => array(
+                    'type' => 'literal',
+                    'options' => array(
+                        'route' => '/images'
+                    ),
+                    'may_terminate' => false,
+                    'child_routes' => array (
+                        'create' => array(
+                            'type' => 'method',
+                            'options' => array(
+                                'verb' => 'post',
+                                'defaults' => array(
+                                    'controller' => 'HcbStoreProduct-Controller-Localized-Image-Create'
+                                )
+                            )
+                        ),
+                        'list' => array(
+                            'type' => 'method',
+                            'options' => array(
+                                'verb' => 'get',
+                                'defaults' => array(
+                                    'controller' => 'HcbStoreProduct-Controller-Localized-Image-List'
+                                )
+                            )
+                        )
+                    )
+                ),
                 'locale' => array(
                     'type' => 'literal',
                     'options' => array(

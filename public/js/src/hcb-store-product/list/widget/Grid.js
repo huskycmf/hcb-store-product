@@ -2,6 +2,7 @@ define([
     "dojo/_base/declare",
     "hcb-store-product/store/ProductStore",
     "dgrid/OnDemandGrid",
+    "dgrid/editor",
     "dgrid/extensions/ColumnHider",
     "dgrid/extensions/ColumnResizer",
     "dgrid/extensions/DijitRegistry",
@@ -13,8 +14,8 @@ define([
     "dgrid/selector",
     "dojo/i18n!../../nls/List"
 ], function(declare, ProductStore,
-            OnDemandGrid, ColumnHider, ColumnResizer, DijitRegistry,
-            _Selection, _Refresher, timestamp, editor, Keyboard,
+            OnDemandGrid, editor, ColumnHider, ColumnResizer, DijitRegistry,
+            _Selection, _Refresher, timestamp, ColumnsEditor, Keyboard,
             selector, i18nList) {
     return declare('hcb-store-product.list.widget.Grid',
                    [ OnDemandGrid, ColumnHider, ColumnResizer,
@@ -27,8 +28,14 @@ define([
         columns: [
             selector({ label: "", width: 40, selectorType: "checkbox" }),
             {label: i18nList.labelId, hidden: true, field: 'id', sortable: true, resizable: false},
-            editor({label: i18nList.labelAlias, field: 'alias', hidden: false,
+            ColumnsEditor({label: i18nList.labelTitle, field: 'name', hidden: false,
                     sortable: true, resizable: true, route: '/update/:id'}),
+            {label: i18nList.labelCategory, hidden: false, field: 'category',
+                sortable: true, resizable: false},
+            editor({label: i18nList.labelWatched,
+                    hidden: false, field: 'watched',
+                    sortable: false, resizable: false},
+                   "checkbox"),
             timestamp({label: i18nList.labelTimestamp, field: 'timestamp', sortable: true})
         ],
 

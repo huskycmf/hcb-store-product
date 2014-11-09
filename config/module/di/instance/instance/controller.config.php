@@ -26,7 +26,6 @@ return array(
     ),
 
     // Localized
-
     'HcbStoreProduct-Controller-Localized-Collection-List' => array(
         'parameters' => array(
             'fetchService' => 'HcbStoreProduct-Service-FetchService-Product',
@@ -54,7 +53,6 @@ return array(
     ),
 
     // Localized Image
-
     'HcbStoreProduct-Controller-Localized-Image-Create' => array(
         'parameters' => array(
             'saveService' => 'HcBackend-Images-Default-SaveService',
@@ -62,4 +60,10 @@ return array(
             'createResourceData' => 'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource-Localized'
         )
     ),
+
+    'HcbStoreProduct-Controller-Localized-Image-List' => array(
+        'parameters' => array(
+            'fetchService' => 'HcbStoreProduct-Service-FetchService-Product'
+        )
+    )
 );

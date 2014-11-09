@@ -10,7 +10,8 @@ define([
     "dijit/form/Textarea",
     "dijit/form/NumberTextBox",
     "dojo-common/form/BusyButton",
-    "dijit/form/ValidationTextBox"
+    "dijit/form/ValidationTextBox",
+    "dojo-common/form/FileInputList"
 ], function(declare, Form, _HasPageFieldsMixin, _WidgetsInTemplateMixin, config,
             template, i18nAdd) {
     return declare([ Form, _HasPageFieldsMixin, _WidgetsInTemplateMixin ], {
@@ -27,7 +28,10 @@ define([
 
         postMixInProperties: function () {
             try {
-                this.filebrowserUploadUrl = config.get('primaryRoute')+'/static-page/image';
+                this.filebrowserUploadUrl = config.get('primaryRoute') +
+                                            '/store/product/' +
+                                            this.saveService.identifier +
+                                            '/images';
                 this.inherited(arguments);
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);

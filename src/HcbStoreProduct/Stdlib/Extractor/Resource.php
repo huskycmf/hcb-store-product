@@ -1,6 +1,7 @@
 <?php
 namespace HcbStoreProduct\Stdlib\Extractor;
 
+use Doctrine\ORM\EntityManager;
 use HcBackend\Service\Alias\DetectAlias;
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
@@ -16,11 +17,19 @@ class Resource implements ExtractorInterface
     protected $detectAlias;
 
     /**
-     * @param DetectAlias $detectAlias
+     * @var EntityManager
      */
-    public function __construct(DetectAlias $detectAlias)
+    protected $entityManager;
+
+    /**
+     * @param DetectAlias $detectAlias
+     * @param EntityManager $entityManager
+     */
+    public function __construct(DetectAlias $detectAlias,
+                                EntityManager $entityManager)
     {
         $this->detectAlias = $detectAlias;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -38,6 +47,7 @@ class Resource implements ExtractorInterface
 
         /* @var $localizedEntity ProductLocalizedEntity */
         $localizedEntity = $product->getLocalized()->current();
+
         $updatedTimestamp = $product->getUpdatedTimestamp();
         if (is_null($updatedTimestamp)) {
             $updatedTimestamp = $product->getCreatedTimestamp()->format('Y-m-d H:i:s');
@@ -45,9 +55,37 @@ class Resource implements ExtractorInterface
             $updatedTimestamp = $updatedTimestamp->format('Y-m-d H:i:s');
         }
 
-        $aliasEntity = $this->detectAlias->detect($localizedEntity->getProduct());
-        return array('id'=>$localizedEntity->getId(),
-                     'alias'=>(is_null($aliasEntity) ? '' : $aliasEntity->getAlias()->getName()),
+        $categoryRepository = $this->entityManager
+                                   ->getRepository('HcbStoreProductCategory\Entity\Category');
+
+        $qb = $categoryRepository->createQueryBuilder('c');
+        /* @var $categoryEntity \HcbStoreProductCategory\Entity\Category */
+        $categoryEntity = $qb->select()
+                             ->join('c.product', 'p')
+                             ->where('p = :product')
+                             ->setParameter('product', $product)
+                             ->setMaxResults(1)
+                             ->getQuery()
+                             ->getOneOrNullResult();
+
+        $categoryName = $categoryEntity->getLocalized()->current()->getTitle();
+
+        $watchedRepository = $this->entityManager
+                                  ->getRepository('HcbStoreProductWatched\Entity\Watched');
+
+        $watchedEntity = $watchedRepository->createQueryBuilder('w')
+                                           ->select()
+                                           ->join('w.product', 'p')
+                                           ->where('p = :product')
+                                           ->setParameter('product', $product)
+                                           ->setMaxResults(1)
+                                           ->getQuery()
+                                           ->getOneOrNullResult();
+
+        return array('id'=>$product->getId(),
+                     'name'=>$localizedEntity->getTitle(),
+                     'category'=>$categoryName,
+                     'watched'=>!is_null($watchedEntity),
                      'timestamp'=>$updatedTimestamp);
     }
 }

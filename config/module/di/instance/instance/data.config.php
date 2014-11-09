@@ -2,10 +2,13 @@
 return array(
     'HcbStoreProduct-Data-Localized' => array(
         'parameters' => array(
-//            'resourceInputContentLoader' =>
-//                'HcbStoreProduct-Uploader-Input-Image-LoadResource-FromText-Content'
+            'resourceInputImageLoader' => 'HcbStoreProduct-Data-InputCreateResourceInput-Image',
             'entityManager' => 'Doctrine\ORM\EntityManager'
         )
+    ),
+
+    'HcbStoreProduct-Data-InputCreateResourceInput-Image' => array(
+        'parameters' => array( 'name' => 'image' )
     ),
 
     'HcbStoreProduct-Data-Collection-Entities-ByIds-Product' => array(
