@@ -6,6 +6,8 @@ return array(
     'HcbStoreProduct-Controller-Localized-Update',
     'HcbStoreProduct-Controller-Localized-Create',
     'HcbStoreProduct-Controller-Localized-Collection-List',
-    'HcbStoreProduct-Controller-Localized-Image-Create',
-    'HcbStoreProduct-Controller-Localized-Image-List'
+    'HcbStoreProduct-Controller-Image-Create',
+    'HcbStoreProduct-Controller-Image-List',
+    'HcbStoreProduct-Controller-Thumbnail-List',
+    'HcbStoreProduct-Controller-Image3d-List'
 );

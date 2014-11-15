@@ -25,6 +25,15 @@ define({ root:
         descriptionLabel: "Description",
         descriptionHelp: "Product description displayed in product view",
 
+        imagesLabel: "Images",
+        imagesHelp: "",
+
+        thumbnailLabel: "Thumbnail",
+        thumbnailHelp: "",
+
+        image3dLabel: "Image 3D",
+        image3dHelp: "",
+
         extraDescriptionLabel: "Extra Description",
         extraDescriptionHelp: "Extra Product description displayed in product view",
 

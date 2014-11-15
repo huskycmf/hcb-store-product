@@ -19,6 +19,8 @@ define([
         //      Form widget for adding page to the CMS database
 
         filebrowserUploadUrl: '',
+        thumbnailUploadUrl: '',
+        image3dUploadUrl: '',
 
         templateString: template,
 
@@ -32,6 +34,16 @@ define([
                                             '/store/product/' +
                                             this.saveService.identifier +
                                             '/images';
+
+                this.thumbnailUploadUrl = config.get('primaryRoute') +
+                                            '/store/product/' +
+                                            this.saveService.identifier +
+                                            '/thumbnail';
+
+                this.image3dUploadUrl = config.get('primaryRoute') +
+                                            '/store/product/' +
+                                            this.saveService.identifier +
+                                            '/image3d';
                 this.inherited(arguments);
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);

@@ -24,6 +24,15 @@ define(
         descriptionLabel: "Описание",
         descriptionHelp: "Длинное описание товара",
 
+        imagesLabel: "Картинки",
+        imagesHelp: "",
+
+        thumbnailLabel: "Превью товара",
+        thumbnailHelp: "",
+
+        image3dLabel: "3D Картинка",
+        image3dHelp: "",
+
         extraDescriptionLabel: "Инструкция по инсталяции",
         extraDescriptionHelp: "Описание установки товара",
 

@@ -14,6 +14,44 @@ return array(
             ),
             'may_terminate' => false,
             'child_routes' => array(
+                'image3d' => array(
+                    'type' => 'literal',
+                    'options' => array(
+                        'route' => '/image3d'
+                    ),
+                    'may_terminate' => false,
+                    'child_routes' => array (
+                        'list' => array(
+                            'type' => 'method',
+                            'options' => array(
+                                'verb' => 'get',
+                                'defaults' => array(
+                                    'controller' =>
+                                        'HcbStoreProduct-Controller-Image3d-List'
+                                )
+                            )
+                        )
+                    )
+                ),
+                'thumbnail' => array(
+                    'type' => 'literal',
+                    'options' => array(
+                        'route' => '/thumbnail'
+                    ),
+                    'may_terminate' => false,
+                    'child_routes' => array (
+                        'list' => array(
+                            'type' => 'method',
+                            'options' => array(
+                                'verb' => 'get',
+                                'defaults' => array(
+                                    'controller' =>
+                                        'HcbStoreProduct-Controller-Thumbnail-List'
+                                )
+                            )
+                        )
+                    )
+                ),
                 'image' => array(
                     'type' => 'literal',
                     'options' => array(
@@ -26,7 +64,8 @@ return array(
                             'options' => array(
                                 'verb' => 'post',
                                 'defaults' => array(
-                                    'controller' => 'HcbStoreProduct-Controller-Localized-Image-Create'
+                                    'controller' =>
+                                        'HcbStoreProduct-Controller-Image-Create'
                                 )
                             )
                         ),
@@ -35,7 +74,8 @@ return array(
                             'options' => array(
                                 'verb' => 'get',
                                 'defaults' => array(
-                                    'controller' => 'HcbStoreProduct-Controller-Localized-Image-List'
+                                    'controller' =>
+                                        'HcbStoreProduct-Controller-Image-List'
                                 )
                             )
                         )
@@ -53,7 +93,8 @@ return array(
                             'options' => array(
                                 'verb' => 'get',
                                 'defaults' => array(
-                                    'controller' => 'HcbStoreProduct-Controller-Localized-Collection-List'
+                                    'controller' =>
+                                        'HcbStoreProduct-Controller-Localized-Collection-List'
                                 )
                             )
                         ),

@@ -1,5 +1,5 @@
 <?php
-namespace HcbStoreProduct\Controller\Images;
+namespace HcbStoreProduct\Controller\Image3d;
 
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
@@ -45,14 +45,11 @@ class ListController extends AbstractResourceController
 
         $extractor = new DoctrineObject($this->entityManager, true);
 
-        $iter = 0;
-        /* @var $image \HcbStoreProduct\Entity\Product\Image */
-        foreach ($productEntity->getImage() as $k=>$image) {
-            if ($image->getIsPreview() === true) continue;
-            $image = $extractor->extract($image->getImage());
+        $image3d = $productEntity->getImage3d();
+        if (!is_null($image3d)) {
+            $image = $extractor->extract($image3d);
             $image['path'] = $image['httpPath'];
-            $result->setVariable($iter, $image);
-            $iter++;
+            $result->setVariable(0, $image);
         }
 
         $e->setResult($result);

@@ -52,18 +52,32 @@ return array(
         )
     ),
 
-    // Localized Image
-    'HcbStoreProduct-Controller-Localized-Image-Create' => array(
+    // Product Image
+    'HcbStoreProduct-Controller-Image-Create' => array(
         'parameters' => array(
             'saveService' => 'HcBackend-Images-Default-SaveService',
-            'uploaderModel' => 'HcbStoreProduct-Uploader-View-Model-UploaderModel-Localized-Image',
-            'createResourceData' => 'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource-Localized'
+            'uploaderModel' => 'HcbStoreProduct-Uploader-View-Model-UploaderModel-Image',
+            'createResourceData' => 'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource'
         )
     ),
 
-    'HcbStoreProduct-Controller-Localized-Image-List' => array(
+    // Product Thumbnail
+    'HcbStoreProduct-Controller-Thumbnail-List' => array(
         'parameters' => array(
             'fetchService' => 'HcbStoreProduct-Service-FetchService-Product'
         )
-    )
+    ),
+
+    // Product Image 3D
+    'HcbStoreProduct-Controller-Image3d-List' => array(
+        'parameters' => array(
+            'fetchService' => 'HcbStoreProduct-Service-FetchService-Product'
+        )
+    ),
+
+    'HcbStoreProduct-Controller-Image-List' => array(
+        'parameters' => array(
+            'fetchService' => 'HcbStoreProduct-Service-FetchService-Product'
+        )
+    ),
 );

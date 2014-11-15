@@ -1,5 +1,5 @@
 <?php
-namespace HcbStoreProduct\Controller\Images;
+namespace HcbStoreProduct\Controller\Thumbnail;
 
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
@@ -45,14 +45,14 @@ class ListController extends AbstractResourceController
 
         $extractor = new DoctrineObject($this->entityManager, true);
 
-        $iter = 0;
         /* @var $image \HcbStoreProduct\Entity\Product\Image */
         foreach ($productEntity->getImage() as $k=>$image) {
-            if ($image->getIsPreview() === true) continue;
+            if ($image->getIsPreview() != 1) {
+                continue;
+            }
             $image = $extractor->extract($image->getImage());
             $image['path'] = $image['httpPath'];
-            $result->setVariable($iter, $image);
-            $iter++;
+            $result->setVariable($k, $image);
         }
 
         $e->setResult($result);
