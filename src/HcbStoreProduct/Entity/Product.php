@@ -2,10 +2,11 @@
 namespace HcbStoreProduct\Entity;
 
 use HcBackend\Entity\AliasWiredAwareInterface;
+use HcBackend\Entity\ImageBindInterface;
 use HcBackend\Entity\LocalizedInterface;
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
-use HcBackend\Entity\Image;
+use Zf2FileUploader\Entity\ImageInterface as ImageInterface;
 
 /**
  * Product
@@ -13,7 +14,10 @@ use HcBackend\Entity\Image;
  * @ORM\Table(name="store_product")
  * @ORM\Entity
  */
-class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInterface
+class Product implements EntityInterface,
+                         ImageBindInterface,
+                         LocalizedInterface,
+                         AliasWiredAwareInterface
 {
     /**
      * @var integer
@@ -91,6 +95,21 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
      *
      * @ORM\OneToMany(targetEntity="HcbStoreProduct\Entity\Product\Image", mappedBy="product")
      * @ORM\OrderBy({"priority" = "ASC"})
+     */
+    private $productImage;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="HcBackend\Entity\Image")
+     * @ORM\JoinTable(name="store_product_image",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     *   }
+     * )
      */
     private $image;
 
@@ -333,39 +352,6 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     }
 
     /**
-     * Add image
-     *
-     * @param \HcbStoreProduct\Entity\Product\Image $image
-     * @return Product
-     */
-    public function addImage(\HcbStoreProduct\Entity\Product\Image $image)
-    {
-        $this->image[] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Remove image
-     *
-     * @param \HcbStoreProduct\Entity\Product\Image $image
-     */
-    public function removeImage(\HcbStoreProduct\Entity\Product\Image $image)
-    {
-        $this->image->removeElement($image);
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Add attribute
      *
      * @param \HcbStoreProduct\Entity\Product\Attribute $attribute
@@ -542,18 +528,6 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     {
         return $this->fileInstruction;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->alias = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->label = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->selection = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add selection
@@ -586,5 +560,84 @@ class Product implements EntityInterface, LocalizedInterface, AliasWiredAwareInt
     public function getSelection()
     {
         return $this->selection;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->productImage = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->alias = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->attribute = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->label = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->selection = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->localized = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add productImage
+     *
+     * @param \HcbStoreProduct\Entity\Product\Image $productImage
+     * @return Product
+     */
+    public function addProductImage(\HcbStoreProduct\Entity\Product\Image $productImage)
+    {
+        $this->productImage[] = $productImage;
+
+        return $this;
+    }
+
+    /**
+     * Remove productImage
+     *
+     * @param \HcbStoreProduct\Entity\Product\Image $productImage
+     */
+    public function removeProductImage(\HcbStoreProduct\Entity\Product\Image $productImage)
+    {
+        $this->productImage->removeElement($productImage);
+    }
+
+    /**
+     * Get productImage
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProductImage()
+    {
+        return $this->productImage;
+    }
+
+    /**
+     * Add image
+     *
+     * @param ImageInterface $image
+     * @return Product
+     */
+    public function addImage(ImageInterface $image)
+    {
+        $this->image[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param ImageInterface $image
+     */
+    public function removeImage(ImageInterface $image)
+    {
+        $this->image->removeElement($image);
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

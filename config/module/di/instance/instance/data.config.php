@@ -2,13 +2,18 @@
 return array(
     'HcbStoreProduct-Data-Localized' => array(
         'parameters' => array(
-            'resourceInputImageLoader' => 'HcbStoreProduct-Data-InputCreateResourceInput-Image',
+            'resourceInputImageLoader' =>
+                'HcbStoreProduct-Data-InputCreateResourceInput-Image',
+            'resourceInputThumbnailLoader' =>
+                'HcbStoreProduct-Data-InputCreateResourceInput-Thumbnail',
+            'resourceInputImage3dLoader' =>
+                'HcbStoreProduct-Data-InputCreateResourceInput-Image3d',
+            'resourceInputLoaderFromTextDescription' =>
+                'HcbStoreProduct-Data-InputCreateResourceInput-LoadResource-FromText-Description',
+            'resourceInputLoaderFromTextExtraDescription' =>
+                'HcbStoreProduct-Data-InputCreateResourceInput-LoadResource-FromText-ExtraDescription',
             'entityManager' => 'Doctrine\ORM\EntityManager'
         )
-    ),
-
-    'HcbStoreProduct-Data-InputCreateResourceInput-Image' => array(
-        'parameters' => array( 'name' => 'image' )
     ),
 
     'HcbStoreProduct-Data-Collection-Entities-ByIds-Product' => array(

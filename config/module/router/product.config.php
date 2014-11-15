@@ -52,7 +52,7 @@ return array(
                         )
                     )
                 ),
-                'image' => array(
+                'images' => array(
                     'type' => 'literal',
                     'options' => array(
                         'route' => '/images'
@@ -76,6 +76,26 @@ return array(
                                 'defaults' => array(
                                     'controller' =>
                                         'HcbStoreProduct-Controller-Image-List'
+                                )
+                            )
+                        ),
+                        'image' => array(
+                            'type' => 'segment',
+                            'options' => array(
+                                'route' => '/:token',
+                                'constraints' => array( 'token' => '[a-zA-Z0-9\_]+' )
+                            ),
+                            'may_terminate' => false,
+                            'child_routes' => array(
+                                'remove' => array(
+                                    'type' => 'method',
+                                    'options' => array(
+                                        'verb' => 'delete',
+                                        'defaults' => array(
+                                            'controller' =>
+                                                'HcBackend\Controller\Image\RemoveController'
+                                        )
+                                    )
                                 )
                             )
                         )

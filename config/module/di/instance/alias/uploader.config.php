@@ -1,10 +1,19 @@
 <?php
 return array(
-    'HcbStoreProduct-Uploader-Input-Image-LoadResource-FromText-Description' =>
+    'HcbStoreProduct-Data-InputCreateResourceInput-LoadResource-FromText-Description' =>
         'Zf2FileUploader\Input\Image\LoadResource\FromText',
 
-    'HcbStoreProduct-Uploader-Input-Image-LoadResource-FromText-ExtraDescription' =>
+    'HcbStoreProduct-Data-InputCreateResourceInput-LoadResource-FromText-ExtraDescription' =>
         'Zf2FileUploader\Input\Image\LoadResource\FromText',
+
+    'HcbStoreProduct-Data-InputCreateResourceInput-Image' =>
+        'Zf2FileUploader\Input\Image\LoadResource\FromList',
+
+    'HcbStoreProduct-Data-InputCreateResourceInput-Thumbnail' =>
+        'Zf2FileUploader\Input\Image\LoadResource\FromList',
+
+    'HcbStoreProduct-Data-InputCreateResourceInput-Image3d' =>
+        'Zf2FileUploader\Input\Image\LoadResource\FromList',
 
     'HcbStoreProduct-Uploader-View-Model-UploaderModel-Image' =>
         'Zf2FileUploader\View\Model\UploaderModel',

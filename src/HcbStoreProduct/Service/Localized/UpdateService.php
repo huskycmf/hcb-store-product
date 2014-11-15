@@ -6,6 +6,7 @@ use HcBackend\Service\ImageBinderServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use HcbStoreProduct\Data\LocalizedInterface;
 use HcbStoreProduct\Entity\Product\Localized;
+use Zf2FileUploader\Resource\Handler\Remover\RemoverInterface;
 use Zf2Libs\Stdlib\Service\Response\Messages\ResponseInterface;
 
 class UpdateService
@@ -26,16 +27,25 @@ class UpdateService
     protected $pageBinderService;
 
     /**
+     * @var PageBinderServiceInterface
+     */
+    protected $imageBinderService;
+
+    /**
      * @param EntityManagerInterface $entityManager
      * @param PageBinderServiceInterface $pageBinderService
      * @param ResponseInterface $saveResponse
      */
     public function __construct(EntityManagerInterface $entityManager,
                                 PageBinderServiceInterface $pageBinderService,
+                                ImageBinderServiceInterface $imageBinderService,
+                                RemoverInterface $remover,
                                 ResponseInterface $saveResponse)
     {
         $this->pageBinderService = $pageBinderService;
+        $this->imageBinderService = $imageBinderService;
         $this->entityManager = $entityManager;
+        $this->imageRemover = $remover;
         $this->saveResponse = $saveResponse;
     }
 
@@ -49,17 +59,45 @@ class UpdateService
         try {
             $this->entityManager->beginTransaction();
 
+            $productEntity = $productLocalizedEntity->getProduct();
+
+            $this->imageBinderService->bind($localizedData, $productEntity);
             $this->pageBinderService->bind($localizedData, $productLocalizedEntity);
+
+            $imageThumbnail = $localizedData->getThumbnail();
+
+            if (!empty($imageThumbnail)) {
+                $repo = $this->entityManager
+                             ->getRepository('HcbStoreProduct\Entity\Product\Image');
+
+                $repo->findOneByImage($imageThumbnail->getEntity()->getId())
+                     ->setIsPreview(true);
+            }
+
+            $existsImage3dEntity = $productEntity->getImage3d();
+            $image3dResource = $localizedData->getImage3d();
+
+            if (!empty($image3dResource)) {
+                $image3dEntity = $image3dResource->getEntity();
+                if (!is_null($existsImage3dEntity) &&
+                    $image3dEntity->getId() != $existsImage3dEntity->getId()) {
+                    $image3dEntity->setTemporary(false);
+                    $productEntity->setImage3d($image3dEntity);
+                    $this->imageRemover->remove($existsImage3dEntity);
+                }
+            } else if (!empty($existsImage3dEntity)) {
+                $this->imageRemover->remove($existsImage3dEntity);
+            }
 
             $productLocalizedEntity->setTitle($localizedData->getTitle());
             $productLocalizedEntity->setDescription($localizedData->getDescription());
 
-            $productLocalizedEntity->getProduct()->setPrice($localizedData->getPrice());
-            $productLocalizedEntity->getProduct()->setPriceDeal($localizedData->getPriceDeal());
+            $productEntity->setPrice($localizedData->getPrice());
+            $productEntity->setPriceDeal($localizedData->getPriceDeal());
 
             $productLocalizedEntity->setShortDescription($localizedData->getShortDescription());
             $productLocalizedEntity->setExtraDescription($localizedData->getExtraDescription());
-            $productLocalizedEntity->getProduct()->setStatus($localizedData->getStatus());
+            $productEntity->setStatus($localizedData->getStatus());
 
             $this->entityManager->persist($productLocalizedEntity);
 

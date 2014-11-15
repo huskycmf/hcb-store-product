@@ -1,10 +1,11 @@
 <?php
 namespace HcbStoreProduct\Data;
 
+use HcBackend\Data\ImageInterface;
 use HcBackend\Data\PageInterface;
 use HcCore\Data\LocaleInterface;
 
-interface LocalizedInterface extends PageInterface, LocaleInterface
+interface LocalizedInterface extends PageInterface, ImageInterface, LocaleInterface
 {
     /**
      * @return string
@@ -40,4 +41,14 @@ interface LocalizedInterface extends PageInterface, LocaleInterface
      * @return number
      */
     public function getPriceDeal();
+
+    /**
+     * @return \Zf2FileUploader\Resource\Persisted\ImageResourceInterface
+     */
+    public function getThumbnail();
+
+    /**
+     * @return \Zf2FileUploader\Resource\Persisted\ImageResourceInterface
+     */
+    public function getImage3d();
 }

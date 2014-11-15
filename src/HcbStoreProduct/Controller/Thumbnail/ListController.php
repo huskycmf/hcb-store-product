@@ -46,12 +46,13 @@ class ListController extends AbstractResourceController
         $extractor = new DoctrineObject($this->entityManager, true);
 
         /* @var $image \HcbStoreProduct\Entity\Product\Image */
-        foreach ($productEntity->getImage() as $k=>$image) {
+        foreach ($productEntity->getProductImage() as $k=>$image) {
             if ($image->getIsPreview() != 1) {
                 continue;
             }
             $image = $extractor->extract($image->getImage());
             $image['path'] = $image['httpPath'];
+            $image['id'] = $image['token'];
             $result->setVariable($k, $image);
         }
 

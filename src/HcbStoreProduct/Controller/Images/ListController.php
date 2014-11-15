@@ -47,10 +47,11 @@ class ListController extends AbstractResourceController
 
         $iter = 0;
         /* @var $image \HcbStoreProduct\Entity\Product\Image */
-        foreach ($productEntity->getImage() as $k=>$image) {
+        foreach ($productEntity->getProductImage() as $k=>$image) {
             if ($image->getIsPreview() === true) continue;
             $image = $extractor->extract($image->getImage());
             $image['path'] = $image['httpPath'];
+            $image['id'] = $image['token'];
             $result->setVariable($iter, $image);
             $iter++;
         }
