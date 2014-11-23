@@ -18,6 +18,11 @@ interface LocalizedInterface extends PageInterface, ImageInterface, LocaleInterf
     public function getShortDescription();
 
     /**
+     * @return Product
+     */
+    public function getProductData();
+
+    /**
      * @return string
      */
     public function getExtraDescription();
@@ -41,14 +46,4 @@ interface LocalizedInterface extends PageInterface, ImageInterface, LocaleInterf
      * @return number
      */
     public function getPriceDeal();
-
-    /**
-     * @return \Zf2FileUploader\Resource\Persisted\ImageResourceInterface
-     */
-    public function getThumbnail();
-
-    /**
-     * @return \Zf2FileUploader\Resource\Persisted\ImageResourceInterface
-     */
-    public function getImage3d();
 }

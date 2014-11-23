@@ -60,11 +60,14 @@ class UpdateService
             $this->entityManager->beginTransaction();
 
             $productEntity = $productLocalizedEntity->getProduct();
+            $productData = $localizedData->getProductData();
 
-            $this->imageBinderService->bind($localizedData, $productEntity);
+            $this->imageBinderService->bind($productData, $productEntity);
+
+            $this->imageBinderService->bind($localizedData, $productLocalizedEntity);
             $this->pageBinderService->bind($localizedData, $productLocalizedEntity);
 
-            $imageThumbnail = $localizedData->getThumbnail();
+            $imageThumbnail = $productData->getThumbnail();
 
             if (!empty($imageThumbnail)) {
                 $repo = $this->entityManager
@@ -75,7 +78,7 @@ class UpdateService
             }
 
             $existsImage3dEntity = $productEntity->getImage3d();
-            $image3dResource = $localizedData->getImage3d();
+            $image3dResource = $productData->getImage3d();
 
             if (!empty($image3dResource)) {
                 $image3dEntity = $image3dResource->getEntity();

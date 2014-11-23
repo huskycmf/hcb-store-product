@@ -1,12 +1,14 @@
 <?php
 namespace HcbStoreProduct\Entity\Product;
 
+use HcBackend\Entity\ImageBindInterface;
 use HcBackend\Entity\PageBindInterface;
 use HcBackend\Entity\PageInterface;
 use HcbStoreProduct\Entity\Product;
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use HcCore\Entity\LocaleBindInterface;
+use Zf2FileUploader\Entity\ImageInterface;
 
 /**
  * Localized
@@ -14,7 +16,10 @@ use HcCore\Entity\LocaleBindInterface;
  * @ORM\Table(name="store_product_localized")
  * @ORM\Entity
  */
-class Localized implements EntityInterface, PageBindInterface, LocaleBindInterface
+class Localized implements EntityInterface,
+                           PageBindInterface,
+                           ImageBindInterface,
+                           LocaleBindInterface
 {
     /**
      * @var integer
@@ -69,6 +74,21 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
      * @ORM\OneToOne(targetEntity="HcbStoreProduct\Entity\Product\Localized\Page", mappedBy="localized")
      */
     private $page;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="HcBackend\Entity\Image")
+     * @ORM\JoinTable(name="store_product_localized_has_image",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="store_product_localized_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $image;
 
     /**
      * @var Locale
@@ -306,5 +326,38 @@ class Localized implements EntityInterface, PageBindInterface, LocaleBindInterfa
     public function getExtraDescription()
     {
         return $this->extraDescription;
+    }
+
+    /**
+     * Add image
+     *
+     * @param ImageInterface $image
+     * @return Localized
+     */
+    public function addImage(ImageInterface $image)
+    {
+        $this->image[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param ImageInterface $image
+     */
+    public function removeImage(ImageInterface $image)
+    {
+        $this->image->removeElement($image);
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

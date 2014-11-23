@@ -19,47 +19,36 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
      * @var LoadResourceInterface
      */
     protected $resourceInputLoaderFromTextDescription;
+
     /**
-     * @var LoadResourceInterface
+     * @var Product
      */
-    protected $resourceInputImageLoader;
-    /**
-     * @var LoadResourceInterface
-     */
-    protected $resourceInputThumbnailLoader;
-    /**
-     * @var LoadResourceInterface
-     */
-    protected $resourceInputImage3dLoader;
+    protected $productData;
 
     /**
      * @param Request $request
-     * @param LoadResourceInterface $resourceInputImageLoader
-     * @param LoadResourceInterface $resourceInputThumbnailLoader
-     * @param LoadResourceInterface $resourceInputImage3dLoader
      * @param LoadResourceInterface $resourceInputLoaderFromTextDescription
      * @param LoadResourceInterface $resourceInputLoaderFromTextExtraDescription
      * @param Extractor $dataExtractor
      * @param Di $di
      */
     public function __construct(Request $request,
-                                LoadResourceInterface $resourceInputImageLoader,
-                                LoadResourceInterface $resourceInputThumbnailLoader,
-                                LoadResourceInterface $resourceInputImage3dLoader,
-                                LoadResourceInterface $resourceInputLoaderFromTextDescription,
-                                LoadResourceInterface $resourceInputLoaderFromTextExtraDescription,
+                                LoadResourceInterface
+                                    $resourceInputLoaderFromTextDescription,
+                                LoadResourceInterface
+                                    $resourceInputLoaderFromTextExtraDescription,
                                 Extractor $dataExtractor,
+                                Product $productData,
                                 Di $di)
     {
+
+        $this->productData = $productData;
+
         $this->resourceInputLoaderFromTextExtraDescription =
             $resourceInputLoaderFromTextExtraDescription;
 
         $this->resourceInputLoaderFromTextDescription =
             $resourceInputLoaderFromTextDescription;
-
-        $this->resourceInputImageLoader = $resourceInputImageLoader;
-        $this->resourceInputThumbnailLoader = $resourceInputThumbnailLoader;
-        $this->resourceInputImage3dLoader = $resourceInputImage3dLoader;
 
         /* @var $input \HcBackend\InputFilter\Input\Locale */
         $input = $di->get('HcBackend\InputFilter\Input\Locale',
@@ -99,15 +88,20 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
         $resourceInputLoaderFromTextDescription->setAllowEmpty(true);
         $this->add($resourceInputLoaderFromTextDescription);
 
-        $this->add($resourceInputImageLoader);
-        $this->add($resourceInputImage3dLoader);
-        $this->add($resourceInputThumbnailLoader);
-
         $this->add(array( 'name' => 'description', 'required' => false, 'allowEmpty' => true,
                           'filters' => array(array('name' => 'StringTrim'))));
 
         $this->setData($dataExtractor->extract($request));
 
+        $this->add($productData, 'product');
+    }
+
+    /**
+     * @return Product
+     */
+    public function getProductData()
+    {
+        return $this->productData;
     }
 
     /**
@@ -116,30 +110,8 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
     public function getResources()
     {
         $data = array_merge($this->resourceInputLoaderFromTextExtraDescription->getResources(),
-                            $this->resourceInputLoaderFromTextDescription->getResources(),
-                            $this->resourceInputImageLoader->getResources());
-
-        $thumbnailImage = $this->getThumbnail();
-        if (!empty($thumbnailImage)) {
-            array_push($data, $this->getThumbnail());
-        }
+                            $this->resourceInputLoaderFromTextDescription->getResources());
         return $data;
-    }
-
-    /**
-     * @return \Zf2FileUploader\Resource\ImageResourceInterface
-     */
-    public function getThumbnail()
-    {
-        return current($this->resourceInputThumbnailLoader->getResources());
-    }
-
-    /**
-     * @return \Zf2FileUploader\Resource\ImageResourceInterface
-     */
-    public function getImage3d()
-    {
-        return current($this->resourceInputImage3dLoader->getResources());
     }
 
     /**
@@ -236,6 +208,6 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
      */
     public function getUrl()
     {
-        return $this->getValue('page')['pageUrl'];
+        return '';
     }
 }
