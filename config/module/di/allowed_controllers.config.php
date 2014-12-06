@@ -2,6 +2,9 @@
 return array(
     'HcbStoreProduct-Controller-Collection-List',
     'HcbStoreProduct-Controller-Create',
+    'HcbStoreProduct-Controller-View',
+    'HcbStoreProduct-Controller-Localized-Characteristic-Collection',
+    'HcbStoreProduct-Controller-Localized-Characteristic-Value-Collection',
     'HcbStoreProduct-Controller-Collection-Delete',
     'HcbStoreProduct-Controller-Localized-Update',
     'HcbStoreProduct-Controller-Localized-Create',

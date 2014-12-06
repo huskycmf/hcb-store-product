@@ -10,6 +10,30 @@ return array(
         )
     ),
 
+    'HcbStoreProduct-Controller-Localized-Characteristic-Collection' => array(
+        'parameters' => array(
+            'paginatorDataFetchService' =>
+                'HcbStoreProduct\Service\Localized\Characteristic\Collection\FetchQbBuilderService',
+            'viewModel' => 'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized-Characteristic'
+        )
+    ),
+
+    'HcbStoreProduct-Controller-Localized-Characteristic-Value-Collection' => array(
+        'parameters' => array(
+            'paginatorDataFetchService' =>
+                'HcbStoreProduct\Service\Localized\Characteristic\Value\Collection\FetchQbBuilderService',
+            'viewModel' =>
+                'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized-Characteristic-Value'
+        )
+    ),
+
+    'HcbStoreProduct-Controller-View' => array(
+        'parameters' => array(
+            'fetchService' => 'HcbStoreProduct-Service-FetchService-Product',
+            'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Resource'
+        )
+    ),
+
     'HcbStoreProduct-Controller-Create' => array(
         'parameters' => array(
             'serviceCommand' => 'HcbStoreProduct-Service-Create',

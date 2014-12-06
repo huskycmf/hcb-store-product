@@ -23,6 +23,11 @@ interface LocalizedInterface extends PageInterface, ImageInterface, LocaleInterf
     public function getProductData();
 
     /**
+     * @return number
+     */
+    public function getReplaceProductId();
+
+    /**
      * @return string
      */
     public function getExtraDescription();

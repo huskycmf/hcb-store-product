@@ -15,6 +15,10 @@ define(
         metaTitleLabel: "Заголовок страницы",
         metaTitleHelp: "Текст который будет отображен в заголовке страницы",
 
+        modelToReplaceLabel: "Товар на замену",
+        isNewLabel: "Новинка",
+        characteristicsLabel: "Характеристики (атрибуты)",
+
         metaDescriptionLabel: "Описание страницы",
         metaDescriptionHelp: "Текст который будет отображен в описании страницы",
 

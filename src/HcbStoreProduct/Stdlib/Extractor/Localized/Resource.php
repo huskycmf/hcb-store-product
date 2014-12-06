@@ -65,6 +65,8 @@ class Resource implements ExtractorInterface
                            'extraDescription'=>$productLocalized->getExtraDescription(),
                            'status' => $productLocalized->getProduct()->getStatus(),
                            'price' => $productLocalized->getProduct()->getPrice(),
+                           'replaceProduct' => $productLocalized->getProduct()
+                                                                ->getProduct()->getId(),
                            'priceDeal' => $productLocalized->getProduct()->getPriceDeal(),
                            'createdTimestamp'=>$createdTimestamp,
                            'updatedTimestamp'=>$updatedTimestamp);

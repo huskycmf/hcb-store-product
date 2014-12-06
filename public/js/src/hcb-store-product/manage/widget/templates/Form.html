@@ -31,11 +31,28 @@
 
     <div class="row">
         ${!_t.statusLabel}
-        <input class="${baseClass}Status"
-               data-dojo-type="dijit/form/NumberTextBox"
-               data-dojo-attach-point="statusWidget"
-               data-dojo-props='name: "status", constraints: {min: 1, max: 4}' />
-        <div class="field-description">${!_t.statusHelp}</div>
+        <select data-dojo-type="dijit/form/FilteringSelect"
+                data-dojo-attach-point="statusWidget"
+                data-dojo-props='name: "status", constraints: {min: 1, max: 4}'>
+            <option value="1">На складе</option>
+            <option value="2">В пути</option>
+            <option value="3">Пред заказ</option>
+            <option value="4">Снят с производства</option>
+        </select>
+    </div>
+
+    <div class="row">
+        ${!_t.modelToReplaceLabel}
+        <select data-dojo-type="dijit/form/FilteringSelect"
+                data-dojo-attach-point="modelToReplaceWidget"
+                data-dojo-props="name: 'replaceProduct'"></select>
+    </div>
+
+    <div class="row">
+        ${!_t.isNewLabel}
+        <select data-dojo-type="dijit/form/CheckBox"
+                data-dojo-attach-point="isNewWidget"
+                data-dojo-props="name: 'isNew'"></select>
     </div>
 
     <div class="row">
@@ -96,6 +113,11 @@
                               name: 'image3d',
                               uploadInputName: 'upload',
                               saveMultiImage: false"></div>
+    </div>
+
+    <div class="row">
+        ${!_t.characteristicsLabel}
+        <div data-dojo-attach-point="characteristicsWidget"></div>
     </div>
 
     <div class="row">

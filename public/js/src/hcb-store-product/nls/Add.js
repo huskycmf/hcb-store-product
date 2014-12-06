@@ -13,6 +13,9 @@ define({ root:
         statusLabel: "Status",
         statusHelp: "Product statuses, 1 = onstock, 2 = ontheway, 3 = preorder, 4 = discontinued",
 
+        modelToReplaceLabel: "",
+        isNewLabel: "",
+
         metaTitleLabel: "Page Title",
         metaTitleHelp: "Text which will be displayed as page title",
 

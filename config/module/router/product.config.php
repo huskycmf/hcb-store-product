@@ -6,13 +6,63 @@ return array(
     ),
     'may_terminate' => false,
     'child_routes' => array(
+        'locale' => array(
+            'type' => 'literal',
+            'options' => array(
+                'route' => '/localized'
+            ),
+            'may_terminate' => false,
+            'child_routes' => array(
+                'characteristics' => array(
+                    'type' => 'literal',
+                    'options' => array(
+                        'route' => '/characteristics'
+                    ),
+                    'may_terminate' => false,
+                    'child_routes' => array(
+                        'list' => array(
+                            'type' => 'method',
+                            'options' => array(
+                                'verb' => 'get',
+                                'defaults' => array(
+                                    'controller' => 'HcbStoreProduct-Controller-Localized-Characteristic-Collection'
+                                )
+                            )
+                        ),
+                        'values' => array(
+                            'type' => 'literal',
+                            'options' => array(
+                                'route' => '/values'
+                            ),
+                            'may_terminate' => false,
+                            'child_routes' => array(
+                                'list' => array(
+                                    'type' => 'method',
+                                    'options' => array(
+                                        'verb' => 'get',
+                                        'defaults' => array(
+                                            'controller' =>
+                                                'HcbStoreProduct-Controller-Localized-Characteristic-Value-Collection'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        ),
         'resource' => array(
             'type' => 'segment',
             'options' => array(
                 'route' => '/:id',
-                'constraints' => array( 'id' => '[0-9]+' )
+                'constraints' => array( 'id' => '[0-9]+' ),
+                'defaults' => array(
+                    'controller' =>
+                        'HcbStoreProduct-Controller-View'
+                )
             ),
-            'may_terminate' => false,
+            'may_terminate' => true,
             'child_routes' => array(
                 'image3d' => array(
                     'type' => 'literal',

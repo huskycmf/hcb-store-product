@@ -101,6 +101,12 @@ class UpdateService
             $productLocalizedEntity->setShortDescription($localizedData->getShortDescription());
             $productLocalizedEntity->setExtraDescription($localizedData->getExtraDescription());
             $productEntity->setStatus($localizedData->getStatus());
+            if ($localizedData->getReplaceProductId()) {
+                $productEntity
+                    ->setProduct($this->entityManager
+                                      ->getReference('HcbStoreProduct\Entity\Product',
+                                                     $localizedData->getReplaceProductId()));
+            }
 
             $this->entityManager->persist($productLocalizedEntity);
 
