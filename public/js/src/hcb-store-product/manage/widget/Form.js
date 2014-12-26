@@ -31,6 +31,7 @@ define([
         filebrowserUploadUrl: '',
         thumbnailUploadUrl: '',
         image3dUploadUrl: '',
+        characteristicInstance: null,
 
         templateString: template,
 
@@ -95,14 +96,6 @@ define([
                         {
                             w: ComboBox,
                             name: 'value',
-                            onChange: function (value) {
-                                try {
-                                    alert(11);
-                                } catch (e) {
-                                    console.error(this.declaredClass + " " + arguments.callee.nom, arguments, e);
-                                    throw e;
-                                }
-                            },
                             args: {
                                 maxLength: 1024,
                                 store: new Memory({data: response[1][1]}),
@@ -111,13 +104,28 @@ define([
                             }
                         }];
 
-                    this.own(new InputList({fields: fields,
-                            name: 'characteristics'},
-                        this.characteristicsWidget));
+                    this.characteristicInstance = new InputList({fields: fields,
+                            name: 'characteristics[]'},
+                        this.characteristicsWidget);
+                    this.characteristicInstance.attr('value', this.characteristics);
+                    this.own(this.characteristicInstance);
                 }));
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
+            }
+        },
+
+        _setValueAttr: function (values) {
+            try {
+                this.inherited(arguments);
+                this.characteristics = values['characteristics[]'];
+                if (this.characteristicInstance) {
+                    this.characteristicInstance.attr('value', this.characteristics);
+                }
+            } catch (e) {
+                console.error(this.declaredClass + " " + arguments.callee.nom, arguments, e);
+                throw e;
             }
         },
 

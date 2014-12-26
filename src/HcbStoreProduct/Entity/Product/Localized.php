@@ -5,6 +5,7 @@ use HcBackend\Entity\ImageBindInterface;
 use HcBackend\Entity\PageBindInterface;
 use HcBackend\Entity\PageInterface;
 use HcbStoreProduct\Entity\Product;
+use HcbStoreProduct\Entity\Product\Localized\CharacteristicBindInterface;
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use HcCore\Entity\LocaleBindInterface;
@@ -19,7 +20,8 @@ use Zf2FileUploader\Entity\ImageInterface;
 class Localized implements EntityInterface,
                            PageBindInterface,
                            ImageBindInterface,
-                           LocaleBindInterface
+                           LocaleBindInterface,
+                           CharacteristicBindInterface
 {
     /**
      * @var integer

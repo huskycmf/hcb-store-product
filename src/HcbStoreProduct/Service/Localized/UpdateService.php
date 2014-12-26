@@ -6,6 +6,7 @@ use HcBackend\Service\ImageBinderServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use HcbStoreProduct\Data\LocalizedInterface;
 use HcbStoreProduct\Entity\Product\Localized;
+use HcbStoreProduct\Service\Localized\Characteristic\CharacteristicBinderService;
 use Zf2FileUploader\Resource\Handler\Remover\RemoverInterface;
 use Zf2Libs\Stdlib\Service\Response\Messages\ResponseInterface;
 
@@ -32,18 +33,28 @@ class UpdateService
     protected $imageBinderService;
 
     /**
+     * @var CharacteristicBinderService
+     */
+    protected $characteristicBinderService;
+
+    /**
      * @param EntityManagerInterface $entityManager
      * @param PageBinderServiceInterface $pageBinderService
+     * @param ImageBinderServiceInterface $imageBinderService
+     * @param CharacteristicBinderService $characteristicsBinderService
+     * @param RemoverInterface $remover
      * @param ResponseInterface $saveResponse
      */
     public function __construct(EntityManagerInterface $entityManager,
                                 PageBinderServiceInterface $pageBinderService,
                                 ImageBinderServiceInterface $imageBinderService,
+                                CharacteristicBinderService $characteristicBinderService,
                                 RemoverInterface $remover,
                                 ResponseInterface $saveResponse)
     {
         $this->pageBinderService = $pageBinderService;
         $this->imageBinderService = $imageBinderService;
+        $this->characteristicBinderService = $characteristicBinderService;
         $this->entityManager = $entityManager;
         $this->imageRemover = $remover;
         $this->saveResponse = $saveResponse;
@@ -54,7 +65,8 @@ class UpdateService
      * @param LocalizedInterface $localizedData
      * @return ResponseInterface
      */
-    public function update(Localized $productLocalizedEntity, LocalizedInterface $localizedData)
+    public function update(Localized $productLocalizedEntity,
+                           LocalizedInterface $localizedData)
     {
         try {
             $this->entityManager->beginTransaction();
@@ -62,10 +74,17 @@ class UpdateService
             $productEntity = $productLocalizedEntity->getProduct();
             $productData = $localizedData->getProductData();
 
+            $this->characteristicBinderService->bind($localizedData, $productLocalizedEntity);
+
             $this->imageBinderService->bind($productData, $productEntity);
 
             $this->imageBinderService->bind($localizedData, $productLocalizedEntity);
             $this->pageBinderService->bind($localizedData, $productLocalizedEntity);
+
+//            foreach ($productLocalizedEntity->getCharacteristic() as $chars) {
+//                \Zf2Libs\Debug\Utility::dumpAlive( $chars->getName() );
+//            }
+//            \Zf2Libs\Debug\Utility::dump( 123 );
 
             $imageThumbnail = $productData->getThumbnail();
 

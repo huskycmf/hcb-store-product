@@ -55,7 +55,7 @@ class Characteristic implements EntityInterface
      *
      * @ORM\Column(name="priority", type="integer", nullable=false, options={"unsigned"=true})
      */
-    private $priority;
+    private $priority = 0;
 
     /**
      * Constructor

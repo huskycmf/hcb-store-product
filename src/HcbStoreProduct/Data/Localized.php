@@ -78,6 +78,8 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
         $this->add(array( 'name' => 'price', 'required' => true,
                           'validators' => array(array( 'name' => 'digits'))));
 
+        $this->add(array( 'name' => 'characteristics[]', 'required' => false));
+
         $this->add(array( 'name' => 'priceDeal', 'required' => false, 'allowEmpty' => true,
                           'validators' => array(array( 'name' => 'digits'))));
 
@@ -181,6 +183,13 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
         return $this->getValue('status');
     }
 
+    /**
+     * @return array
+     */
+    public function getCharacteristic()
+    {
+        return $this->getValue('characteristics[]');
+    }
 
     /**
      * @return string

@@ -39,8 +39,8 @@ class Resource implements ExtractorInterface
     public function extract($productLocalized)
     {
         if (!$productLocalized instanceof ProductLocalizedEntity) {
-            throw new InvalidArgumentException("Expected HcbStoreProduct\\Entity\\Product\\Localized
-                                                object, invalid object given");
+            throw new InvalidArgumentException
+                        ("Expected HcbStoreProduct\\Entity\\Product\\Localized object, invalid object given");
         }
 
         $createdTimestamp = $productLocalized->getProduct()->getCreatedTimestamp();
@@ -53,7 +53,12 @@ class Resource implements ExtractorInterface
             $updatedTimestamp = $updatedTimestamp->format('Y-m-d H:i:s');
         }
 
-        $aliasWireEntity = $this->detectAlias->detect($productLocalized->getProduct());
+        $aliasWireEntity = $this->detectAlias
+                                ->detect($productLocalized->getProduct());
+
+        $replaceProduct = $productLocalized->getProduct()
+                                           ->getProduct();
+        $characteristics = $productLocalized->getCharacteristic();
 
         $localData = array('id'=>$productLocalized->getId(),
                            'locale'=>$productLocalized->getLocale()->getLocale(),
@@ -65,8 +70,9 @@ class Resource implements ExtractorInterface
                            'extraDescription'=>$productLocalized->getExtraDescription(),
                            'status' => $productLocalized->getProduct()->getStatus(),
                            'price' => $productLocalized->getProduct()->getPrice(),
-                           'replaceProduct' => $productLocalized->getProduct()
-                                                                ->getProduct()->getId(),
+                           'characteristics[]'=>$characteristics->map(function ($characteristic){return $characteristic->getName().":".$characteristic->getValue();})->toArray(),
+                           'replaceProduct' => (is_null($replaceProduct) ?
+                                                null : $replaceProduct->getId()),
                            'priceDeal' => $productLocalized->getProduct()->getPriceDeal(),
                            'createdTimestamp'=>$createdTimestamp,
                            'updatedTimestamp'=>$updatedTimestamp);
