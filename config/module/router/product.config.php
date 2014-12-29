@@ -49,6 +49,24 @@ return array(
                             )
                         )
                     )
+                ),
+                'attributes' => array(
+                    'type' => 'literal',
+                    'options' => array(
+                        'route' => '/attributes'
+                    ),
+                    'may_terminate' => false,
+                    'child_routes' => array(
+                        'list' => array(
+                            'type' => 'method',
+                            'options' => array(
+                                'verb' => 'get',
+                                'defaults' => array(
+                                    'controller' => 'HcbStoreProduct-Controller-Attribute-Collection'
+                                )
+                            )
+                        )
+                    )
                 )
             )
         ),

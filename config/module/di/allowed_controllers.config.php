@@ -5,6 +5,7 @@ return array(
     'HcbStoreProduct-Controller-View',
     'HcbStoreProduct-Controller-Localized-Characteristic-Collection',
     'HcbStoreProduct-Controller-Localized-Characteristic-Value-Collection',
+    'HcbStoreProduct-Controller-Attribute-Collection',
     'HcbStoreProduct-Controller-Collection-Delete',
     'HcbStoreProduct-Controller-Localized-Update',
     'HcbStoreProduct-Controller-Localized-Create',

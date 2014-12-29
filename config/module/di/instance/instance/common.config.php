@@ -12,6 +12,12 @@ return array(
         )
     ),
 
+    'HcbStoreProduct-Paginator-ViewModel-JsonModel-Attribute' => array(
+        'parameters' => array(
+            'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Attribute-Resource'
+        )
+    ),
+
     'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized-Characteristic-Value' => array(
         'parameters' => array(
             'extractor' =>

@@ -18,6 +18,15 @@ return array(
         )
     ),
 
+    'HcbStoreProduct-Controller-Attribute-Collection' => array(
+        'parameters' => array(
+            'paginatorDataFetchService' =>
+                'HcbStoreProduct\Service\Attribute\Collection\FetchQbBuilderService',
+            'viewModel' =>
+                'HcbStoreProduct-Paginator-ViewModel-JsonModel-Attribute'
+        )
+    ),
+
     'HcbStoreProduct-Controller-Localized-Characteristic-Value-Collection' => array(
         'parameters' => array(
             'paginatorDataFetchService' =>

@@ -59,6 +59,8 @@ class Resource implements ExtractorInterface
         $replaceProduct = $productLocalized->getProduct()
                                            ->getProduct();
         $characteristics = $productLocalized->getCharacteristic();
+        $attributes = $productLocalized->getProduct()->getAttribute();
+//        \Zf2Libs\Debug\Utility::dump( $attributes->count() );
 
         $localData = array('id'=>$productLocalized->getId(),
                            'locale'=>$productLocalized->getLocale()->getLocale(),
@@ -70,7 +72,10 @@ class Resource implements ExtractorInterface
                            'extraDescription'=>$productLocalized->getExtraDescription(),
                            'status' => $productLocalized->getProduct()->getStatus(),
                            'price' => $productLocalized->getProduct()->getPrice(),
-                           'characteristics[]'=>$characteristics->map(function ($characteristic){return $characteristic->getName().":".$characteristic->getValue();})->toArray(),
+                           'characteristics[]'=>
+                               $characteristics->map(function ($characteristic){return $characteristic->getName().":".$characteristic->getValue();})->toArray(),
+                           'attributes[]'=>
+                               $attributes->map(function ($attribute){return $attribute->getName();})->toArray(),
                            'replaceProduct' => (is_null($replaceProduct) ?
                                                 null : $replaceProduct->getId()),
                            'priceDeal' => $productLocalized->getProduct()->getPriceDeal(),

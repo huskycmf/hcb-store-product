@@ -5,6 +5,8 @@ return array(
 
     'HcbStoreProduct-Stdlib-Extractor-Resource' =>
         'HcbStoreProduct\Stdlib\Extractor\Resource',
+    'HcbStoreProduct-Stdlib-Extractor-Attribute-Resource' =>
+        'HcbStoreProduct\Stdlib\Extractor\Attribute\Resource',
     'HcbStoreProduct-Stdlib-Extractor-Localized-Characteristic-Resource' =>
         'HcbStoreProduct\Stdlib\Extractor\Localized\Characteristic\Resource',
     'HcbStoreProduct-Stdlib-Extractor-Localized-Characteristic-Value-Resource' =>
@@ -13,6 +15,8 @@ return array(
         'HcbStoreProduct\Stdlib\Extractor\Localized\Resource',
 
     'HcbStoreProduct-Paginator-ViewModel-JsonModel-Product' =>
+        'Zf2Libs\Paginator\ViewModel\JsonModel',
+    'HcbStoreProduct-Paginator-ViewModel-JsonModel-Attribute' =>
         'Zf2Libs\Paginator\ViewModel\JsonModel',
     'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized-Characteristic' =>
         'Zf2Libs\Paginator\ViewModel\JsonModel',

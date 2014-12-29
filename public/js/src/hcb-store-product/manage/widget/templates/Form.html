@@ -122,6 +122,11 @@
     </div>
 
     <div class="row">
+        ${!_t.attributesLabel}
+        <div data-dojo-attach-point="attributesWidget"></div>
+    </div>
+
+    <div class="row">
         ${!_t.descriptionLabel}
         <div class="${baseClass}DescriptionEditor"
              data-dojo-type="dojo-ckeditor/Editor"

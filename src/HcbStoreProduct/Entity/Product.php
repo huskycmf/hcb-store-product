@@ -4,6 +4,7 @@ namespace HcbStoreProduct\Entity;
 use HcBackend\Entity\AliasWiredAwareInterface;
 use HcBackend\Entity\ImageBindInterface;
 use HcBackend\Entity\LocalizedInterface;
+use HcbStoreProduct\Entity\Product\Attribute\AttributeBindInterface;
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Zf2FileUploader\Entity\ImageInterface as ImageInterface;
@@ -17,6 +18,7 @@ use Zf2FileUploader\Entity\ImageInterface as ImageInterface;
 class Product implements EntityInterface,
                          ImageBindInterface,
                          LocalizedInterface,
+                         AttributeBindInterface,
                          AliasWiredAwareInterface
 {
     /**

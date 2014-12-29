@@ -31,7 +31,6 @@ define([
         filebrowserUploadUrl: '',
         thumbnailUploadUrl: '',
         image3dUploadUrl: '',
-        characteristicInstance: null,
 
         templateString: template,
 
@@ -66,6 +65,37 @@ define([
                  throw e;
             }
         },
+
+        initAttributes: function () {
+            try {
+                var store = new JsonRest({target: config.get('primaryRoute') + "/store/product/localized/attributes"});
+
+                var defList = new DeferredList([store.query()]);
+
+                defList.then(lang.hitch(this, function (response) {
+                    var fields = [{
+                        w: ComboBox,
+                        name: 'name',
+                        args: {
+                            searchAttr: 'name',
+                            labelAttr: 'name',
+                            maxLength: 250,
+                            store: new Memory({data: response[0][1]})
+                        }
+                    }];
+
+                    this.attributesInstance = new InputList({fields: fields,
+                            name: 'attributes[]'},
+                        this.attributesWidget);
+                    this.attributesInstance.attr('value', this.attributes);
+                    this.own(this.attributesInstance);
+                }));
+            } catch (e) {
+                console.error(this.declaredClass, arguments, e);
+                throw e;
+            }
+        },
+
 
         initCharacteristics: function () {
             try {
@@ -120,8 +150,12 @@ define([
             try {
                 this.inherited(arguments);
                 this.characteristics = values['characteristics[]'];
+                this.attributes = values['attributes[]'];
                 if (this.characteristicInstance) {
                     this.characteristicInstance.attr('value', this.characteristics);
+                }
+                if (this.attributesInstance) {
+                    this.attributesInstance.attr('value', this.attributes);
                 }
             } catch (e) {
                 console.error(this.declaredClass + " " + arguments.callee.nom, arguments, e);
@@ -142,6 +176,7 @@ define([
         startup: function () {
             try {
                 this.initCharacteristics(this.get('lang'));
+                this.initAttributes(this.get('lang'));
                 this.inherited(arguments);
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);

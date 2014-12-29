@@ -13,6 +13,11 @@ return array(
     'HcbStoreProduct-Controller-Collection-Delete' =>
         'HcCore\Controller\Common\Rest\Collection\DataController',
 
+    //Attributes
+
+    'HcbStoreProduct-Controller-Attribute-Collection' =>
+        'HcCore\Controller\Common\Rest\Collection\ListController',
+
     //Characteristics
 
     'HcbStoreProduct-Controller-Localized-Characteristic-Collection' =>

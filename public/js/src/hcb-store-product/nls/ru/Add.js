@@ -17,7 +17,8 @@ define(
 
         modelToReplaceLabel: "Товар на замену",
         isNewLabel: "Новинка",
-        characteristicsLabel: "Характеристики (атрибуты)",
+        characteristicsLabel: "Характеристики (атрибуты) товаров",
+        attributesLabel: "Функции",
 
         metaDescriptionLabel: "Описание страницы",
         metaDescriptionHelp: "Текст который будет отображен в описании страницы",
