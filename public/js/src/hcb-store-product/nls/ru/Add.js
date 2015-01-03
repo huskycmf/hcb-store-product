@@ -11,12 +11,19 @@ define(
 
         statusLabel: "Статус",
         statusHelp: "Статус продукта, 1 = на складе, 2 = в пути, 3 = пред заказ, 4 = снят с производства",
+        watchedLabel: 'Посетители сайта сейчас просматривают',
 
         metaTitleLabel: "Заголовок страницы",
         metaTitleHelp: "Текст который будет отображен в заголовке страницы",
 
         modelToReplaceLabel: "Товар на замену",
+
+        categoryLabel: "Категория",
+        instructionLabel: "Инструкция",
+        crosssellLabel: "С этим товаром покупают",
+
         isNewLabel: "Новинка",
+        isEnabledLabel: "Отображается на сайте",
         characteristicsLabel: "Характеристики (атрибуты) товаров",
         attributesLabel: "Функции",
 

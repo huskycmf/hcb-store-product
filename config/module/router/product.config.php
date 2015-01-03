@@ -70,6 +70,43 @@ return array(
                 )
             )
         ),
+        'images' => array(
+            'type' => 'literal',
+            'options' => array(
+                'route' => '/images'
+            ),
+            'may_terminate' => false,
+            'child_routes' => array (
+                'create' => array(
+                    'type' => 'method',
+                    'options' => array(
+                        'verb' => 'post',
+                        'defaults' => array(
+                            'controller' =>
+                                'HcbStoreProduct-Controller-Image-Create'
+                        )
+                    )
+                )
+            )
+        ),
+        'instruction' => array(
+            'type' => 'literal',
+            'options' => array(
+                'route' => '/instruction'
+            ),
+            'may_terminate' => false,
+            'child_routes' => array (
+                'create' => array(
+                    'type' => 'method',
+                    'options' => array(
+                        'verb' => 'post',
+                        'defaults' => array(
+                            'controller' => 'HcbStoreProduct-Controller-Instruction-Create'
+                        )
+                    )
+                )
+            )
+        ),
         'resource' => array(
             'type' => 'segment',
             'options' => array(
@@ -127,16 +164,6 @@ return array(
                     ),
                     'may_terminate' => false,
                     'child_routes' => array (
-                        'create' => array(
-                            'type' => 'method',
-                            'options' => array(
-                                'verb' => 'post',
-                                'defaults' => array(
-                                    'controller' =>
-                                        'HcbStoreProduct-Controller-Image-Create'
-                                )
-                            )
-                        ),
                         'list' => array(
                             'type' => 'method',
                             'options' => array(

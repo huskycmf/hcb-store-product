@@ -1,7 +1,7 @@
 <?php
 namespace HcbStoreProduct\Service\Localized;
 
-use HcCore\Service\LocaleBinderServiceInterface;
+use HcbStoreProduct\Service\LocaleBinderService;
 use HcBackend\Service\PageBinderServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use HcbStoreProduct\Data\LocalizedInterface;
@@ -26,23 +26,31 @@ class CreateService
     protected $pageBinderService;
 
     /**
-     * @var LocaleBinderServiceInterface
+     * @var LocaleBinderService
      */
     protected $localeBinderService;
 
     /**
+     * @var UpdateService
+     */
+    protected $updateService;
+
+    /**
      * @param EntityManagerInterface $entityManager
      * @param PageBinderServiceInterface $pageBinderService
-     * @param LocaleBinderServiceInterface $localeService
+     * @param LocaleBinderService $localeService
+     * @param UpdateService $updateService
      * @param CreateResponse $saveResponse
      */
     public function __construct(EntityManagerInterface $entityManager,
                                 PageBinderServiceInterface $pageBinderService,
-                                LocaleBinderServiceInterface $localeBinderService,
+                                LocaleBinderService $localeBinderService,
+                                UpdateService $updateService,
                                 CreateResponse $saveResponse)
     {
         $this->pageBinderService = $pageBinderService;
         $this->localeBinderService = $localeBinderService;
+        $this->updateService = $updateService;
         $this->entityManager = $entityManager;
         $this->createResponse = $saveResponse;
     }
@@ -58,8 +66,6 @@ class CreateService
             $this->entityManager->beginTransaction();
 
             $localizedEntity = new Product\Localized();
-            $productEntity->setEnabled(1);
-
             $localizedEntity->setProduct($productEntity);
 
             $response = $this->localeBinderService
@@ -69,8 +75,11 @@ class CreateService
                 return $response;
             }
 
-            $this->pageBinderService->bind($localizedData, $localizedEntity);
-            $this->entityManager->persist($localizedEntity);
+            $response = $this->updateService->update($localizedEntity, $localizedData);
+
+            if ($response->isFailed()) {
+                return $response;
+            }
 
             $this->entityManager->flush();
 

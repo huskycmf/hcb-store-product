@@ -47,6 +47,10 @@ class Resource implements ExtractorInterface
 
         /* @var $localizedEntity ProductLocalizedEntity */
         $localizedEntity = $product->getLocalized()->current();
+        $title = '__EMPTY__';
+        if (!empty($localizedEntity)) {
+            $title = $localizedEntity->getTitle();
+        }
 
         $updatedTimestamp = $product->getUpdatedTimestamp();
         if (is_null($updatedTimestamp)) {
@@ -68,24 +72,14 @@ class Resource implements ExtractorInterface
                              ->getQuery()
                              ->getOneOrNullResult();
 
-        $categoryName = $categoryEntity->getLocalized()->current()->getTitle();
-
-        $watchedRepository = $this->entityManager
-                                  ->getRepository('HcbStoreProductWatched\Entity\Watched');
-
-        $watchedEntity = $watchedRepository->createQueryBuilder('w')
-                                           ->select()
-                                           ->join('w.product', 'p')
-                                           ->where('p = :product')
-                                           ->setParameter('product', $product)
-                                           ->setMaxResults(1)
-                                           ->getQuery()
-                                           ->getOneOrNullResult();
+        $categoryName = '';
+        if (!is_null($categoryEntity)) {
+            $categoryName = $categoryEntity->getLocalized()->current()->getTitle();
+        }
 
         return array('id'=>$product->getId(),
-                     'name'=>$localizedEntity->getTitle(),
+                     'name'=>$title,
                      'category'=>$categoryName,
-                     'watched'=>!is_null($watchedEntity),
                      'timestamp'=>$updatedTimestamp);
     }
 }

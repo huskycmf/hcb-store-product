@@ -46,6 +46,7 @@ class ListController extends AbstractResourceController
         $extractor = new DoctrineObject($this->entityManager, true);
 
         $image3d = $productEntity->getImage3d();
+
         if (!is_null($image3d)) {
             $image = $extractor->extract($image3d);
             $image['path'] = $image['httpPath'];

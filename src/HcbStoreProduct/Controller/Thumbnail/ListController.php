@@ -53,7 +53,8 @@ class ListController extends AbstractResourceController
             $image = $extractor->extract($image->getImage());
             $image['path'] = $image['httpPath'];
             $image['id'] = $image['token'];
-            $result->setVariable($k, $image);
+            $result->setVariable(0, $image);
+            break;
         }
 
         $e->setResult($result);

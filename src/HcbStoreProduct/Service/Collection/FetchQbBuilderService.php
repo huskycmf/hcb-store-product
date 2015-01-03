@@ -41,8 +41,7 @@ class FetchQbBuilderService implements DataServiceInterface
                    ->getRepository('HcbStoreProduct\Entity\Product')
                    ->createQueryBuilder('p');
 
-        $qb->where('p.enabled = 1');
-
+        $qb->orderBy('p.id', 'DESC');
         if (is_null($params)) return $qb;
 
         return $this->sortingService->apply($params, $qb, 'p');

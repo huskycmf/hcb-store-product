@@ -5,6 +5,7 @@ use HcBackend\Entity\AliasWiredAwareInterface;
 use HcBackend\Entity\ImageBindInterface;
 use HcBackend\Entity\LocalizedInterface;
 use HcbStoreProduct\Entity\Product\Attribute\AttributeBindInterface;
+use HcbStoreProduct\Entity\Product\IdentifierInterface;
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Zf2FileUploader\Entity\ImageInterface as ImageInterface;
@@ -17,6 +18,7 @@ use Zf2FileUploader\Entity\ImageInterface as ImageInterface;
  */
 class Product implements EntityInterface,
                          ImageBindInterface,
+                         IdentifierInterface,
                          LocalizedInterface,
                          AttributeBindInterface,
                          AliasWiredAwareInterface
@@ -38,30 +40,37 @@ class Product implements EntityInterface,
     private $enabled = false;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_new", type="boolean", nullable=false)
+     */
+    private $isNew = false;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="status", type="integer", nullable=false)
      */
-    private $status;
+    private $status = 1;
 
     /**
      * @var float
      *
      * @ORM\Column(name="price", type="float", nullable=false)
      */
-    private $price;
+    private $price = 0;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="price_deal", type="float", nullable=false)
+     * @ORM\Column(name="price_deal", type="float", nullable=true)
      */
     private $priceDeal;
 
     /**
      * @var Image
      *
-     * @ORM\OneToOne(targetEntity="HcBackend\Entity\Image")
+     * @ORM\OneToOne(targetEntity="HcBackend\Entity\Image", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="image_3d_id", referencedColumnName="id")
      * })
@@ -103,7 +112,7 @@ class Product implements EntityInterface,
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="HcBackend\Entity\Image")
+     * @ORM\ManyToMany(targetEntity="HcBackend\Entity\Image", cascade={"persist"})
      * @ORM\JoinTable(name="store_product_image",
      *   joinColumns={
      *     @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
@@ -641,5 +650,28 @@ class Product implements EntityInterface,
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set isNew
+     *
+     * @param boolean $isNew
+     * @return Product
+     */
+    public function setIsNew($isNew)
+    {
+        $this->isNew = $isNew;
+
+        return $this;
+    }
+
+    /**
+     * Get isNew
+     *
+     * @return boolean 
+     */
+    public function getIsNew()
+    {
+        return $this->isNew;
     }
 }

@@ -61,6 +61,11 @@ class FetchArrayCollectionService implements ResourceDataServiceInterface
                            ->getQuery()->getResult();
         }
 
+        if (!count($result)) {
+            $result[0] = new ProductEntity\Localized();
+            $result[0]->setProduct($productEntity);
+        }
+
         return new ArrayCollection($result);
     }
 }

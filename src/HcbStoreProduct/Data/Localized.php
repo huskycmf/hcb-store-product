@@ -73,11 +73,24 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
                           'validators' => array(array( 'name' => 'digits'))));
 
         $this->add(array( 'name' => 'replaceProduct', 'required' => false,
+                          'allowEmpty' => true,
                           'validators' => array(array( 'name' => 'digits'))));
 
-        $this->add(array( 'name' => 'price', 'required' => true,
+        $this->add(array( 'name' => 'category', 'required' => false,
+                          'allowEmpty' => true,
                           'validators' => array(array( 'name' => 'digits'))));
 
+        $this->add(array( 'name' => 'isNew', 'required' => false));
+
+        $this->add(array( 'name' => 'instruction', 'required' => false ));
+
+        $this->add(array( 'name' => 'isEnabled', 'required' => false));
+        $this->add(array( 'name' => 'isWatched', 'required' => false));
+
+        $this->add(array( 'name' => 'price', 'required' => false, 'allowEmpty' => true,
+                          'validators' => array(array( 'name' => 'digits'))));
+
+        $this->add(array( 'name' => 'crosssell[]', 'required' => false));
         $this->add(array( 'name' => 'characteristics[]', 'required' => false));
         $this->add(array( 'name' => 'attributes[]', 'required' => false));
 
@@ -115,9 +128,18 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
      */
     public function getResources()
     {
-        $data = array_merge($this->resourceInputLoaderFromTextExtraDescription->getResources(),
+        $data = array_merge($this->resourceInputLoaderFromTextExtraDescription
+                                 ->getResources(),
                             $this->resourceInputLoaderFromTextDescription->getResources());
         return $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInstruction()
+    {
+        return $this->getValue('instruction');
     }
 
     /**
@@ -134,6 +156,22 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
     public function getTitle()
     {
         return $this->getValue('title');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNew()
+    {
+        return !!$this->getValue('isNew');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return !!$this->getValue('isEnabled');
     }
 
     /**
@@ -161,6 +199,14 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
     }
 
     /**
+     * @return number
+     */
+    public function getCategoryId()
+    {
+        return $this->getValue('category');
+    }
+
+    /**
      * @return string
      */
     public function getShortDescription()
@@ -182,6 +228,22 @@ class Localized extends InputFilter implements LocalizedInterface, DataMessagesI
     public function getStatus()
     {
         return $this->getValue('status');
+    }
+
+    /**
+     * @return array
+     */
+    public function getCrosssell()
+    {
+        return $this->getValue('crosssell[]');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isWatched()
+    {
+        return !!$this->getValue('isWatched');
     }
 
     /**

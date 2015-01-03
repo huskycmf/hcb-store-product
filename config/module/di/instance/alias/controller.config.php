@@ -43,6 +43,10 @@ return array(
     'HcbStoreProduct-Controller-Image-List' =>
         'HcbStoreProduct\Controller\Images\ListController',
 
+    // Product Instruction
+    'HcbStoreProduct-Controller-Instruction-Create' =>
+        'HcbStoreProduct\Controller\Instruction\CreateController',
+
     // Product Thumbnail Images
     'HcbStoreProduct-Controller-Thumbnail-List' =>
         'HcbStoreProduct\Controller\Thumbnail\ListController',

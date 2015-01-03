@@ -46,6 +46,13 @@ class Product extends InputFilter implements ImageInterface, DataMessagesInterfa
         $this->resourceInputThumbnailLoader = $resourceInputThumbnailLoader;
         $this->resourceInputImage3dLoader = $resourceInputImage3dLoader;
 
+        $resourceInputThumbnailLoader->setAllowEmpty(true);
+        $resourceInputThumbnailLoader->setRequired(false);
+        $resourceInputImage3dLoader->setAllowEmpty(true);
+        $resourceInputImage3dLoader->setRequired(false);
+        $resourceInputImageLoader->setAllowEmpty(true);
+        $resourceInputImageLoader->setRequired(false);
+
         $this->add($resourceInputImageLoader);
         $this->add($resourceInputImage3dLoader);
         $this->add($resourceInputThumbnailLoader);
@@ -64,6 +71,7 @@ class Product extends InputFilter implements ImageInterface, DataMessagesInterfa
         if (!empty($thumbnailImage)) {
             array_push($data, $this->getThumbnail());
         }
+
         return $data;
     }
 

@@ -1,7 +1,9 @@
 <form data-dojo-attach-point="containerNode" class="dijitHidden">
     <div class="row">
         <label>${!_t.titleLabel}</label>
-        <input class="${baseClass}Alias" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"title"' />
+        <input class="${baseClass}Alias"
+               data-dojo-type="dijit/form/ValidationTextBox"
+               data-dojo-props='name:"title", required: "true"' />
         <div class="field-description">${!_t.titleHelp}</div>
     </div>
 
@@ -50,10 +52,29 @@
     </div>
 
     <div class="row">
+        ${!_t.categoryLabel}
+        <select data-dojo-type="dijit/form/FilteringSelect"
+                data-dojo-attach-point="categoryWidget"
+                data-dojo-props="name: 'category', searchAttr: 'title'">
+        </select>
+    </div>
+
+    <div class="row">
         ${!_t.isNewLabel}
-        <select data-dojo-type="dijit/form/CheckBox"
-                data-dojo-attach-point="isNewWidget"
-                data-dojo-props="name: 'isNew'"></select>
+        <input data-dojo-type="dijit/form/CheckBox"
+                data-dojo-props="name: 'isNew'"/>
+    </div>
+
+    <div class="row">
+        ${!_t.watchedLabel}
+        <input data-dojo-type="dijit/form/CheckBox"
+               data-dojo-props="name: 'isWatched'"/>
+    </div>
+
+    <div class="row">
+        ${!_t.isEnabledLabel}
+        <input data-dojo-type="dijit/form/CheckBox"
+               data-dojo-props="name: 'isEnabled'"/>
     </div>
 
     <div class="row">
@@ -88,8 +109,8 @@
         ${!_t.imagesLabel}
         <div data-dojo-type="dojo-common/form/FileInputList"
              style="width: 100%;"
-             data-dojo-props="service: '${filebrowserUploadUrl}',
-                              fileUploadUrl: '${filebrowserUploadUrl}',
+             data-dojo-props="service: '${filebrowserServiceUrl}',
+                              uploadingUrl: '${filebrowserUploadUrl}',
                               name: 'image',
                               uploadInputName: 'upload'"></div>
     </div>
@@ -98,8 +119,8 @@
         ${!_t.thumbnailLabel}
         <div data-dojo-type="dojo-common/form/FileInputList"
              style="width: 265px;"
-             data-dojo-props="service: '${thumbnailUploadUrl}',
-                              fileUploadUrl: '${filebrowserUploadUrl}',
+             data-dojo-props="service: '${thumbnailServiceUrl}',
+                              uploadingUrl: '${filebrowserUploadUrl}',
                               name: 'thumbnail',
                               uploadInputName: 'upload',
                               saveMultiImage: false"></div>
@@ -109,8 +130,8 @@
         ${!_t.image3dLabel}
         <div data-dojo-type="dojo-common/form/FileInputList"
              style="width: 100%; "
-             data-dojo-props="service: '${image3dUploadUrl}',
-                              fileUploadUrl: '${filebrowserUploadUrl}',
+             data-dojo-props="service: '${image3dServiceUrl}',
+                              uploadingUrl: '${filebrowserUploadUrl}',
                               name: 'image3d',
                               uploadInputName: 'upload',
                               saveMultiImage: false"></div>
@@ -148,19 +169,30 @@
         <div class="field-description">${!_t.extraDescriptionHelp}</div>
     </div>
 
+    <div class="row">
+        ${!_t.instructionLabel}<br/>
+        <div class="fileInputList">
+        <div data-dojo-attach-point="instructionNameNode"></div>
+        <input data-dojo-type="dojo-common/form/FileInputAuto"
+               data-dojo-attach-point="instructionWidget"
+               data-dojo-props="name: 'instruction',
+                                url:  '${instructionUploadUrl}',
+                                triggerEvent: 'onchange',
+                                duration: 1,
+                                realSize: 36,
+                                blurDelay: 0" />
+        </div>
+    </div>
+
+    <div class="row">
+        ${!_t.crosssellLabel}
+        <div data-dojo-attach-point="crosssellWidget"></div>
+    </div>
+
     <input class="${baseClass}AddButton"
            data-dojo-type="dojo-common/form/BusyButton"
            data-dojo-attach-point="saveButtonWidget"
            data-dojo-attach-event="onClick: save"
            data-dojo-props='name:"send",
-                            disabled: true,
                             label:"${!_t.addButton}"' />
-
-    <input class="${baseClass}ResetButton"
-           data-dojo-type="dijit/form/Button"
-           data-dojo-attach-point="resetButtonWidget"
-           data-dojo-attach-event="onClick: reset"
-           data-dojo-props='name:"reset",
-                            disabled: true,
-                            label:"${!_t.resetButton}"' />
 </form>

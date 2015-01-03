@@ -1,6 +1,7 @@
 <?php
 namespace HcbStoreProduct\Stdlib\Extractor\Localized;
 
+use Doctrine\ORM\EntityManagerInterface;
 use HcBackend\Service\Alias\DetectAlias;
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
@@ -20,13 +21,20 @@ class Resource implements ExtractorInterface
     protected $detectAlias;
 
     /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
+
+    /**
      * @param PageExtractor $pageExtractor
      */
     public function __construct(PageExtractor $pageExtractor,
-                                DetectAlias $detectAlias)
+                                DetectAlias $detectAlias,
+                                EntityManagerInterface $entityManager)
     {
         $this->pageExtractor = $pageExtractor;
         $this->detectAlias = $detectAlias;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -53,6 +61,24 @@ class Resource implements ExtractorInterface
             $updatedTimestamp = $updatedTimestamp->format('Y-m-d H:i:s');
         }
 
+        $categoryRepository = $this->entityManager
+                                   ->getRepository('HcbStoreProductCategory\Entity\Category');
+
+        $qb = $categoryRepository->createQueryBuilder('c');
+        /* @var $categoryEntity \HcbStoreProductCategory\Entity\Category */
+        $categoryEntity = $qb->select()
+                             ->join('c.product', 'p')
+                             ->where('p = :product')
+                             ->setParameter('product', $productLocalized->getProduct())
+                             ->setMaxResults(1)
+                             ->getQuery()
+                             ->getOneOrNullResult();
+
+        $categoryId = '';
+        if (!is_null($categoryEntity)) {
+            $categoryId = $categoryEntity->getId();
+        }
+
         $aliasWireEntity = $this->detectAlias
                                 ->detect($productLocalized->getProduct());
 
@@ -60,18 +86,72 @@ class Resource implements ExtractorInterface
                                            ->getProduct();
         $characteristics = $productLocalized->getCharacteristic();
         $attributes = $productLocalized->getProduct()->getAttribute();
-//        \Zf2Libs\Debug\Utility::dump( $attributes->count() );
 
-        $localData = array('id'=>$productLocalized->getId(),
-                           'locale'=>$productLocalized->getLocale()->getLocale(),
+        $isEnabled = array();
+        if ($productLocalized->getProduct()->getEnabled()) {
+            $isEnabled[0] = 'on';
+        }
+
+        $isNew = array();
+        if ($productLocalized->getProduct()->getIsNew()) {
+            $isNew[0] = 'on';
+        }
+
+        $isWatched = array();
+        $watchedRepository = $this->entityManager
+            ->getRepository('HcbStoreProductWatched\Entity\Watched');
+
+        $watchedEntity = $watchedRepository->createQueryBuilder('w')
+                                           ->select()
+                                           ->join('w.product', 'p')
+                                           ->where('p = :product')
+                                           ->setParameter('product',
+                                                          $productLocalized->getProduct())
+                                           ->setMaxResults(1)
+                                           ->getQuery()
+                                           ->getOneOrNullResult();
+        if (!is_null($watchedEntity)) {
+            $isWatched[0] = 'on';
+        }
+
+        $locale = $productLocalized->getLocale();
+
+        $sellStrategyProductRepository = $this->entityManager
+                                       ->getRepository
+                                       ('HcbStoreSellStrategy\Entity\SellStrategy\Product');
+
+        $qb = $sellStrategyProductRepository->createQueryBuilder('sp');
+        $qb->select(array('sp'))
+           ->join('sp.sellStrategy', 'ss')
+           ->where('ss.name = :name')
+           ->andWhere('sp.sellProduct = :product')
+           ->setParameter('name', 'crosssell')
+           ->setParameter('product', $productLocalized->getProduct());
+
+        $crosssell = array();
+
+        /* @var $sellProductEntity \HcbStoreSellStrategy\Entity\SellStrategy\Product */
+        foreach ($qb->getQuery()->getResult() as $sellProductEntity) {
+            $crosssell[] = (string)$sellProductEntity->getProduct()->getId();
+        }
+
+
+        $localData = array('locale'=>($locale ? $locale ->getLocale() : ''),
                            'alias'=>(is_null($aliasWireEntity) ? '' :
                                      $aliasWireEntity->getAlias()->getName()),
+                           'category'=>$categoryId,
                            'title'=>$productLocalized->getTitle(),
                            'description'=>$productLocalized->getDescription(),
                            'shortDescription'=>$productLocalized->getShortDescription(),
                            'extraDescription'=>$productLocalized->getExtraDescription(),
                            'status' => $productLocalized->getProduct()->getStatus(),
                            'price' => $productLocalized->getProduct()->getPrice(),
+                           'isNew' => $isNew,
+                           'isEnabled' => $isEnabled,
+                           'isWatched' => $isWatched,
+                           'crosssell[]' => $crosssell,
+                           'instruction' => $productLocalized->getProduct()
+                                                             ->getFileInstruction(),
                            'characteristics[]'=>
                                $characteristics->map(function ($characteristic){return $characteristic->getName().":".$characteristic->getValue();})->toArray(),
                            'attributes[]'=>
@@ -82,6 +162,10 @@ class Resource implements ExtractorInterface
                            'createdTimestamp'=>$createdTimestamp,
                            'updatedTimestamp'=>$updatedTimestamp);
 
+        if ($productLocalized->getId()) {
+            $localData['id']=$productLocalized->getId();
+        }
+        
         if (($pageEntity = $productLocalized->getPage())) {
             $localData = array_merge($localData, $this->pageExtractor->extract($pageEntity));
         }

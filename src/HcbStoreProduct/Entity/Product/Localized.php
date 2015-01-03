@@ -63,7 +63,7 @@ class Localized implements EntityInterface,
     /**
      * @var Product
      *
-     * @ORM\ManyToOne(targetEntity="HcbStoreProduct\Entity\Product", inversedBy="localized")
+     * @ORM\ManyToOne(targetEntity="HcbStoreProduct\Entity\Product", inversedBy="localized", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="store_product_id", referencedColumnName="id")
      * })
@@ -73,7 +73,7 @@ class Localized implements EntityInterface,
     /**
      * @var Page
      *
-     * @ORM\OneToOne(targetEntity="HcbStoreProduct\Entity\Product\Localized\Page", mappedBy="localized")
+     * @ORM\OneToOne(targetEntity="HcbStoreProduct\Entity\Product\Localized\Page",  mappedBy="localized")
      */
     private $page;
 

@@ -7,9 +7,10 @@ define([
     "dojo/i18n!hcb-store-product/nls/List",
     "dijit/form/Button",
     "hc-backend/router",
-    "hcb-store-product/list/widget/Grid"
+    "hcb-store-product/list/widget/Grid",
+    "hc-backend/dgrid/form/DeleteSelectedButton"
 ], function(declare, _ContentMixin, _TemplatedMixin,
-            lang, template, i18nList, Button, router, Grid) {
+            lang, template, i18nList, Button, router, Grid, DeleteSelectedButton) {
     return declare('hcb-store-product.list.Container', [ _ContentMixin, _TemplatedMixin ], {
         //  summary:
         //      List container. Contains widgets who responsible for
@@ -34,6 +35,12 @@ define([
                         this._gridWidget.save()
                             .then(lang.hitch(this, 'refresh'));
                     })});
+
+                this._deleteWidget = new DeleteSelectedButton({'label': i18nList.deleteSelectedButton,
+                    'target': router.assemble('/delete', {}, true),
+                    'name': 'products',
+                    'class': this.baseClass+'Delete',
+                    'grid': this._gridWidget});
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
@@ -44,6 +51,7 @@ define([
             try {
                 this.addChild(this._addWidget);
                 this.addChild(this._saveWidget);
+                this.addChild(this._deleteWidget);
                 this.addChild(this._gridWidget);
                 this.inherited(arguments);
             } catch (e) {

@@ -1,6 +1,8 @@
 define([
     "dojo/_base/declare",
     "dojo/_base/lang",
+    "dojo/dom-attr",
+    "dojo/aspect",
     "hc-backend/widget/ContentLocalization/widget/Form",
     "hc-backend/form/_HasPageFieldsMixin",
     "dijit/_WidgetsInTemplateMixin",
@@ -11,6 +13,7 @@ define([
     "dojo-common/form/InputList",
     "dojo/DeferredList",
     "dijit/form/ComboBox",
+    "dijit/form/FilteringSelect",
     "dojo/text!./templates/Form.html",
     "dojo/i18n!../../nls/Add",
     "dijit/form/TextBox",
@@ -20,19 +23,23 @@ define([
     "dijit/form/ValidationTextBox",
     "dojo-common/form/FileInputList",
     "dijit/form/Select",
-    "dijit/form/FilteringSelect",
     "dijit/form/CheckBox"
-], function(declare, lang, Form, _HasPageFieldsMixin, _WidgetsInTemplateMixin, config,
-            JsonRest, Cache, Memory, InputList, DeferredList, ComboBox, template, i18nAdd) {
+], function(declare, lang, domAttr, aspect, Form, _HasPageFieldsMixin,
+            _WidgetsInTemplateMixin, config,
+            JsonRest, Cache, Memory, InputList, DeferredList, ComboBox, FilteringSelect,
+            template, i18nAdd) {
     return declare([ Form, _HasPageFieldsMixin, _WidgetsInTemplateMixin ], {
         //  summary:
         //      Form widget for adding page to the CMS database
 
         filebrowserUploadUrl: '',
-        thumbnailUploadUrl: '',
-        image3dUploadUrl: '',
+        filebrowserServiceUrl: '',
+        instructionUploadUrl: '',
+        thumbnailServiceUrl: '',
+        image3dServiceUrl: '',
 
         templateString: template,
+        rawValues: [],
 
         // _t: [const] Object
         //      Contains dictionary with translations
@@ -40,22 +47,42 @@ define([
 
         postMixInProperties: function () {
             try {
+                this.restProductStore = Memory();
+                this.restCategoryStore = Memory();
 
-                this.restStore = Cache(JsonRest({
+                (JsonRest({
                     target: config.get('primaryRoute')+"/store/product"
-                }), Memory());
+                })).query().forEach(lang.hitch(this, function (item){
+                    this.restProductStore.put(item);
+                })).then(lang.hitch(this, function (){
+                    this.modelToReplaceWidget.attr('value', this.rawValues['replaceProduct']);
+                }));
+
+                (JsonRest({
+                    target: config.get('primaryRoute')+"/store/product/category?enabled=1"
+                })).query().forEach(lang.hitch(this, function (item){
+                    this.restCategoryStore.put(item);
+                })).then(lang.hitch(this, function (){
+                        this.categoryWidget.attr('value', this.rawValues['category']);
+                }));
+
+                this.instructionUploadUrl = config.get('primaryRoute') +
+                                            '/store/product/instruction';
 
                 this.filebrowserUploadUrl = config.get('primaryRoute') +
+                                            '/store/product/images';
+
+                this.filebrowserServiceUrl = config.get('primaryRoute') +
                                             '/store/product/' +
                                             this.saveService.identifier +
                                             '/images';
 
-                this.thumbnailUploadUrl = config.get('primaryRoute') +
+                this.thumbnailServiceUrl = config.get('primaryRoute') +
                                             '/store/product/' +
                                             this.saveService.identifier +
                                             '/thumbnail';
 
-                this.image3dUploadUrl = config.get('primaryRoute') +
+                this.image3dServiceUrl = config.get('primaryRoute') +
                                             '/store/product/' +
                                             this.saveService.identifier +
                                             '/image3d';
@@ -63,6 +90,36 @@ define([
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
+            }
+        },
+
+        initCrosssell: function () {
+            try {
+                var store = new JsonRest({target: config.get('primaryRoute') + "/store/product"});
+
+                var defList = new DeferredList([store.query()]);
+                defList.then(lang.hitch(this, function (response) {
+                    var fields = [{
+                        w: FilteringSelect,
+                        name: 'name',
+                        args: {
+                            searchAttr: 'name',
+                            labelAttr: 'name',
+                            maxLength: 250,
+                            store: new Memory({data: response[0][1]})
+                        }
+                    }];
+
+                    this.crosssellInstance = new InputList({fields: fields,
+                                                            name: 'crosssell[]'},
+                                                           this.crosssellWidget);
+                    this.crosssellInstance.attr('value',
+                                                this.rawValues['crosssell[]']);
+                    this.own(this.crosssellInstance);
+                }));
+            } catch (e) {
+                console.error(this.declaredClass, arguments, e);
+                throw e;
             }
         },
 
@@ -87,7 +144,8 @@ define([
                     this.attributesInstance = new InputList({fields: fields,
                             name: 'attributes[]'},
                         this.attributesWidget);
-                    this.attributesInstance.attr('value', this.attributes);
+                    this.attributesInstance.attr('value',
+                                                 this.rawValues['attributes[]']);
                     this.own(this.attributesInstance);
                 }));
             } catch (e) {
@@ -137,7 +195,8 @@ define([
                     this.characteristicInstance = new InputList({fields: fields,
                             name: 'characteristics[]'},
                         this.characteristicsWidget);
-                    this.characteristicInstance.attr('value', this.characteristics);
+                    this.characteristicInstance
+                        .attr('value', this.rawValues['characteristics[]']);
                     this.own(this.characteristicInstance);
                 }));
             } catch (e) {
@@ -148,15 +207,32 @@ define([
 
         _setValueAttr: function (values) {
             try {
+
+                if (values['id'] < 1) {
+                    delete values['id'];
+                }
+
                 this.inherited(arguments);
-                this.characteristics = values['characteristics[]'];
-                this.attributes = values['attributes[]'];
+
+                this.rawValues = values;
+
                 if (this.characteristicInstance) {
-                    this.characteristicInstance.attr('value', this.characteristics);
+                    this.characteristicInstance.attr('value', values['characteristics[]']);
                 }
+
                 if (this.attributesInstance) {
-                    this.attributesInstance.attr('value', this.attributes);
+                    this.attributesInstance.attr('value', values['attributes[]']);
                 }
+
+                if (this.crosssellInstance) {
+                    this.crosssellInstance.attr('value', values['crosssell[]']);
+                }
+
+                if (values['instruction'] && values['instruction'].length) {
+                   domAttr.set(this.instructionNameNode,
+                               'innerHTML', values['instruction']);
+                }
+
             } catch (e) {
                 console.error(this.declaredClass + " " + arguments.callee.nom, arguments, e);
                 throw e;
@@ -165,7 +241,18 @@ define([
 
         postCreate: function () {
             try {
-                this.modelToReplaceWidget.attr('store', this.restStore);
+                this.modelToReplaceWidget.attr('store', this.restProductStore);
+                this.categoryWidget.attr('store', this.restCategoryStore);
+
+                aspect.after(this.instructionWidget, 'onComplete',
+                             lang.hitch(this, function (def, response){
+                                 if (response && response[0] && response[0].name) {
+                                     domAttr.set(this.instructionNameNode,
+                                                 'innerHTML', response[0].name);
+                                     this.instructionWidget.attr('value', response[0].name);
+                                 }
+                            }));
+
                 this.inherited(arguments);
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
@@ -177,6 +264,7 @@ define([
             try {
                 this.initCharacteristics(this.get('lang'));
                 this.initAttributes(this.get('lang'));
+                this.initCrosssell(this.get('lang'));
                 this.inherited(arguments);
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);

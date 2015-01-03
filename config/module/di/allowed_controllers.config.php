@@ -13,5 +13,6 @@ return array(
     'HcbStoreProduct-Controller-Image-Create',
     'HcbStoreProduct-Controller-Image-List',
     'HcbStoreProduct-Controller-Thumbnail-List',
-    'HcbStoreProduct-Controller-Image3d-List'
+    'HcbStoreProduct-Controller-Image3d-List',
+    'HcbStoreProduct-Controller-Instruction-Create'
 );
