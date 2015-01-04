@@ -6,19 +6,6 @@ define([
 
     return declare([ Container ], {
         baseClass: 'productsUpdate',
-        langContainer: LangContainer,
-
-        handle: function (router, route) {
-            try {
-                this.inherited(arguments);
-
-                if (route.params.id) {
-                    this._langContainerWidget.attr('identifier', route.params.id);
-                }
-            } catch (e) {
-                console.error(this.declaredClass, arguments, e);
-                throw e;
-            }
-        }
+        langContainer: LangContainer
     });
 });

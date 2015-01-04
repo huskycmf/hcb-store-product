@@ -207,14 +207,7 @@ define([
 
         _setValueAttr: function (values) {
             try {
-
-                if (values['id'] < 1) {
-                    delete values['id'];
-                }
-
                 this.inherited(arguments);
-
-                this.rawValues = values;
 
                 if (this.characteristicInstance) {
                     this.characteristicInstance.attr('value', values['characteristics[]']);

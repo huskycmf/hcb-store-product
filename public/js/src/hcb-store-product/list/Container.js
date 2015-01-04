@@ -29,13 +29,6 @@ define([
                         router.go(router.assemble('/create', {}, true));
                     })});
 
-                this._saveWidget = new Button({'label': i18nList.saveButton,
-                    'class': this.baseClass+'Add',
-                    'onClick': lang.hitch(this, function (){
-                        this._gridWidget.save()
-                            .then(lang.hitch(this, 'refresh'));
-                    })});
-
                 this._deleteWidget = new DeleteSelectedButton({'label': i18nList.deleteSelectedButton,
                     'target': router.assemble('/delete', {}, true),
                     'name': 'products',
@@ -50,7 +43,6 @@ define([
         startup: function () {
             try {
                 this.addChild(this._addWidget);
-                this.addChild(this._saveWidget);
                 this.addChild(this._deleteWidget);
                 this.addChild(this._gridWidget);
                 this.inherited(arguments);
