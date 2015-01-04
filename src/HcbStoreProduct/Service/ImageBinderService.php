@@ -40,12 +40,6 @@ class ImageBinderService
         $this->entityManager = $entityManager;
     }
 
-    protected function bindImage3d()
-    {
-
-    }
-
-
     /**
      * @param LocalizedInterface $imageData
      * @param ImageBindInterface $imageBinder
