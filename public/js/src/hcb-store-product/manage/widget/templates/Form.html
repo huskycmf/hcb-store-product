@@ -98,7 +98,7 @@
     <div class="row">
         ${!_t.shortDescriptionLabel}
         <div class="${baseClass}ShortDescriptionEditor"
-             data-dojo-type="dojo-ckeditor/Editor"
+             data-dojo-type="hc-backend/Editor"
              data-dojo-attach-point="shortDescriptionEditorWidget"
              data-dojo-props='name:"shortDescription",
                               settings: {allowedContent: true}'></div>
@@ -107,33 +107,27 @@
 
     <div class="row">
         ${!_t.imagesLabel}
-        <div data-dojo-type="dojo-common/form/FileInputList"
+        <div data-dojo-type="hc-backend/form/FileInputList"
              style="width: 100%;"
              data-dojo-props="service: '${filebrowserServiceUrl}',
-                              uploadingUrl: '${filebrowserUploadUrl}',
-                              name: 'image',
-                              uploadInputName: 'upload'"></div>
+                              name: 'image'"></div>
     </div>
 
     <div class="row">
         ${!_t.thumbnailLabel}
-        <div data-dojo-type="dojo-common/form/FileInputList"
+        <div data-dojo-type="hc-backend/form/FileInputList"
              style="width: 265px;"
              data-dojo-props="service: '${thumbnailServiceUrl}',
-                              uploadingUrl: '${filebrowserUploadUrl}',
                               name: 'thumbnail',
-                              uploadInputName: 'upload',
                               saveMultiImage: false"></div>
     </div>
 
     <div class="row">
         ${!_t.image3dLabel}
-        <div data-dojo-type="dojo-common/form/FileInputList"
+        <div data-dojo-type="hc-backend/form/FileInputList"
              style="width: 100%; "
              data-dojo-props="service: '${image3dServiceUrl}',
-                              uploadingUrl: '${filebrowserUploadUrl}',
                               name: 'image3d',
-                              uploadInputName: 'upload',
                               saveMultiImage: false"></div>
     </div>
 
@@ -150,22 +144,20 @@
     <div class="row">
         ${!_t.descriptionLabel}
         <div class="${baseClass}DescriptionEditor"
-             data-dojo-type="dojo-ckeditor/Editor"
+             data-dojo-type="hc-backend/Editor"
              data-dojo-attach-point="descriptionEditorWidget"
              data-dojo-props='name:"description",
-                              settings: {filebrowserUploadUrl: "${filebrowserUploadUrl}",
-                                         allowedContent: true}'></div>
+                              settings: {allowedContent: true}'></div>
         <div class="field-description">${!_t.descriptionHelp}</div>
     </div>
 
     <div class="row">
         ${!_t.extraDescriptionLabel}
         <div class="${baseClass}ExtraDescriptionEditor"
-             data-dojo-type="dojo-ckeditor/Editor"
+             data-dojo-type="hc-backend/Editor"
              data-dojo-attach-point="extraDescriptionEditorWidget"
              data-dojo-props='name: "extraDescription",
-                              settings: {filebrowserUploadUrl: "${filebrowserUploadUrl}",
-                                         allowedContent: true}'></div>
+                              settings: {allowedContent: true}'></div>
         <div class="field-description">${!_t.extraDescriptionHelp}</div>
     </div>
 

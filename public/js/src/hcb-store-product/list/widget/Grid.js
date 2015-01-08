@@ -10,7 +10,7 @@ define([
     "hc-backend/dgrid/columns/timestamp",
     "hc-backend/dgrid/columns/editor",
     "dgrid/Keyboard",
-    "dgrid/selector",
+    "dgrid/Selector",
     "dojo/i18n!../../nls/List"
 ], function(declare, ProductStore,
             OnDemandGrid, ColumnHider, ColumnResizer, DijitRegistry,

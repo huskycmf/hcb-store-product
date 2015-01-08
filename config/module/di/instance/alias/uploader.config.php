@@ -15,9 +15,6 @@ return array(
     'HcbStoreProduct-Data-InputCreateResourceInput-Image3d' =>
         'Zf2FileUploader\Input\Image\LoadResource\FromList',
 
-    'HcbStoreProduct-Uploader-View-Model-UploaderModel-Image' =>
-        'Zf2FileUploader\View\Model\UploaderModel',
-
     'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource' =>
         'Zf2FileUploader\InputFilter\Image\CreateResource',
 

@@ -7,5 +7,5 @@ return array(
         'HcbStoreProduct\Data\Localized',
 
     'Zf2FileUploader\Resource\Handler\Remover\RemoverInterface' =>
-        'HcBackend-Images-Default-TotalImagesRemover'
+        'HcBackend-Images-TotalImagesRemover'
 );

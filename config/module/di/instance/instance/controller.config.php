@@ -88,7 +88,7 @@ return array(
     // Product Image
     'HcbStoreProduct-Controller-Image-Create' => array(
         'parameters' => array(
-            'saveService' => 'HcBackend-Images-Default-SaveService',
+            'saveService' => 'HcBackend-Service-Image-SaveService',
             'uploaderModel' => 'HcbStoreProduct-Uploader-View-Model-UploaderModel-Image',
             'createResourceData' => 'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource'
         )

@@ -21,7 +21,7 @@ define([
     "dijit/form/NumberTextBox",
     "dojo-common/form/BusyButton",
     "dijit/form/ValidationTextBox",
-    "dojo-common/form/FileInputList",
+    "hc-backend/form/FileInputList",
     "dijit/form/Select",
     "dijit/form/CheckBox"
 ], function(declare, lang, domAttr, aspect, Form, _HasPageFieldsMixin,
@@ -68,9 +68,6 @@ define([
 
                 this.instructionUploadUrl = config.get('primaryRoute') +
                                             '/store/product/instruction';
-
-                this.filebrowserUploadUrl = config.get('primaryRoute') +
-                                            '/store/product/images';
 
                 this.filebrowserServiceUrl = config.get('primaryRoute') +
                                             '/store/product/' +
