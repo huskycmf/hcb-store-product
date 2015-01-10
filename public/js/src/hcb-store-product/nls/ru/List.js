@@ -8,6 +8,7 @@ define(
         addButton: 'Добавить',
         saveButton: 'Сохранить',
         loadingMessage: 'Загрузка ...',
-        deleteSelectedButton: 'Удалить'
+        deleteSelectedButton: 'Удалить',
+        selectionLabelButton: 'Комплекты'
     })
 );

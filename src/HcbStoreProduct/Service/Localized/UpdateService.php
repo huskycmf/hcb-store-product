@@ -178,7 +178,12 @@ class UpdateService
             $this->imageBinderService->bind($productData, $productEntity);
 
             $this->imageBinderService->bind($localizedData, $productLocalizedEntity);
-            $this->pageBinderService->bind($localizedData, $productLocalizedEntity);
+            $this->pageBinderService->bind($localizedData,
+                                           $productLocalizedEntity,
+                                           'HcbStoreProduct\Entity\Product\Localized\Page');
+
+            $productLocalizedEntity->getPage()
+                                   ->setLocalized($productLocalizedEntity);
 
             $imageThumbnail = $productData->getThumbnail();
 

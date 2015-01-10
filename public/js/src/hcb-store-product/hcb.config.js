@@ -16,6 +16,15 @@ define([], function() {
             "subRoutes": {"/:lang": function (evt) { this.getInstance().selectLanguageTab(evt.params.lang); },
                 "": function () { this.getInstance().selectLanguageTab(); }},
             "module": "update/Container"
+        }, {
+            "route": "/selection",
+            "module": "selection/list/Container"
+        }, {
+            "route": "/selection/create",
+            "module": "selection/manage/Container"
+        },  {
+            "route": "/selection/update/:id",
+            "module": "selection/manage/Container"
         }]
     }
 });

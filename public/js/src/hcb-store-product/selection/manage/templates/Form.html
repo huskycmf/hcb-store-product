@@ -1,0 +1,21 @@
+<form data-dojo-attach-point="containerNode" class="dijitHidden">
+    <div class="row">
+        ${!_t.priceLabel}
+        <input class="${baseClass}Price"
+               data-dojo-type="dijit/form/NumberTextBox"
+               data-dojo-attach-point="priceWidget"
+               data-dojo-props='name: "price", constraints: {min: 1}' />
+    </div>
+
+    <div class="row">
+        ${!_t.productsLabel}
+        <div data-dojo-attach-point="productsWidget"></div>
+    </div>
+
+    <input class="${baseClass}SaveButton"
+           data-dojo-type="dojo-common/form/BusyButton"
+           data-dojo-attach-point="saveButtonWidget"
+           data-dojo-attach-event="onClick: save"
+           data-dojo-props='name:"send",
+                            label:"${!_t.saveButton}"' />
+</form>

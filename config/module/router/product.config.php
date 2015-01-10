@@ -6,6 +6,7 @@ return array(
     ),
     'may_terminate' => false,
     'child_routes' => array(
+        'selection' => include __DIR__ . '/product/selection.config.php',
         'locale' => array(
             'type' => 'literal',
             'options' => array(
@@ -65,25 +66,6 @@ return array(
                                     'controller' => 'HcbStoreProduct-Controller-Attribute-Collection'
                                 )
                             )
-                        )
-                    )
-                )
-            )
-        ),
-        'images' => array(
-            'type' => 'literal',
-            'options' => array(
-                'route' => '/images'
-            ),
-            'may_terminate' => false,
-            'child_routes' => array (
-                'create' => array(
-                    'type' => 'method',
-                    'options' => array(
-                        'verb' => 'post',
-                        'defaults' => array(
-                            'controller' =>
-                                'HcbStoreProduct-Controller-Image-Create'
                         )
                     )
                 )

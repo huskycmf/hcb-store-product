@@ -15,9 +15,12 @@ return array(
     'HcbStoreProduct-Data-InputCreateResourceInput-Image3d' =>
         'Zf2FileUploader\Input\Image\LoadResource\FromList',
 
-    'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource' =>
-        'Zf2FileUploader\InputFilter\Image\CreateResource',
 
-    'HcbStoreProduct-Uploader-Input-Image-CreateResource' =>
-        'Zf2FileUploader\Input\Image\CreateResource',
+    // Selection
+
+    'HcbStoreProduct-Data-InputCreateResourceInput-Selection-Image' =>
+        'Zf2FileUploader\Input\Image\LoadResource\FromList',
+
+    'HcbStoreProduct-Uploader-Input-Selection-Image-CreateResource' =>
+        'Zf2FileUploader\Input\Image\CreateResource'
 );

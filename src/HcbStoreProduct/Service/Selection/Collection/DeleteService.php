@@ -1,6 +1,7 @@
 <?php
-namespace HcbStoreProduct\Service\Collection;
+namespace HcbStoreProduct\Service\Selection\Collection;
 
+use HcbStoreProduct\Entity\Product\Selection as SelectionEntity;
 use HcbStoreProduct\Entity\Product as ProductEntity;
 use HcCore\Data\Collection\Entities\ByIdsInterface;
 use HcCore\Service\CommandInterface;
@@ -56,48 +57,24 @@ class DeleteService implements CommandInterface
     }
 
     /**
-     * @param \HcCore\Data\Collection\Entities\ByIdsInterface $productsToDelete
+     * @param \HcCore\Data\Collection\Entities\ByIdsInterface $selectionsToDelete
+     *
      * @return Response
      */
-    protected  function delete(ByIdsInterface $productsToDelete)
+    protected  function delete(ByIdsInterface $selectionsToDelete)
     {
         try {
             $this->entityManager->beginTransaction();
-            $productEntities = $productsToDelete->getEntities();
 
-            /* @var $productEntities ProductEntity[] */
-            foreach ($productEntities as $productEntity) {
-                $images = $productEntity->getImage();
-                if (!is_null($images)) {
-                    foreach ($images as $imageEntity) {
-                        $this->imageRemover->remove($imageEntity);
-                    }
-                }
-                if (!is_null($productEntity->getImage3d())) {
-                    $this->imageRemover->remove($productEntity->getImage3d());
-                }
+            /* @var $selectionEntities SelectionEntity[] */
+            $selectionEntities = $selectionsToDelete->getEntities();
 
-                if (!is_null($productEntity->getFileInstruction())) {
-                    @unlink(INDEX_DIR.$productEntity->getFileInstruction());
+            foreach ($selectionEntities as $selectionEntity) {
+                $image = $selectionEntity->getImage();
+                if (!is_null($image)) {
+                    $this->imageRemover->remove($image);
                 }
-
-                /* @var $localized ProductEntity\Localized[] */
-                $localized = $productEntity->getLocalized();
-                if (!is_null($localized)) {
-                    foreach ($localized as $localizedEntity) {
-                        $images = $localizedEntity->getImage();
-                        if (!is_null($images)) {
-                            foreach ($images as $imageEntity) {
-                                $this->entityManager->remove($imageEntity);
-                            }
-                        }
-
-                        $this->entityManager->remove($localizedEntity);
-                        $productEntity->removeLocalized($localizedEntity);
-                    }
-                }
-                $productEntity->setProduct(null);
-                $this->entityManager->remove($productEntity);
+                $this->entityManager->remove($selectionEntity);
             }
             $this->entityManager->flush();
             $this->entityManager->commit();

@@ -1,6 +1,53 @@
 <?php
 return array(
 
+    // Selection
+
+    'HcbStoreProduct-Controller-Selection-Collection-List' => array(
+        'parameters' => array(
+            'paginatorDataFetchService' => 'HcbStoreProduct-Service-Selection-Collection-FetchQbBuilder',
+            'viewModel' => 'HcbStoreProduct-Paginator-ViewModel-JsonModel-Selection'
+        )
+    ),
+
+    'HcbStoreProduct-Controller-Selection-View' => array(
+        'parameters' => array(
+            'fetchService' => 'HcbStoreProduct-Service-FetchService-Selection',
+            'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Selection-Resource'
+        )
+    ),
+
+    'HcbStoreProduct-Controller-Selection-Create' => array(
+        'parameters' => array(
+            'serviceCommand' => 'HcbStoreProduct-Service-Selection-Create',
+            'jsonResponseModelFactory' => 'HcbStoreProduct-ViewModel-StatusMessageDataModelFactory-Selection'
+        )
+    ),
+
+    'HcbStoreProduct-Controller-Selection-Update' => array(
+        'parameters' => array(
+            'inputData' => 'HcbStoreProduct-Data-Selection',
+            'fetchService' => 'HcbStoreProduct-Service-FetchService-Selection',
+            'serviceCommand' => 'HcbStoreProduct-Service-Selection-Update',
+            'jsonResponseModelFactory' => 'HcbStoreProduct-ViewModel-StatusMessageDataModelFactory-Selection'
+        )
+    ),
+
+    'HcbStoreProduct-Controller-Selection-Collection-Delete' => array(
+        'parameters' => array(
+            'inputData' => 'HcbStoreProduct-Data-Collection-Entities-ByIds-Selection',
+            'serviceCommand' => 'HcbStoreProduct-Service-Selection-Collection-Delete',
+            'jsonResponseModelFactory' => 'HcbStoreProduct-ViewModel-StatusMessageDataModelFactory-Selection'
+        )
+    ),
+
+    // Selection Image
+    'HcbStoreProduct-Controller-Selection-Image-List' => array(
+        'parameters' => array(
+            'fetchService' => 'HcbStoreProduct-Service-FetchService-Selection'
+        )
+    ),
+
     // Product
 
     'HcbStoreProduct-Controller-Collection-List' => array(
@@ -46,7 +93,7 @@ return array(
     'HcbStoreProduct-Controller-Create' => array(
         'parameters' => array(
             'serviceCommand' => 'HcbStoreProduct-Service-Create',
-            'jsonResponseModelFactory' => 'HcbStoreProduct-Json-View-StatusMessageDataModelFactory'
+            'jsonResponseModelFactory' => 'HcbStoreProduct-ViewModel-StatusMessageDataModelFactory'
         )
     ),
 
@@ -54,7 +101,7 @@ return array(
         'parameters' => array(
             'inputData' => 'HcbStoreProduct-Data-Collection-Entities-ByIds-Product',
             'serviceCommand' => 'HcbStoreProduct-Service-Collection-Delete',
-            'jsonResponseModelFactory' => 'HcbStoreProduct-Json-View-StatusMessageDataModelFactory'
+            'jsonResponseModelFactory' => 'HcbStoreProduct-ViewModel-StatusMessageDataModelFactory'
         )
     ),
 
@@ -72,7 +119,7 @@ return array(
             'inputData' => 'HcbStoreProduct-Data-Localized',
             'fetchService' => 'HcbStoreProduct-Service-FetchService-Localized',
             'serviceCommand' => 'HcbStoreProduct-Service-Localized-UpdateCommand',
-            'jsonResponseModelFactory' => 'HcbStoreProduct-Json-View-StatusMessageDataModelFactory'
+            'jsonResponseModelFactory' => 'HcbStoreProduct-ViewModel-StatusMessageDataModelFactory'
         )
     ),
 
@@ -81,16 +128,7 @@ return array(
             'inputData' => 'HcbStoreProduct-Data-Localized',
             'fetchService' => 'HcbStoreProduct-Service-FetchService-Product',
             'serviceCommand' => 'HcbStoreProduct-Service-Localized-CreateCommand',
-            'jsonResponseModelFactory' => 'HcbStoreProduct-Json-View-StatusMessageDataModelFactory'
-        )
-    ),
-
-    // Product Image
-    'HcbStoreProduct-Controller-Image-Create' => array(
-        'parameters' => array(
-            'saveService' => 'HcBackend-Service-Image-SaveService',
-            'uploaderModel' => 'HcbStoreProduct-Uploader-View-Model-UploaderModel-Image',
-            'createResourceData' => 'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource'
+            'jsonResponseModelFactory' => 'HcbStoreProduct-ViewModel-StatusMessageDataModelFactory'
         )
     ),
 
@@ -108,9 +146,10 @@ return array(
         )
     ),
 
+    // Product Image
     'HcbStoreProduct-Controller-Image-List' => array(
         'parameters' => array(
             'fetchService' => 'HcbStoreProduct-Service-FetchService-Product'
         )
-    ),
+    )
 );

@@ -1,6 +1,6 @@
 <?php
 return array(
-    'HcbStoreProduct-Json-View-StatusMessageDataModelFactory' =>
+    'HcbStoreProduct-ViewModel-StatusMessageDataModelFactory' =>
         'Zf2Libs\View\Model\Json\Specific\StatusMessageDataModelFactory',
 
     'HcbStoreProduct-Stdlib-Extractor-Resource' =>
@@ -24,4 +24,15 @@ return array(
         'Zf2Libs\Paginator\ViewModel\JsonModel',
     'HcbStoreProduct-Paginator-ViewModel-JsonModel-Localized' =>
         'Zf2Libs\Paginator\ViewModel\JsonModel',
+
+    // Selection
+
+    'HcbStoreProduct-Stdlib-Extractor-Selection-Resource' =>
+        'HcbStoreProduct\Stdlib\Extractor\Selection\Resource',
+
+    'HcbStoreProduct-Paginator-ViewModel-JsonModel-Selection' =>
+        'Zf2Libs\Paginator\ViewModel\JsonModel',
+
+    'HcbStoreProduct-ViewModel-StatusMessageDataModelFactory-Selection' =>
+        'Zf2Libs\View\Model\Json\Specific\StatusMessageDataModelFactory',
 );

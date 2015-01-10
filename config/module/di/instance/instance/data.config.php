@@ -25,5 +25,21 @@ return array (
             'idsCollection' => 'HcbStoreProduct-Service-Collection-IdsService-Product',
             'inputName' => 'products'
         )
-    )
+    ),
+
+    // Selection
+
+    'HcbStoreProduct-Data-Selection' => array (
+        'parameters' => array (
+            'resourceInputImageLoader' =>
+                'HcbStoreProduct-Data-InputCreateResourceInput-Selection-Image'
+        )
+    ),
+
+    'HcbStoreProduct-Data-Collection-Entities-ByIds-Selection' => array (
+        'parameters' => array (
+            'idsCollection' => 'HcbStoreProduct-Service-Collection-IdsService-Selection',
+            'inputName' => 'selections'
+        )
+    ),
 );

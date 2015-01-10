@@ -26,5 +26,23 @@ return array(
     'HcbStoreProduct-Service-FetchService-Localized' =>
         'HcCore\Service\FetchService',
 
-    'HcbStoreProduct-Service-FetchByAlias' => 'HcbStoreProduct\Service\FetchByAliasService'
+    'HcbStoreProduct-Service-FetchByAlias' => 'HcbStoreProduct\Service\FetchByAliasService',
+
+    // Selection
+
+    'HcbStoreProduct-Service-Collection-IdsService-Selection' =>
+        'HcCore\Service\Collection\IdsService',
+
+    'HcbStoreProduct-Service-FetchService-Selection' =>
+        'HcCore\Service\FetchService',
+
+    'HcbStoreProduct-Service-Selection-Collection-FetchQbBuilder' =>
+        'HcbStoreProduct\Service\Selection\Collection\FetchQbBuilderService',
+
+    'HcbStoreProduct-Service-Selection-Create' => 'HcbStoreProduct\Service\Selection\CreateService',
+
+    'HcbStoreProduct-Service-Selection-Update' => 'HcbStoreProduct\Service\Selection\UpdateService',
+
+    'HcbStoreProduct-Service-Selection-Collection-Delete' =>
+        'HcbStoreProduct\Service\Selection\Collection\DeleteService',
 );

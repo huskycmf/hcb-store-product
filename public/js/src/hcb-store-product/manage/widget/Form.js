@@ -202,6 +202,55 @@ define([
             }
         },
 
+        initSelection: function () {
+            try {
+                var productStore = new JsonRest({target: config.get('primaryRoute') + "/store/product"});
+
+                var defList = new DeferredList([productStore.query()]);
+
+                defList.then(lang.hitch(this, function (response) {
+                    var fields = [{
+                        w: ComboBox,
+                        name: 'name',
+                        onChange: function (value) {
+                            try {
+                                this._getWidgetByName('value').query = {name: value};
+                            } catch (e) {
+                                console.error(this.declaredClass + " " + arguments.callee.nom, arguments, e);
+                                throw e;
+                            }
+                        },
+                        args: {
+                            searchAttr: 'name',
+                            labelAttr: 'name',
+                            maxLength: 250,
+                            store: new Memory({data: response[0][1]})
+                        }
+                    },
+                        {
+                            w: ComboBox,
+                            name: 'value',
+                            args: {
+                                maxLength: 1024,
+                                store: new Memory({data: response[1][1]}),
+                                labelAttr: 'value',
+                                searchAttr: 'value'
+                            }
+                        }];
+
+                    this.characteristicInstance = new InputList({fields: fields,
+                            name: 'characteristics[]'},
+                        this.characteristicsWidget);
+                    this.characteristicInstance
+                        .attr('value', this.rawValues['characteristics[]']);
+                    this.own(this.characteristicInstance);
+                }));
+            } catch (e) {
+                console.error(this.declaredClass, arguments, e);
+                throw e;
+            }
+        },
+
         _setValueAttr: function (values) {
             try {
                 this.inherited(arguments);

@@ -10,9 +10,16 @@ return array(
     'HcbStoreProduct-Controller-Localized-Update',
     'HcbStoreProduct-Controller-Localized-Create',
     'HcbStoreProduct-Controller-Localized-Collection-List',
-    'HcbStoreProduct-Controller-Image-Create',
     'HcbStoreProduct-Controller-Image-List',
     'HcbStoreProduct-Controller-Thumbnail-List',
     'HcbStoreProduct-Controller-Image3d-List',
-    'HcbStoreProduct-Controller-Instruction-Create'
+    'HcbStoreProduct-Controller-Instruction-Create',
+
+    //Selection
+    'HcbStoreProduct-Controller-Selection-Collection-List',
+    'HcbStoreProduct-Controller-Selection-Image-List',
+    'HcbStoreProduct-Controller-Selection-Collection-Delete',
+    'HcbStoreProduct-Controller-Selection-Create',
+    'HcbStoreProduct-Controller-Selection-Update',
+    'HcbStoreProduct-Controller-Selection-View',
 );

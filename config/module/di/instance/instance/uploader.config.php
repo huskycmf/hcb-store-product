@@ -20,15 +20,9 @@ return array(
         'parameters' => array( 'name' => 'image3d' )
     ),
 
-    // Product Uploads
-    'HcbStoreProduct-Uploader-Input-Image-CreateResource' => array(
-        'parameters' => array(
-            'name' => 'upload'
-        )
-    ),
-    'HcbStoreProduct-Uploader-InputFilter-Image-CreateResource' => array(
-        'parameters' => array(
-            'resourceInput' => 'HcbStoreProduct-Uploader-Input-Image-CreateResource'
-        )
+    // Selection Uploads
+
+    'HcbStoreProduct-Data-InputCreateResourceInput-Selection-Image' => array(
+        'parameters' => array( 'name' => 'image' )
     )
 );

@@ -29,5 +29,12 @@ return array(
         'parameters' => array(
             'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Localized-Resource'
         )
+    ),
+
+    // Selection
+    'HcbStoreProduct-Paginator-ViewModel-JsonModel-Selection' => array(
+        'parameters' => array(
+            'extractor' => 'HcbStoreProduct-Stdlib-Extractor-Selection-Resource'
+        )
     )
 );

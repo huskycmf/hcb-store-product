@@ -1,5 +1,21 @@
 <?php
 return array(
+    // Selection
+    'HcbStoreProduct-Controller-Selection-Collection-List' =>
+        'HcCore\Controller\Common\Rest\Collection\ListController',
+
+    'HcbStoreProduct-Controller-Selection-Create' =>
+        'HcCore\Controller\Common\Rest\Collection\DataController',
+
+    'HcbStoreProduct-Controller-Selection-Update' =>
+        'HcCore\Controller\Common\Rest\Collection\ResourceDataController',
+
+    'HcbStoreProduct-Controller-Selection-View' =>
+        'HcCore\Controller\Common\Rest\Collection\ResourceController',
+
+    'HcbStoreProduct-Controller-Selection-Collection-Delete' =>
+        'HcCore\Controller\Common\Rest\Collection\DataController',
+
     // Product
     'HcbStoreProduct-Controller-Collection-List' =>
         'HcCore\Controller\Common\Rest\Collection\ListController',
