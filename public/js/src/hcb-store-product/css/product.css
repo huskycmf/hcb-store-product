@@ -1,3 +1,17 @@
-a {
-
+.hc-backend .fileInputList.thumbnailImage {
+    height: 275px;
 }
+
+.hc-backend .fileInputList.thumbnailImage .dgrid {
+    height: 250px;
+}
+
+.hc-backend .fileInputList.presentationImage {
+    height: 540px;
+}
+
+.hc-backend .fileInputList.presentationImage .dgrid {
+    height: 510px;
+}
+
+
